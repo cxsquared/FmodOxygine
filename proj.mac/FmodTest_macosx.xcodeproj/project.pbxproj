@@ -1,0 +1,533 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04059FEA1872027500BA6557 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A57D861872012D0068B1E5 /* SDL2.framework */; };
+		04059FEB1872027B00BA6557 /* liboxygine_macosx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FE41872026200BA6557 /* liboxygine_macosx.a */; };
+		04059FED187202A200BA6557 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FEC187202A200BA6557 /* libz.dylib */; };
+		04059FEF187202AC00BA6557 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FEE187202AC00BA6557 /* OpenGL.framework */; };
+		0405A00018720D2200BA6557 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FF01872031A00BA6557 /* libjpeg.a */; };
+		0405A00118720D2200BA6557 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FF11872031A00BA6557 /* libpng.a */; };
+		049B57321871FBE900EF3C66 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B57311871FBE900EF3C66 /* Cocoa.framework */; };
+		049B574A1871FBE900EF3C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049B57491871FBE900EF3C66 /* Images.xcassets */; };
+		E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A41C1092AE00FFCF2E /* entry_point.cpp */; };
+		E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A61C1092CC00FFCF2E /* example.cpp */; };
+		E57C11B01C109C4800FFCF2E /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AD1C109C4800FFCF2E /* fonts */; };
+		E57C11B11C109C4800FFCF2E /* images in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AE1C109C4800FFCF2E /* images */; };
+		E57C11B21C109C4800FFCF2E /* xmls in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AF1C109C4800FFCF2E /* xmls */; };
+		E57C11E01C10A80C00FFCF2E /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11D31C10A80C00FFCF2E /* AudioEngine.cpp */; };
+		E57C12001C1143F200FFCF2E /* libfmod.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11F81C1143E100FFCF2E /* libfmod.dylib */; };
+		E57C12011C1143F200FFCF2E /* libfmodL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11F91C1143E100FFCF2E /* libfmodL.dylib */; };
+		E57C12021C1143F200FFCF2E /* libfmodstudio.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11FA1C1143E100FFCF2E /* libfmodstudio.dylib */; };
+		E57C12031C1143F200FFCF2E /* libfmodstudioL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04059FE31872026200BA6557 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 049B52BB1871EDE900EF3C66;
+			remoteInfo = oxygine_macosx;
+		};
+		04059FE81872027200BA6557 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 049B52BA1871EDE900EF3C66;
+			remoteInfo = oxygine_macosx;
+		};
+		04A57D851872012D0068B1E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BECDF66C0761BA81005FE872;
+			remoteInfo = Framework;
+		};
+		04A57D871872012D0068B1E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BECDF6B30761BA81005FE872;
+			remoteInfo = "Static Library";
+		};
+		04A57D891872012D0068B1E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB31407717554B71006C0E22;
+			remoteInfo = "Shared Library";
+		};
+		04A57D8B1872012D0068B1E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BECDF6BE0761BA81005FE872;
+			remoteInfo = "Standard DMG";
+		};
+		04A57D8E187201EF0068B1E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BECDF5FE0761BA81005FE872;
+			remoteInfo = Framework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E57C11E91C1141A000FFCF2E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E57C12001C1143F200FFCF2E /* libfmod.dylib in CopyFiles */,
+				E57C12011C1143F200FFCF2E /* libfmodL.dylib in CopyFiles */,
+				E57C12021C1143F200FFCF2E /* libfmodstudio.dylib in CopyFiles */,
+				E57C12031C1143F200FFCF2E /* libfmodstudioL.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04059FEC187202A200BA6557 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		04059FEE187202AC00BA6557 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		04059FF01872031A00BA6557 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/macosx/libraries/libjpeg.a"; sourceTree = "<group>"; };
+		04059FF11872031A00BA6557 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/macosx/libraries/libpng.a"; sourceTree = "<group>"; };
+		04059FF4187203A600BA6557 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/ios/libraries/libjpeg.a"; sourceTree = "<group>"; };
+		04059FF5187203A600BA6557 /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/ios/libraries/libpng.a"; sourceTree = "<group>"; };
+		049B572E1871FBE900EF3C66 /* FmodTest_macosx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FmodTest_macosx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		049B57311871FBE900EF3C66 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		049B57341871FBE900EF3C66 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		049B57351871FBE900EF3C66 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		049B57361871FBE900EF3C66 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		049B57391871FBE900EF3C66 /* FmodTest_macosx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FmodTest_macosx-Info.plist"; sourceTree = "<group>"; };
+		049B57491871FBE900EF3C66 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FmodTest/Images.xcassets; sourceTree = "<group>"; };
+		049B57501871FBE900EF3C66 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = oxygine_macosx.xcodeproj; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/SDL/macosx/oxygine_macosx/oxygine_macosx.xcodeproj"; sourceTree = "<group>"; };
+		04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL.xcodeproj; path = "../../oxygine-framework-with-sdl//SDL/Xcode/SDL/SDL.xcodeproj"; sourceTree = "<group>"; };
+		E57C11A41C1092AE00FFCF2E /* entry_point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entry_point.cpp; sourceTree = "<group>"; };
+		E57C11A61C1092CC00FFCF2E /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
+		E57C11A71C1092CC00FFCF2E /* example.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = example.hpp; sourceTree = "<group>"; };
+		E57C11AD1C109C4800FFCF2E /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../data/fonts; sourceTree = "<group>"; };
+		E57C11AE1C109C4800FFCF2E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../data/images; sourceTree = "<group>"; };
+		E57C11AF1C109C4800FFCF2E /* xmls */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xmls; path = ../data/xmls; sourceTree = "<group>"; };
+		E57C11D31C10A80C00FFCF2E /* AudioEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEngine.cpp; sourceTree = "<group>"; };
+		E57C11D41C10A80C00FFCF2E /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
+		E57C11F81C1143E100FFCF2E /* libfmod.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmod.dylib; path = ../lib/libfmod.dylib; sourceTree = "<group>"; };
+		E57C11F91C1143E100FFCF2E /* libfmodL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodL.dylib; path = ../lib/libfmodL.dylib; sourceTree = "<group>"; };
+		E57C11FA1C1143E100FFCF2E /* libfmodstudio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudio.dylib; path = ../lib/libfmodstudio.dylib; sourceTree = "<group>"; };
+		E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudioL.dylib; path = ../lib/libfmodstudioL.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		049B572B1871FBE900EF3C66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0405A00018720D2200BA6557 /* libjpeg.a in Frameworks */,
+				0405A00118720D2200BA6557 /* libpng.a in Frameworks */,
+				04059FEF187202AC00BA6557 /* OpenGL.framework in Frameworks */,
+				04059FED187202A200BA6557 /* libz.dylib in Frameworks */,
+				04059FEB1872027B00BA6557 /* liboxygine_macosx.a in Frameworks */,
+				04059FEA1872027500BA6557 /* SDL2.framework in Frameworks */,
+				049B57321871FBE900EF3C66 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04059FE01872026200BA6557 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04059FE41872026200BA6557 /* liboxygine_macosx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		049B57251871FBE900EF3C66 = {
+			isa = PBXGroup;
+			children = (
+				E57C11F71C1143D600FFCF2E /* Libraries */,
+				049B57491871FBE900EF3C66 /* Images.xcassets */,
+				049B57381871FBE900EF3C66 /* Supporting Files */,
+				04A57D391871FF8B0068B1E5 /* src */,
+				04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */,
+				04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */,
+				049B57301871FBE900EF3C66 /* Frameworks */,
+				049B572F1871FBE900EF3C66 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		049B572F1871FBE900EF3C66 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				049B572E1871FBE900EF3C66 /* FmodTest_macosx.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		049B57301871FBE900EF3C66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04059FF4187203A600BA6557 /* libjpeg.a */,
+				04059FF5187203A600BA6557 /* libpng.a */,
+				04059FF01872031A00BA6557 /* libjpeg.a */,
+				04059FF11872031A00BA6557 /* libpng.a */,
+				04059FEE187202AC00BA6557 /* OpenGL.framework */,
+				04059FEC187202A200BA6557 /* libz.dylib */,
+				049B57311871FBE900EF3C66 /* Cocoa.framework */,
+				049B57501871FBE900EF3C66 /* XCTest.framework */,
+				049B57331871FBE900EF3C66 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		049B57331871FBE900EF3C66 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				049B57341871FBE900EF3C66 /* AppKit.framework */,
+				049B57351871FBE900EF3C66 /* CoreData.framework */,
+				049B57361871FBE900EF3C66 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		049B57381871FBE900EF3C66 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E57C11AD1C109C4800FFCF2E /* fonts */,
+				E57C11AE1C109C4800FFCF2E /* images */,
+				E57C11AF1C109C4800FFCF2E /* xmls */,
+				049B57391871FBE900EF3C66 /* FmodTest_macosx-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04A57D391871FF8B0068B1E5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E57C11D31C10A80C00FFCF2E /* AudioEngine.cpp */,
+				E57C11D41C10A80C00FFCF2E /* AudioEngine.h */,
+				E57C11A41C1092AE00FFCF2E /* entry_point.cpp */,
+				E57C11A61C1092CC00FFCF2E /* example.cpp */,
+				E57C11A71C1092CC00FFCF2E /* example.hpp */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		04A57D7F1872012A0068B1E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04A57D861872012D0068B1E5 /* SDL2.framework */,
+				04A57D881872012D0068B1E5 /* libSDL2.a */,
+				04A57D8A1872012D0068B1E5 /* libSDL2.dylib */,
+				04A57D8C1872012D0068B1E5 /* Standard DMG */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E57C11F71C1143D600FFCF2E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E57C11F81C1143E100FFCF2E /* libfmod.dylib */,
+				E57C11F91C1143E100FFCF2E /* libfmodL.dylib */,
+				E57C11FA1C1143E100FFCF2E /* libfmodstudio.dylib */,
+				E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		049B572D1871FBE900EF3C66 /* FmodTest_macosx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 049B575F1871FBE900EF3C66 /* Build configuration list for PBXNativeTarget "FmodTest_macosx" */;
+			buildPhases = (
+				049B572A1871FBE900EF3C66 /* Sources */,
+				049B572B1871FBE900EF3C66 /* Frameworks */,
+				049B572C1871FBE900EF3C66 /* Resources */,
+				E57C11E91C1141A000FFCF2E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04059FE91872027200BA6557 /* PBXTargetDependency */,
+				04A57D8F187201EF0068B1E5 /* PBXTargetDependency */,
+			);
+			name = FmodTest_macosx;
+			productName = FmodTest;
+			productReference = 049B572E1871FBE900EF3C66 /* FmodTest_macosx.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		049B57261871FBE900EF3C66 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = oxygine;
+			};
+			buildConfigurationList = 049B57291871FBE900EF3C66 /* Build configuration list for PBXProject "FmodTest_macosx" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 049B57251871FBE900EF3C66;
+			productRefGroup = 049B572F1871FBE900EF3C66 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 04059FE01872026200BA6557 /* Products */;
+					ProjectRef = 04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */;
+				},
+				{
+					ProductGroup = 04A57D7F1872012A0068B1E5 /* Products */;
+					ProjectRef = 04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				049B572D1871FBE900EF3C66 /* FmodTest_macosx */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		04059FE41872026200BA6557 /* liboxygine_macosx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liboxygine_macosx.a;
+			remoteRef = 04059FE31872026200BA6557 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04A57D861872012D0068B1E5 /* SDL2.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SDL2.framework;
+			remoteRef = 04A57D851872012D0068B1E5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04A57D881872012D0068B1E5 /* libSDL2.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSDL2.a;
+			remoteRef = 04A57D871872012D0068B1E5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04A57D8A1872012D0068B1E5 /* libSDL2.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libSDL2.dylib;
+			remoteRef = 04A57D891872012D0068B1E5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04A57D8C1872012D0068B1E5 /* Standard DMG */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "Standard DMG";
+			remoteRef = 04A57D8B1872012D0068B1E5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		049B572C1871FBE900EF3C66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E57C11B21C109C4800FFCF2E /* xmls in Resources */,
+				E57C11B11C109C4800FFCF2E /* images in Resources */,
+				049B574A1871FBE900EF3C66 /* Images.xcassets in Resources */,
+				E57C11B01C109C4800FFCF2E /* fonts in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		049B572A1871FBE900EF3C66 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
+				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
+				E57C11E01C10A80C00FFCF2E /* AudioEngine.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04059FE91872027200BA6557 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = oxygine_macosx;
+			targetProxy = 04059FE81872027200BA6557 /* PBXContainerItemProxy */;
+		};
+		04A57D8F187201EF0068B1E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Framework;
+			targetProxy = 04A57D8E187201EF0068B1E5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		049B575D1871FBE900EF3C66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/src ../../oxygine-framework-with-sdl//SDL/include";
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		049B575E1871FBE900EF3C66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/src ../../oxygine-framework-with-sdl//SDL/include";
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		049B57601871FBE900EF3C66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FmodTest/FmodTest_macosx-Prefix.pch";
+				INFOPLIST_FILE = "FmodTest_macosx-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/macosx/libraries",
+					"../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/ios/libraries",
+				);
+				OTHER_LDFLAGS = (
+					../lib/libfmodL.dylib,
+					../lib/libfmodstudioL.dylib,
+				);
+				PRODUCT_NAME = FmodTest_macosx;
+				USER_HEADER_SEARCH_PATHS = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/src ../../oxygine-framework-with-sdl//SDL/include ../inc/";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		049B57611871FBE900EF3C66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FmodTest/FmodTest_macosx-Prefix.pch";
+				INFOPLIST_FILE = "FmodTest_macosx-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/macosx/libraries",
+					"../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/ios/libraries",
+				);
+				OTHER_LDFLAGS = (
+					../lib/libfmod.dylib,
+					../lib/libfmodstudio.dylib,
+				);
+				PRODUCT_NAME = FmodTest_macosx;
+				USER_HEADER_SEARCH_PATHS = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/src ../../oxygine-framework-with-sdl//SDL/include ../inc/";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		049B57291871FBE900EF3C66 /* Build configuration list for PBXProject "FmodTest_macosx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				049B575D1871FBE900EF3C66 /* Debug */,
+				049B575E1871FBE900EF3C66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		049B575F1871FBE900EF3C66 /* Build configuration list for PBXNativeTarget "FmodTest_macosx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				049B57601871FBE900EF3C66 /* Debug */,
+				049B57611871FBE900EF3C66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 049B57261871FBE900EF3C66 /* Project object */;
+}
