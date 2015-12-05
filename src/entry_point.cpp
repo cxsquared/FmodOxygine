@@ -11,19 +11,14 @@
 #include "DebugActor.h"
 
 #include "example.hpp"
-#include "AudioEngine.h"
 
 using namespace oxygine;
-
-CAudioEngine aEngine;
 
 //Called each frame
 int mainloop() {
     example_update();
     
     getStage()->update();
-    
-    aEngine.Update();
     
     if(core::beginRendering()) {
         Color clearColor(32,32,32,255);
@@ -41,8 +36,6 @@ int mainloop() {
 
 void run() {
     ObjectBase::__startTracingLeaks();
-    
-    aEngine.Init();
     
     //core oxygine init
     core::init_desc desc;

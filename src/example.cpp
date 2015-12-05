@@ -1,5 +1,7 @@
 #include "oxygine-framework.h"
 #include <functional>
+#include "SoundManager.hpp"
+
 using namespace oxygine;
 
 Resources gameResources;
@@ -33,26 +35,32 @@ public:
         //button was clicked
         _button->setColor(Color::White);
         _button->addTween(Sprite::TweenColor(Color::Green), 500, 1, true);
+        SoundManager::playSound("sounds/sword.wav");
     }
 };
 
 //Intrusive_ptr stuff
 typedef oxygine::intrusive_ptr<MainActor> spMainActor;
 
-void example_preinit(){}
+void example_preinit(){
+
+    SoundManager::init();
+}
 
 void example_init() {
-        gameResources.loadXML("xmls/res.xml");
+    gameResources.loadXML("xmls/res.xml");
         
-        spMainActor actor = new MainActor;
-        
-        getStage()->addChild(actor);
-    }
+    spMainActor actor = new MainActor();
+    
+    getStage()->addChild(actor);
+    
+    SoundManager::loadSound("sounds/sword.wav");
+}
 
-    void example_update() {
-        
-    }
+void example_update() {
+}
 
-    void example_destroy(){
-        gameResources.free();
-    }
+void example_destroy(){
+    SoundManager::destroy();
+    gameResources.free();
+}

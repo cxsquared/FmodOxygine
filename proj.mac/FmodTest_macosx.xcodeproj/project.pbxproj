@@ -25,6 +25,9 @@
 		E57C12011C1143F200FFCF2E /* libfmodL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11F91C1143E100FFCF2E /* libfmodL.dylib */; };
 		E57C12021C1143F200FFCF2E /* libfmodstudio.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11FA1C1143E100FFCF2E /* libfmodstudio.dylib */; };
 		E57C12031C1143F200FFCF2E /* libfmodstudioL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */; };
+		E57C12051C11563E00FFCF2E /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
+		E57C12071C1167D900FFCF2E /* sounds in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
+		E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E57C12061C1167B200FFCF2E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				E57C12071C1167D900FFCF2E /* sounds in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +137,9 @@
 		E57C11F91C1143E100FFCF2E /* libfmodL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodL.dylib; path = ../lib/libfmodL.dylib; sourceTree = "<group>"; };
 		E57C11FA1C1143E100FFCF2E /* libfmodstudio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudio.dylib; path = ../lib/libfmodstudio.dylib; sourceTree = "<group>"; };
 		E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudioL.dylib; path = ../lib/libfmodstudioL.dylib; sourceTree = "<group>"; };
+		E57C12041C11563E00FFCF2E /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../data/sounds; sourceTree = "<group>"; };
+		E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
+		E57C12091C12A60000FFCF2E /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +219,7 @@
 		049B57381871FBE900EF3C66 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E57C12041C11563E00FFCF2E /* sounds */,
 				E57C11AD1C109C4800FFCF2E /* fonts */,
 				E57C11AE1C109C4800FFCF2E /* images */,
 				E57C11AF1C109C4800FFCF2E /* xmls */,
@@ -219,6 +236,8 @@
 				E57C11A41C1092AE00FFCF2E /* entry_point.cpp */,
 				E57C11A61C1092CC00FFCF2E /* example.cpp */,
 				E57C11A71C1092CC00FFCF2E /* example.hpp */,
+				E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */,
+				E57C12091C12A60000FFCF2E /* SoundManager.hpp */,
 			);
 			name = src;
 			path = ../src;
@@ -257,6 +276,7 @@
 				049B572B1871FBE900EF3C66 /* Frameworks */,
 				049B572C1871FBE900EF3C66 /* Resources */,
 				E57C11E91C1141A000FFCF2E /* CopyFiles */,
+				E57C12061C1167B200FFCF2E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -349,6 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E57C12051C11563E00FFCF2E /* sounds in Resources */,
 				E57C11B21C109C4800FFCF2E /* xmls in Resources */,
 				E57C11B11C109C4800FFCF2E /* images in Resources */,
 				049B574A1871FBE900EF3C66 /* Images.xcassets in Resources */,
@@ -364,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
+				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
 				E57C11E01C10A80C00FFCF2E /* AudioEngine.cpp in Sources */,
 			);

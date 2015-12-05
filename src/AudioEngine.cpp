@@ -44,6 +44,7 @@ void CAudioEngine::Update() {
 
 void CAudioEngine::LoadSound(const std::string& strSoundName, bool b3d, bool bLooping, bool bStream)
 {
+    //cout << "Loading sound " << strSoundName << endl;
 	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
 	if (tFoundIt != sgpImplementation->mSounds.end())
 		return;
@@ -56,6 +57,7 @@ void CAudioEngine::LoadSound(const std::string& strSoundName, bool b3d, bool bLo
 	if (pSound){
 		sgpImplementation->mSounds[strSoundName] = pSound;
 	}
+    //cout << "Sound loaded " << strSoundName << endl;
 }
 
 void CAudioEngine::UnLoadSound(const std::string& strSoundName)
@@ -67,9 +69,9 @@ void CAudioEngine::UnLoadSound(const std::string& strSoundName)
 	sgpImplementation->mSounds.erase(tFoundIt);
 }
 
-/*
 int CAudioEngine::PlaySounds(const string& strSoundName, const Vector3& vPosition, float fVolumedB)
 {
+    //cout << "Playing sound " << strSoundName << endl;
 	int nChannelId = sgpImplementation->mnNextChannelId++;
 	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
 	if (tFoundIt == sgpImplementation->mSounds.end())
@@ -97,7 +99,6 @@ int CAudioEngine::PlaySounds(const string& strSoundName, const Vector3& vPositio
 	}
 	return nChannelId;
 }
-*/
 
 void CAudioEngine::SetChannel3dPosition(int nChannelId, const Vector3& vPosition)
 {
