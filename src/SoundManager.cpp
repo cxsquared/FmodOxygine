@@ -23,4 +23,24 @@ namespace SoundManager{
     void loadSound(const string &fileName) {
         aEngine.LoadSound(fileName);
     }
+    
+    void loadBank(const string &bankFileLocaiton){
+        aEngine.LoadBank(bankFileLocaiton,  FMOD_STUDIO_LOAD_BANK_NORMAL);
+    }
+    
+    void loadEvent(const string &eventName){
+        aEngine.LoadEvent(eventName);
+    }
+    
+    void playEvent(const string &eventName){
+        aEngine.PlayEvent(eventName);
+    }
+    
+    void setEventParam(const string &eventName, const string &paramName, float fValue){
+        aEngine.SetEventParameter(eventName, paramName, fValue);
+    }
+    
+    bool isEventPlaying(const string &eventName) {
+        return aEngine.IsEventPlaying(eventName);
+    }
 }

@@ -154,6 +154,7 @@ void CAudioEngine::PlayEvent(const string &strEventName) {
 			return;
 	}
 	tFoundit->second->start();
+    cout << "Playing event " << strEventName << endl;
 }
 
 void CAudioEngine::StopEvent(const string &strEventName, bool bImmediate) {
@@ -193,6 +194,7 @@ void CAudioEngine::SetEventParameter(const string &strEventName, const string &s
 	FMOD::Studio::ParameterInstance* pParameter = NULL;
 	CAudioEngine::ErrorCheck(tFoundIt->second->getParameter(strParameterName.c_str(), &pParameter));
 	CAudioEngine::ErrorCheck(pParameter->setValue(fValue));
+    cout << "Event " << strEventName << " parameter " << strParameterName << " set to " << fValue << endl;
 }
 
 FMOD_VECTOR CAudioEngine::VectorToFmod(const Vector3& vPosition){
