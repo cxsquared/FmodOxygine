@@ -41,6 +41,8 @@ namespace SoundManager{
     }
     
     bool isEventPlaying(const string &eventName) {
-        return aEngine.IsEventPlaying(eventName);
+        bool isPlaying = aEngine.IsEventPlaying(eventName);
+        cout << eventName << " is playing= " << isPlaying << endl;
+        return isPlaying;
     }
 }

@@ -36,13 +36,15 @@ public:
         _button->setColor(Color::White);
         _button->addTween(Sprite::TweenColor(Color::Green), 500, 1, true);
         float newVal = (float)rand()/RAND_MAX;
-        //cout << "New random value " << newVal << endl;
-        if (!SoundManager::isEventPlaying("event:/MusicTrack")) {
-            SoundManager::playEvent("event:/MusicTrack");
-            cout << "Event is now playing" << endl;
+        cout << "New random value " << newVal << endl;
+        /*
+        if (!SoundManager::isEventPlaying("event:/Music/MusicTrack")) {
+            SoundManager::playEvent("event:/Music/MusicTrack");
+            //cout << "Event is now playing" << endl;
         }
-        SoundManager::setEventParam("event:/MusicTrack", "Intensity", newVal);
-        SoundManager::playSound("sounds/sword.wav");
+         */
+        SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", newVal);
+        //SoundManager::playSound("sounds/sword.wav");
     }
 };
 
@@ -61,13 +63,20 @@ void example_init() {
     
     getStage()->addChild(actor);
     
-    SoundManager::loadSound("sounds/sword.wav");
     SoundManager::loadBank("sounds/Master Bank.bank");
     SoundManager::loadBank("sounds/Master Bank.strings.bank");
-    SoundManager::loadEvent("event:/MusicTrack");
+    
+    SoundManager::loadEvent("event:/Music/MusicTrack");
+    SoundManager::loadEvent("event:/Sfx/OneSound");
+    SoundManager::loadEvent("event:/Sfx/RandSound");
+    
+    SoundManager::loadSound("sounds/sword.wav");
+    
+    SoundManager::playEvent("event:/Music/MusicTrack");
 }
 
 void example_update() {
+    SoundManager::update();
 }
 
 void example_destroy(){
