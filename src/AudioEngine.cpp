@@ -100,6 +100,14 @@ int CAudioEngine::PlaySounds(const string& strSoundName, const FmodVector3& vPos
 	return nChannelId;
 }
 
+void CAudioEngine::StopChannel(int nChannelId) {
+    auto tFoundIt = sgpImplementation->mChannels.find(nChannelId);
+    if (tFoundIt == sgpImplementation->mChannels.end())
+        return;
+    
+    CAudioEngine::ErrorCheck(tFoundIt->second->stop());
+}
+
 void CAudioEngine::SetChannel3dPosition(int nChannelId, const FmodVector3& vPosition)
 {
 	auto tFoundIt = sgpImplementation->mChannels.find(nChannelId);

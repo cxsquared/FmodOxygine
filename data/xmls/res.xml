@@ -9,6 +9,6 @@
 	<font file="main.fnt" />
     
     <set path="./../sounds" />
-    <buffer file="sword.wav" />
+    <buffer file="rain.wav" />
     
 </resources>

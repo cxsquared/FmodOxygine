@@ -57,12 +57,14 @@ public:
     spInputText _input;
     spTextWithBackground _current;
     
+    int rainChannel = -1;
+    
     InputTextHandler() {
         _input = new InputText;
         
         _input->addEventListener(Event::COMPLETE, CLOSURE(this, &InputTextHandler::onComplete));
         
-        spTextWithBackground t = new TextWithBackground("Sound input");
+        spTextWithBackground t = new TextWithBackground("Sound Command");
         t->setSize(200, 60);
         t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
         t->attachTo(this);
@@ -103,11 +105,19 @@ public:
         if (tokens[0] == "set") {
             SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", stof(tokens[1]));
         } else if (tokens[0] == "play") {
-            if(SoundManager::isEventPlaying("event:/Music/MusicTrack") == false){
+            if (tokens[1] == "music" && SoundManager::isEventPlaying("event:/Music/MusicTrack") == false) {
                 SoundManager::playEvent("event:/Music/MusicTrack");
+            } else if (tokens[1] == "rain") {
+                rainChannel = SoundManager::playSound("sounds/rain.wav");
+                cout << "Rain channel " << rainChannel << endl;
             }
         } else if (tokens[0] == "stop") {
-            SoundManager::stopEvent("event:/Music/MusicTrack");
+            if (tokens[1] == "music") {
+                SoundManager::stopEvent("event:/Music/MusicTrack");
+            } else if (tokens[1] == "rain" && rainChannel >= 0){
+                SoundManager::stopChannel(rainChannel);
+                rainChannel = -1;
+            }
         }
         
         _current = 0;

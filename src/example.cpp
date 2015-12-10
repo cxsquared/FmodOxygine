@@ -62,10 +62,9 @@ void example_init() {
     SoundManager::loadBank("sounds/Master Bank.strings.bank");
     
     SoundManager::loadEvent("event:/Music/MusicTrack");
-    SoundManager::loadEvent("event:/Sfx/OneSound");
-    SoundManager::loadEvent("event:/Sfx/RandSound");
+    SoundManager::loadEvent("event:/Sfx/Buzz");
     
-    SoundManager::loadSound("sounds/sword.wav");
+    SoundManager::loadSound("sounds/rain.wav");
     
     spGame game = new Game;
     game->init();

@@ -16,8 +16,12 @@ namespace SoundManager{
         aEngine.Shutdown();
     }
     
-    void playSound(const string &fileName) {
-        aEngine.PlaySounds(fileName);
+    int playSound(const string &fileName) {
+        return aEngine.PlaySounds(fileName);
+    }
+    
+    void stopChannel(int nChannelId) {
+        aEngine.StopChannel(nChannelId);
     }
     
     void loadSound(const string &fileName) {

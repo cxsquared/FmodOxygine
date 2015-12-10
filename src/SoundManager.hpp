@@ -10,7 +10,8 @@ namespace SoundManager {
     void destroy();
     void update();
     void loadSound(const string &fileLocation);
-    void playSound(const string &fileLocation);
+    int playSound(const string &fileLocation);
+    void stopChannel(int nChannelId);
     void loadBank(const string &bankFileLocaiton);
     void loadEvent(const string &eventName);
     void playEvent(const string &eventName);
