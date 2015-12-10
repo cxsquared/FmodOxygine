@@ -10,6 +10,7 @@
 
 #include "InputText.h"
 #include "oxygine-framework.h"
+#include "Res.hpp"
 
 using namespace oxygine;
 using namespace std;
@@ -18,10 +19,7 @@ DECLARE_SMART(TextWithBackground, spTextWithBackground);
 class TextWithBackground: public ColorRectSprite {
 public:
     
-    Resources *gameResources;
-    
-    TextWithBackground(const string& defText,Resources &res) {
-        gameResources = &res;
+    TextWithBackground(const string& defText) {
         
         text = new TextField;
         text->setInputEnabled(false);
@@ -31,7 +29,7 @@ public:
         style.hAlign = TextStyle::HALIGN_CENTER;
         style.vAlign = TextStyle::VALIGN_MIDDLE;
         style.multiline = true;
-        style.font = gameResources->getResFont("main")->getFont();
+        style.font = Res::gameResources.getResFont("main")->getFont();
         
         text->setStyle(style);
         text->setText(defText);
@@ -50,14 +48,14 @@ public:
     spInputText _input;
     spTextWithBackground _current;
     
-    InputTextHandler(Resources &res) {
+    InputTextHandler() {
         _input = new InputText;
         
         _input->addEventListener(Event::COMPLETE, CLOSURE(this, &InputTextHandler::onComplete));
         
-        spTextWithBackground t = new TextWithBackground("...", res);
+        spTextWithBackground t = new TextWithBackground("...");
         t->setSize(200, 6);
-        t->setPosition(getStage()->getSize() /2 - _current->getSize() /2);
+        t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
         t->attachTo(this);
         t->addEventListener(TouchEvent::CLICK, CLOSURE(this, &InputTextHandler::onClick));
     }

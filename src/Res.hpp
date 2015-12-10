@@ -10,7 +10,7 @@
 #include "oxygine-framework.h"
 using namespace oxygine;
 
-namespace res {
+namespace Res {
     extern Resources gameResources;
     void load();
     void free();

@@ -8,7 +8,7 @@
 
 #include "Res.hpp"
 
-namespace res {
+namespace Res {
     Resources gameResources;
     
     void load() {

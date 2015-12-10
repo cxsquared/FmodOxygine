@@ -11,7 +11,7 @@
 
 using namespace std;
 
-struct Vector3 {
+struct FmodVector3 {
 	float x;
 	float y;
 	float z;
@@ -49,21 +49,21 @@ public:
 	void LoadEvent(const std::string& strEventName);
 	void LoadSound(const string &strSoundName, bool b3d = true, bool bLooping = false, bool bStream = false);
 	void UnLoadSound(const string &strSoundName);
-	void Set3dListenerAndOrientation(const Vector3& vPosition, const Vector3& vLook, const Vector3& vUp);
-	int PlaySounds(const string &strSoundName, const Vector3& vPos = Vector3{ 0, 0, 0 }, float fVolumedB = 0.0f);
+	void Set3dListenerAndOrientation(const FmodVector3& vPosition, const FmodVector3& vLook, const FmodVector3& vUp);
+	int PlaySounds(const string &strSoundName, const FmodVector3& vPos = FmodVector3{ 0, 0, 0 }, float fVolumedB = 0.0f);
 	void PlayEvent(const string &strEventName);
 	void StopChannel(int nChannelId);
 	void StopEvent(const string &strEventName, bool bImmediate = false);
 	void GetEventParameter(const string &strEventName, const string &strEventParameter, float* parameter);
 	void SetEventParameter(const string &strEventName, const string &strParameterName, float fValue);
 	void StopAllChannels();
-	void SetChannel3dPosition(int nChannelId, const Vector3& vPosition);
+	void SetChannel3dPosition(int nChannelId, const FmodVector3& vPosition);
 	void SetChannelVolume(int nChannelId, float fVolumedB);
 	bool IsPlaying(int nChannelId) const;
 	bool IsEventPlaying(const string &strEventName) const;
 	float dbToVolume(float dB);
 	float VolumeTodB(float volume);
-	FMOD_VECTOR VectorToFmod(const Vector3& vPosition);
+	FMOD_VECTOR VectorToFmod(const FmodVector3& vPosition);
 };
 
 #endif

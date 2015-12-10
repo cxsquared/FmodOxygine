@@ -29,6 +29,7 @@
 		E57C12071C1167D900FFCF2E /* sounds in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
 		E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */; };
 		E5985A831C192A1200699084 /* Res.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A811C192A1200699084 /* Res.cpp */; };
+		E5985A891C192B7900699084 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A871C192B7900699084 /* Game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,8 @@
 		E57C12091C12A60000FFCF2E /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
 		E5985A811C192A1200699084 /* Res.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Res.cpp; sourceTree = "<group>"; };
 		E5985A821C192A1200699084 /* Res.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Res.hpp; sourceTree = "<group>"; };
+		E5985A871C192B7900699084 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		E5985A881C192B7900699084 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputTextHandler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -245,6 +248,8 @@
 				E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */,
 				E5985A811C192A1200699084 /* Res.cpp */,
 				E5985A821C192A1200699084 /* Res.hpp */,
+				E5985A871C192B7900699084 /* Game.cpp */,
+				E5985A881C192B7900699084 /* Game.hpp */,
 			);
 			name = src;
 			path = ../src;
@@ -394,6 +399,7 @@
 				E5985A831C192A1200699084 /* Res.cpp in Sources */,
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
 				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,
+				E5985A891C192B7900699084 /* Game.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
 				E57C11E01C10A80C00FFCF2E /* AudioEngine.cpp in Sources */,
 			);

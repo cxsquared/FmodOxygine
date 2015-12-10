@@ -1,12 +1,12 @@
 #include "oxygine-framework.h"
 #include <functional>
 #include "SoundManager.hpp"
-#include "InputTextHandler.hpp"
+#include "Res.hpp"
+#include "Game.hpp"
 
 using namespace oxygine;
 
-Resources gameResources;
-
+/*
 class MainActor: public Actor {
 public:
     spTextField _text;
@@ -38,12 +38,10 @@ public:
         _button->addTween(Sprite::TweenColor(Color::Green), 500, 1, true);
         float newVal = (float)rand()/RAND_MAX;
         cout << "New random value " << newVal << endl;
-        /*
         if (!SoundManager::isEventPlaying("event:/Music/MusicTrack")) {
             SoundManager::playEvent("event:/Music/MusicTrack");
             //cout << "Event is now playing" << endl;
         }
-         */
         SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", newVal);
         //SoundManager::playSound("sounds/sword.wav");
     }
@@ -51,20 +49,15 @@ public:
 
 //Intrusive_ptr stuff
 typedef oxygine::intrusive_ptr<MainActor> spMainActor;
+*/
 
 void example_preinit(){
 
-    SoundManager::init();
 }
 
 void example_init() {
-    gameResources.loadXML("xmls/res.xml");
-        
-    spMainActor actor = new MainActor();
-    spInputTextHandler inputText = new InputTextHandler(gameResources);
-    
-    getStage()->addChild(inputText);
-    
+    Res::load();
+    SoundManager::init();
     SoundManager::loadBank("sounds/Master Bank.bank");
     SoundManager::loadBank("sounds/Master Bank.strings.bank");
     
@@ -74,7 +67,9 @@ void example_init() {
     
     SoundManager::loadSound("sounds/sword.wav");
     
-    SoundManager::playEvent("event:/Music/MusicTrack");
+    spGame game = new Game;
+    game->init();
+    game->attachTo(getStage());
 }
 
 void example_update() {
@@ -83,5 +78,5 @@ void example_update() {
 
 void example_destroy(){
     SoundManager::destroy();
-    gameResources.free();
+    Res::free();
 }
