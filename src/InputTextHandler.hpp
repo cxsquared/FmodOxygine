@@ -39,6 +39,8 @@ public:
         text->setStyle(style);
         text->setText(defText);
         
+        addChild(text);
+        
         cout << "Text with background added" << endl;
     }
     
