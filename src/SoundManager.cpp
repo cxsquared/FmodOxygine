@@ -36,6 +36,10 @@ namespace SoundManager{
         aEngine.PlayEvent(eventName);
     }
     
+    void stopEvent(const string &eventName) {
+        aEngine.StopEvent(eventName);
+    }
+    
     void setEventParam(const string &eventName, const string &paramName, float fValue){
         aEngine.SetEventParameter(eventName, paramName, fValue);
     }

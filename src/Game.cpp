@@ -19,6 +19,7 @@ void Game::init() {
     
     _inputText = new InputTextHandler;
     _inputText->attachTo(this);
+    _inputText->setPosition(getStage()->getSize()/2);
 }
 
 void Game::doUpdate(const UpdateState& us) {
