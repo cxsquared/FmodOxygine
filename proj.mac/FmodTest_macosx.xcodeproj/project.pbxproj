@@ -28,6 +28,7 @@
 		E57C12051C11563E00FFCF2E /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
 		E57C12071C1167D900FFCF2E /* sounds in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
 		E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */; };
+		E5985A831C192A1200699084 /* Res.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A811C192A1200699084 /* Res.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,9 @@
 		E57C12041C11563E00FFCF2E /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../data/sounds; sourceTree = "<group>"; };
 		E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		E57C12091C12A60000FFCF2E /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
+		E5985A811C192A1200699084 /* Res.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Res.cpp; sourceTree = "<group>"; };
+		E5985A821C192A1200699084 /* Res.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Res.hpp; sourceTree = "<group>"; };
+		E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputTextHandler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +242,9 @@
 				E57C11A71C1092CC00FFCF2E /* example.hpp */,
 				E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */,
 				E57C12091C12A60000FFCF2E /* SoundManager.hpp */,
+				E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */,
+				E5985A811C192A1200699084 /* Res.cpp */,
+				E5985A821C192A1200699084 /* Res.hpp */,
 			);
 			name = src;
 			path = ../src;
@@ -384,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5985A831C192A1200699084 /* Res.cpp in Sources */,
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
 				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,

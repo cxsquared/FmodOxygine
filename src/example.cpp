@@ -1,6 +1,7 @@
 #include "oxygine-framework.h"
 #include <functional>
 #include "SoundManager.hpp"
+#include "InputTextHandler.hpp"
 
 using namespace oxygine;
 
@@ -60,8 +61,9 @@ void example_init() {
     gameResources.loadXML("xmls/res.xml");
         
     spMainActor actor = new MainActor();
+    spInputTextHandler inputText = new InputTextHandler(gameResources);
     
-    getStage()->addChild(actor);
+    getStage()->addChild(inputText);
     
     SoundManager::loadBank("sounds/Master Bank.bank");
     SoundManager::loadBank("sounds/Master Bank.strings.bank");
