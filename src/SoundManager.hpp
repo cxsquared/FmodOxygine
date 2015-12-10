@@ -11,6 +11,7 @@ namespace SoundManager {
     void update();
     void loadSound(const string &fileLocation);
     int playSound(const string &fileLocation);
+    void setChannelVolume(int nChannelId,float fVolumedB);
     void stopChannel(int nChannelId);
     void loadBank(const string &bankFileLocaiton);
     void loadEvent(const string &eventName);

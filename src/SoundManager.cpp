@@ -20,6 +20,10 @@ namespace SoundManager{
         return aEngine.PlaySounds(fileName);
     }
     
+    void setChannelVolume(int nChannelId,float fDb) {
+        aEngine.SetChannelVolume(nChannelId, fDb);
+    }
+    
     void stopChannel(int nChannelId) {
         aEngine.StopChannel(nChannelId);
     }

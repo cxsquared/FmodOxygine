@@ -100,23 +100,27 @@ public:
         while (ss >> buf)
             tokens.push_back(buf);
         
-        cout << "token 1 = " << tokens[0] << " token 2 = " << tokens[1] << endl;
-        
-        if (tokens[0] == "set") {
-            SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", stof(tokens[1]));
-        } else if (tokens[0] == "play") {
-            if (tokens[1] == "music" && SoundManager::isEventPlaying("event:/Music/MusicTrack") == false) {
-                SoundManager::playEvent("event:/Music/MusicTrack");
-            } else if (tokens[1] == "rain") {
-                rainChannel = SoundManager::playSound("sounds/rain.wav");
-                cout << "Rain channel " << rainChannel << endl;
-            }
-        } else if (tokens[0] == "stop") {
-            if (tokens[1] == "music") {
-                SoundManager::stopEvent("event:/Music/MusicTrack");
-            } else if (tokens[1] == "rain" && rainChannel >= 0){
-                SoundManager::stopChannel(rainChannel);
-                rainChannel = -1;
+        if (tokens.size() > 1) {
+            if (tokens[0] == "set" && tokens.size() > 2) {
+                if (tokens[1] == "music"){
+                    SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", stof(tokens[2]));
+                } else if (tokens[1] == "rain" && rainChannel >= 0) {
+                    SoundManager::setChannelVolume(rainChannel, stof(tokens[2]));
+                }
+            } else if (tokens[0] == "play") {
+                if (tokens[1] == "music" && SoundManager::isEventPlaying("event:/Music/MusicTrack") == false) {
+                    SoundManager::playEvent("event:/Music/MusicTrack");
+                } else if (tokens[1] == "rain") {
+                    rainChannel = SoundManager::playSound("sounds/rain.wav");
+                    cout << "Rain channel " << rainChannel << endl;
+                }
+            } else if (tokens[0] == "stop") {
+                if (tokens[1] == "music") {
+                    SoundManager::stopEvent("event:/Music/MusicTrack");
+                } else if (tokens[1] == "rain" && rainChannel >= 0){
+                    SoundManager::stopChannel(rainChannel);
+                    rainChannel = -1;
+                }
             }
         }
         
