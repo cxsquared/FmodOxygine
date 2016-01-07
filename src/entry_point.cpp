@@ -6,9 +6,14 @@
 //  Copyright © 2015 oxygine. All rights reserved.
 //
 
+#ifdef __APPLE__
+#include "CoreFoundation/CoreFoundation.h"
+#endif
+
 #include "core/oxygine.h"
 #include "Stage.h"
 #include "DebugActor.h"
+#include <iostream>
 
 #include "example.hpp"
 
@@ -22,7 +27,7 @@ int mainloop() {
     
     if(core::beginRendering()) {
         Color clearColor(32,32,32,255);
-        Rect viewport(Point(0, 0), core::getDisplaySize());
+        oxygine::Rect viewport(oxygine::Point(0, 0), core::getDisplaySize());
         getStage()->render(clearColor, viewport);
         
         core::swapDisplayBuffers();
@@ -35,6 +40,24 @@ int mainloop() {
 }
 
 void run() {
+    // ----------------------------------------------------------------------------
+    // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
+     
+    #ifdef __APPLE__
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+    {
+    // error!
+    }
+    CFRelease(resourcesURL);
+    
+    chdir(path);
+    std::cout << "Current Path: " << path << std::endl;
+    #endif
+    // ----------------------------------------------------------------------------
+
     ObjectBase::__startTracingLeaks();
     
     //core oxygine init
@@ -51,7 +74,7 @@ void run() {
     
     //create stage as root node
     Stage::instance = new Stage(true);
-    Point size = core::getDisplaySize();
+    oxygine::Point size = core::getDisplaySize();
     getStage()->setSize(size);
     
     //Helper debug node

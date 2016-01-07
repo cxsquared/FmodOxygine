@@ -102,7 +102,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 7;
 			files = (
 				E57C12071C1167D900FFCF2E /* sounds in CopyFiles */,
 			);
