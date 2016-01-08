@@ -8,7 +8,8 @@
 
 #pragma once
 #include "oxygine-framework.h"
-#include "InputTextHandler.hpp"
+#include "InputTextHandler.h"
+#include "ScreenActor.h"
 using namespace oxygine;
 
 DECLARE_SMART(Game, spGame);
@@ -21,6 +22,7 @@ private:
     void doUpdate(const UpdateState& us);
     
     spInputTextHandler _inputText;
+	spScreenDefault _screen;
 };
 
 

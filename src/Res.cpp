@@ -6,7 +6,7 @@
 //  Copyright © 2015 oxygine. All rights reserved.
 //
 
-#include "Res.hpp"
+#include "Res.h"
 
 namespace Res {
     Resources gameResources;

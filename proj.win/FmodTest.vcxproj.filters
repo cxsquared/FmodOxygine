@@ -12,6 +12,9 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{40e18951-3f3b-4601-a5ea-10a1917de268}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screens">
+      <UniqueIdentifier>{2aaad20d-3a61-45a5-9c84-cc54810f4321}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../src/AudioEngine.cpp">
@@ -32,9 +35,36 @@
     <ClCompile Include="../src/example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ScreenState.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ScreenActor.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ScreenState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\example.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\InputTextHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Res.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ScreenActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

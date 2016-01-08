@@ -6,8 +6,10 @@
 //  Copyright © 2015 oxygine. All rights reserved.
 //
 
-#include "Game.hpp"
-#include "SoundManager.hpp"
+#include "Game.h"
+#include "SoundManager.h"
+#include "ScreenState.h"
+#include "ScreenActor.h"
 
 Game::Game(){
 }
@@ -17,9 +19,17 @@ void Game::init() {
     
     setSize(getStage()->getSize());
     
+	// Create text input
     _inputText = new InputTextHandler;
     _inputText->attachTo(this);
-    _inputText->setPosition(getStage()->getSize()/2);
+	_inputText->setPosition(0, getStage()->getSize().y - 60);
+
+	// Create screen
+	_screen = new ScreenActor(new ScreenState());
+	_screen->attachTo(this);
+	_screen->setSize(getStage()->getSize().x, getStage()->getSize().y - 60);
+	_screen->setPosition(0, 0);
+
 }
 
 void Game::doUpdate(const UpdateState& us) {

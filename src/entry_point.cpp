@@ -15,7 +15,7 @@
 #include "DebugActor.h"
 #include <iostream>
 
-#include "example.hpp"
+#include "example.h"
 
 using namespace oxygine;
 

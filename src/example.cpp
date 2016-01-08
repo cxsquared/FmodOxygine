@@ -1,8 +1,8 @@
 #include "oxygine-framework.h"
 #include <functional>
-#include "SoundManager.hpp"
-#include "Res.hpp"
-#include "Game.hpp"
+#include "SoundManager.h"
+#include "Res.h"
+#include "Game.h"
 
 void example_preinit(){
 }

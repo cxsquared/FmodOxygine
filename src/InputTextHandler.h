@@ -10,8 +10,8 @@
 
 #include "InputText.h"
 #include "oxygine-framework.h"
-#include "Res.hpp"
-#include "SoundManager.hpp"
+#include "Res.h"
+#include "SoundManager.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -30,8 +30,8 @@ public:
         text->setTouchEnabled(false);
         
         TextStyle style;
-        style.color = Color::Black;
-        style.hAlign = TextStyle::HALIGN_CENTER;
+        style.color = Color::White;
+        style.hAlign = TextStyle::HALIGN_LEFT;
         style.vAlign = TextStyle::VALIGN_MIDDLE;
         style.multiline = true;
         style.font = Res::gameResources.getResFont("main")->getFont();
@@ -65,8 +65,8 @@ public:
         _input->addEventListener(Event::COMPLETE, CLOSURE(this, &InputTextHandler::onComplete));
         
         spTextWithBackground t = new TextWithBackground("Sound Command");
-        t->setSize(200, 60);
-        t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
+        t->setSize(getStage()->getSize().x, 60);
+        //t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
         t->attachTo(this);
         t->addEventListener(TouchEvent::CLICK, CLOSURE(this, &InputTextHandler::onClick));
 

@@ -124,9 +124,18 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/SoundManager.cpp" />
     <ClCompile Include="../src/entry_point.cpp" />
     <ClCompile Include="../src/example.cpp" />
+    <ClCompile Include="..\src\ScreenActor.cpp" />
+    <ClCompile Include="..\src\ScreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h" />
+    <ClInclude Include="..\src\example.h" />
+    <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\InputTextHandler.h" />
+    <ClInclude Include="..\src\Res.h" />
+    <ClInclude Include="..\src\ScreenActor.h" />
+    <ClInclude Include="..\src\ScreenState.h" />
+    <ClInclude Include="..\src\SoundManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
