@@ -51,6 +51,17 @@ public:
     }
 };
 
+// Custom event class
+class HandleInputEvent : public Event {
+public:
+	enum {EVENT = makefourcc('H', 'a', 'I', 'n') };
+
+	string command;
+	string options;
+
+	HandleInputEvent(string command, string options) :Event(EVENT), command(command), options(options) {}
+};
+
 DECLARE_SMART(InputTextHandler, spInputTextHandler);
 class InputTextHandler : public Actor {
 public:
@@ -83,15 +94,16 @@ public:
     }
                        
     void onComplete(Event* ev) {
-        cout << "Event complete called." << endl;
+        //cout << "Event complete called." << endl;
         if(_current) {
             _current->setColor(Color::White);
         }
         
         string curText = _current->text->getText();
         
-        cout << "Input text = " << curText << endl;
-        
+        //cout << "Input text = " << curText << endl;
+		
+		// Start splitting string into an vector
         string buf; // Have a buffer string
         stringstream ss(curText); // Insert the string into a stream
         
@@ -99,8 +111,16 @@ public:
         
         while (ss >> buf)
             tokens.push_back(buf);
+
+		if (tokens.size() > 0) {
+			HandleInputEvent event(tokens[0], "");
+			getParent()->dispatchEvent(&event);
+
+			cout << "Event sent" << endl;
+		}
         
         if (tokens.size() > 1) {
+			// Old music commands
             if (tokens[0] == "set" && tokens.size() > 2) {
                 if (tokens[1] == "music"){
                     SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", stof(tokens[2]));
@@ -122,8 +142,10 @@ public:
                     rainChannel = -1;
                 }
             }
+			// end music commands
         }
-        
+        // spliting command into different strings
+
         _current = 0;
         InputText::stopAnyInput();
     }

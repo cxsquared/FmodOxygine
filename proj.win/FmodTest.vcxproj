@@ -74,7 +74,7 @@
       <AdditionalIncludeDirectories>D:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;D:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;../../oxygine-framework-with-sdl/oxygine-framework//oxygine/src;../../oxygine-framework-with-sdl//SDL/include;../../oxygine-framework-with-sdl/oxygine-framework//oxygine/third_party/win32/pthreads/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libcurl_imp.lib;libjpeg.lib;libpng.lib;libzlib.lib;opengl32.lib;pthreadVCE2.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(VisualStudioVersion)' == '14.0'">libcurl_imp.lib;libjpeg-2015.lib;fmodL_vc.lib;fmodstudioL_vc.lib;libpng-2015.lib;libzlib.lib;opengl32.lib;pthreadVCE2.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -124,14 +124,20 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/SoundManager.cpp" />
     <ClCompile Include="../src/entry_point.cpp" />
     <ClCompile Include="../src/example.cpp" />
+    <ClCompile Include="..\src\Command.cpp" />
+    <ClCompile Include="..\src\InvalidCommand.cpp" />
+    <ClCompile Include="..\src\Mail.cpp" />
     <ClCompile Include="..\src\ScreenActor.cpp" />
     <ClCompile Include="..\src\ScreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h" />
+    <ClInclude Include="..\src\Command.h" />
     <ClInclude Include="..\src\example.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\InputTextHandler.h" />
+    <ClInclude Include="..\src\InvalidCommand.h" />
+    <ClInclude Include="..\src\Mail.h" />
     <ClInclude Include="..\src\Res.h" />
     <ClInclude Include="..\src\ScreenActor.h" />
     <ClInclude Include="..\src\ScreenState.h" />

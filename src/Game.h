@@ -18,11 +18,12 @@ public:
     Game();
     
     void init();
+	void handleInput(Event* ev);
 private:
     void doUpdate(const UpdateState& us);
     
     spInputTextHandler _inputText;
-	spScreenDefault _screen;
+	spDefaultScreenActor _screen;
 };
 
 

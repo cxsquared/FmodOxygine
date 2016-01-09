@@ -11,7 +11,7 @@ ScreenActor::ScreenActor(ScreenState* startingState)
 
 ScreenActor::~ScreenActor()
 {
-	delete state;
+	state = NULL;
 }
 
 void ScreenActor::doUpdate(const UpdateState & us)
@@ -20,7 +20,6 @@ void ScreenActor::doUpdate(const UpdateState & us)
 	if (newState != NULL) {
 		// If state returns a new state then delete the old one
 		// And then set the current state to new state
-		delete state;
 		state = newState;
 
 		// Initializing state

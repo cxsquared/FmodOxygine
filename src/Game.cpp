@@ -30,6 +30,16 @@ void Game::init() {
 	_screen->setSize(getStage()->getSize().x, getStage()->getSize().y - 60);
 	_screen->setPosition(0, 0);
 
+	this->addEventListener(HandleInputEvent::EVENT, CLOSURE(this, &Game::handleInput));
+}
+
+void Game::handleInput(Event * ev)
+{
+	HandleInputEvent* event = static_cast<HandleInputEvent*>(ev);
+
+	cout << "Parsing verb " << event->command << endl;
+
+	_screen->state->parseVerb(event->command);
 }
 
 void Game::doUpdate(const UpdateState& us) {

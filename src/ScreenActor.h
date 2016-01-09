@@ -8,7 +8,7 @@ using namespace std;
 
 class ScreenState;
 
-DECLARE_SMART(ScreenActor, spScreenDefault);
+DECLARE_SMART(ScreenActor, spDefaultScreenActor);
 class ScreenActor : public Actor
 {
 public:
