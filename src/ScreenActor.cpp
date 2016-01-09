@@ -28,6 +28,14 @@ void ScreenActor::doUpdate(const UpdateState & us)
 	}
 }
 
+void ScreenActor::onTextTweenDone(Event * event)
+{
+	// Adding line break
+	//wstring res = utf8tows(_text->getText().c_str()) + L"<br/>";
+	//string t = ws2utf8(res.c_str());
+	//_text->setHtmlText(t);
+}
+
 void ScreenActor::createScreen()
 {
 	// Createing a new Text Field and making it non interactable
@@ -35,7 +43,7 @@ void ScreenActor::createScreen()
 	_text->setTouchEnabled(false);
 
 	TextStyle style;
-	style.color = Color::Black;
+	style.color = Color::White;
 	style.hAlign = TextStyle::HALIGN_LEFT;
 	style.vAlign = TextStyle::VALIGN_TOP;
 	style.multiline = true;
@@ -53,7 +61,7 @@ void ScreenActor::addText(const string& line)
 	//TODO: Add text scrolling
 
 	// Add a line then add new text
-	_text->setText(_text->getText() + '\n' + line);
+	_text->addTween(TweenText(line), 1000, 1, false)->setDoneCallback(CLOSURE(this, &ScreenActor::onTextTweenDone));
 }
 
 void ScreenActor::clearText()
