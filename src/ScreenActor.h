@@ -23,6 +23,7 @@ protected:
 	void doUpdate(const UpdateState& us);
 	void onTextTweenDone(Event *event);
 	virtual void createScreen();
+	bool isTextTweening = false;
 
 private:
 	spTextField _text;

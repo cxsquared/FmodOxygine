@@ -17,7 +17,7 @@ ScreenActor::~ScreenActor()
 void ScreenActor::doUpdate(const UpdateState & us)
 {
 	ScreenState* newState = state->update(*this);
-	if (newState != NULL) {
+	if (newState != NULL && !isTextTweening) {
 		cout << "Switching to a new state!" << endl;
 		// If state returns a new state then delete the old one
 		// And then set the current state to new state
@@ -30,10 +30,8 @@ void ScreenActor::doUpdate(const UpdateState & us)
 
 void ScreenActor::onTextTweenDone(Event * event)
 {
-	// Adding line break
-	//wstring res = utf8tows(_text->getText().c_str()) + L"<br/>";
-	//string t = ws2utf8(res.c_str());
-	//_text->setHtmlText(t);
+	// TODO: Add skipping tween animation
+	isTextTweening = false;
 }
 
 void ScreenActor::createScreen()
@@ -57,14 +55,14 @@ void ScreenActor::createScreen()
 
 void ScreenActor::addText(const string& line)
 {
-	//TODO: Tween text to look really cool
 	//TODO: Add text scrolling
 
 	// Add a line then add new text
 	_text->addTween(TweenText(line), 1000, 1, false)->setDoneCallback(CLOSURE(this, &ScreenActor::onTextTweenDone));
+	isTextTweening = true;
 }
 
 void ScreenActor::clearText()
 {
-	_text->setText("");
+	_text->setHtmlText("");
 }
