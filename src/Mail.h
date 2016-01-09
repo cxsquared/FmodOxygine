@@ -3,5 +3,5 @@
 
 class Mail : public Command {
 	// Inherited via Command
-	virtual string parseNoun(string noun, ScreenState* state) override;
+	virtual string parseNoun(vector<string> options, ScreenState* state) override;
 };

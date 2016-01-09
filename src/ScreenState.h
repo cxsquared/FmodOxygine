@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <oxygine-framework.h>
+#include <vector>
 #include "InputTextHandler.h"
 
 using namespace oxygine;
@@ -22,9 +23,10 @@ public:
 	
 	void switchStates(ScreenState* newState);
 	Command* parseVerb(const string& command);
-	void handleInput(const string& command, const string& options);
+	void handleInput(const string& command, vector<string> options);
 
-	// TODO: Implement Command Array
+	// Holds all commands that the current state can use
+	// Also holds all possible ways to type commands
 	map<string, Command*> knowCommands;
 protected:
 	ScreenState* stateToSwitchTo = NULL;

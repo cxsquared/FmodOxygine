@@ -57,9 +57,9 @@ public:
 	enum {EVENT = makefourcc('H', 'a', 'I', 'n') };
 
 	string command;
-	string options;
+	vector<string> options;
 
-	HandleInputEvent(string command, string options) :Event(EVENT), command(command), options(options) {}
+	HandleInputEvent(string command, vector<string> options) :Event(EVENT), command(command), options(options) {}
 };
 
 DECLARE_SMART(InputTextHandler, spInputTextHandler);
@@ -109,16 +109,20 @@ public:
         
         vector<string> tokens; // Create vector to hold our words
         
-        while (ss >> buf)
+        while (ss >> buf) // TODO: Learn what's actually happening here
             tokens.push_back(buf);
 
+		// Send event
 		if (tokens.size() > 0) {
-			HandleInputEvent event(tokens[0], "");
+			string command = tokens[0];
+			tokens.erase(tokens.begin());
+			HandleInputEvent event(command, tokens);
 			getParent()->dispatchEvent(&event);
 
 			cout << "Event sent" << endl;
 		}
         
+		/*
         if (tokens.size() > 1) {
 			// Old music commands
             if (tokens[0] == "set" && tokens.size() > 2) {
@@ -145,6 +149,7 @@ public:
 			// end music commands
         }
         // spliting command into different strings
+		*/
 
         _current = 0;
         InputText::stopAnyInput();

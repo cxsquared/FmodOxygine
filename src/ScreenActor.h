@@ -8,6 +8,8 @@ using namespace std;
 
 class ScreenState;
 
+// Class that controls how everything is shown on the screen
+// Can make a child class of this if you need custom visuals on the screen
 DECLARE_SMART(ScreenActor, spDefaultScreenActor);
 class ScreenActor : public Actor
 {
@@ -29,6 +31,7 @@ private:
 	spTextField _text;
 };
 
+// Class that controls how the text shows up on the screen
 class TweenText {
 public:
 	typedef TextField type;

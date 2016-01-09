@@ -23,6 +23,8 @@ void ScreenState::enter(ScreenActor& screen)
 
 	knowCommands["mail"] = Command::mail;
 	knowCommands["Mail"] = Command::mail;
+	knowCommands["Music"] = Command::music;
+	knowCommands["music"] = Command::music;
 }
 
 void ScreenState::switchStates(ScreenState* newState)
@@ -40,7 +42,7 @@ Command* ScreenState::parseVerb(const string& command) {
 	return w->second;
 }
 
-void ScreenState::handleInput(const string & command, const string & options)
+void ScreenState::handleInput(const string & command, vector<string> options)
 {
 	Command* com = parseVerb(command);
 	_screen->addText(com->parseNoun(options, this));

@@ -18,6 +18,9 @@
     <Filter Include="Source Files\Commands">
       <UniqueIdentifier>{fff0f1a2-f83a-4f0a-b44a-b62071ddfa3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{18a9f963-be85-4fd5-9174-4dba8aebdd46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../src/AudioEngine.cpp">
@@ -53,6 +56,9 @@
     <ClCompile Include="..\src\Command.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Music.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
@@ -80,13 +86,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Command.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Mail.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\src\InvalidCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Music.h">
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,9 +1,9 @@
 #include "Mail.h"
 #include "ScreenState.h"
 
-string Mail::parseNoun(string nouns, ScreenState* state)
+string Mail::parseNoun(vector<string> options, ScreenState* state)
 {
-	if (nouns != "") {
+	if (options.size() > 0) {
 		return "Mail takes no arguments.";
 	}
 
