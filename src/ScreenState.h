@@ -22,9 +22,11 @@ public:
 	
 	void switchStates(ScreenState* newState);
 	Command* parseVerb(const string& command);
+	void handleInput(const string& command, const string& options);
 
 	// TODO: Implement Command Array
 	map<string, Command*> knowCommands;
 protected:
 	ScreenState* stateToSwitchTo = NULL;
+	ScreenActor* _screen;
 };

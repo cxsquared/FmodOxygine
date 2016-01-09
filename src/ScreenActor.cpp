@@ -18,6 +18,7 @@ void ScreenActor::doUpdate(const UpdateState & us)
 {
 	ScreenState* newState = state->update(*this);
 	if (newState != NULL) {
+		cout << "Switching to a new state!" << endl;
 		// If state returns a new state then delete the old one
 		// And then set the current state to new state
 		state = newState;

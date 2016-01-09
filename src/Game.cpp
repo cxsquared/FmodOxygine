@@ -39,7 +39,7 @@ void Game::handleInput(Event * ev)
 
 	cout << "Parsing verb " << event->command << endl;
 
-	_screen->state->parseVerb(event->command);
+	_screen->state->handleInput(event->command, event->options);
 }
 
 void Game::doUpdate(const UpdateState& us) {

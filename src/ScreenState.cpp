@@ -17,7 +17,9 @@ ScreenState* ScreenState::update(ScreenActor& screen)
 
 void ScreenState::enter(ScreenActor& screen)
 {
+	_screen = &screen;
 	screen.addChild(this);
+	screen.clearText();
 
 	knowCommands["mail"] = Command::mail;
 	knowCommands["Mail"] = Command::mail;
@@ -36,6 +38,12 @@ Command* ScreenState::parseVerb(const string& command) {
 	}
 
 	return w->second;
+}
+
+void ScreenState::handleInput(const string & command, const string & options)
+{
+	Command* com = parseVerb(command);
+	_screen->addText(com->parseNoun(options, this));
 }
 
 
