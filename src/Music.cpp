@@ -10,7 +10,7 @@ string Music::parseNoun(vector<string> options, ScreenState * state)
 				SoundManager::setEventParam("event:/Music/MusicTrack", "Intensity", stof(options[2]));
 				return "Setting music intensity to " + options[2];
 			}
-			else if (options[1] == "rain" && rainChannel >= 0) {
+			else if (options[1] == "rain" && rainChannel != -1) {
 				SoundManager::setChannelVolume(rainChannel, stof(options[2]));
 				return "Setting rain volume to " + options[2] + "dB";
 			}
@@ -31,7 +31,7 @@ string Music::parseNoun(vector<string> options, ScreenState * state)
 				SoundManager::stopEvent("event:/Music/MusicTrack");
 				return "Stopping music";
 			}
-			else if (options[1] == "rain" && rainChannel >= 0) {
+			else if (options[1] == "rain" && rainChannel != -1) {
 				SoundManager::stopChannel(rainChannel);
 				rainChannel = -1;
 				return "Stopping rain";

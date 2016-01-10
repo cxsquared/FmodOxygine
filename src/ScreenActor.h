@@ -29,6 +29,7 @@ protected:
 
 private:
 	spTextField _text;
+	vector<string> textQueue;
 };
 
 // Class that controls how the text shows up on the screen

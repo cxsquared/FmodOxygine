@@ -26,6 +26,12 @@ void ScreenActor::doUpdate(const UpdateState & us)
 		// Initializing state
 		state->enter(*this);
 	}
+
+	// See if we need to show anymore text
+	if (textQueue.size() > 0 && !isTextTweening) {
+		addText(textQueue[0]);
+		textQueue.erase(textQueue.begin());
+	}
 }
 
 void ScreenActor::onTextTweenDone(Event * event)
@@ -57,9 +63,15 @@ void ScreenActor::addText(const string& line)
 {
 	//TODO: Add text scrolling
 
-	// Add a line then add new text
-	_text->addTween(TweenText(line), 1000, 1, false)->setDoneCallback(CLOSURE(this, &ScreenActor::onTextTweenDone));
-	isTextTweening = true;
+	// Check if we are adding a line right now
+	if (isTextTweening) {
+		textQueue.push_back(line);
+	}
+	else {
+		// Add a line then add new text
+		_text->addTween(TweenText(line), 1000, 1, false)->setDoneCallback(CLOSURE(this, &ScreenActor::onTextTweenDone));
+		isTextTweening = true;
+	}
 }
 
 void ScreenActor::clearText()

@@ -9,12 +9,14 @@ using namespace oxygine;
 using namespace std;
 class ScreenActor;
 class Command;
+class MainMenuState;
 
 DECLARE_SMART(ScreenState, spDefaultScreenState)
 class ScreenState : public Actor{
 public:
 	// TODO: List all posible screens
-	
+	static ScreenState* mainMenu;
+
 	//Methods
 	ScreenState();
 	virtual ~ScreenState();

@@ -2,6 +2,9 @@
 #include "ScreenActor.h"
 #include "Command.h"
 #include <iostream>
+#include "MainMenuState.h"
+
+ScreenState* ScreenState::mainMenu = new MainMenuState();
 
 ScreenState::ScreenState()
 {
@@ -21,10 +24,10 @@ void ScreenState::enter(ScreenActor& screen)
 	screen.addChild(this);
 	screen.clearText();
 
-	knowCommands["mail"] = Command::mail;
-	knowCommands["Mail"] = Command::mail;
-	knowCommands["Music"] = Command::music;
-	knowCommands["music"] = Command::music;
+	//knowCommands["mail"] = Command::mail;
+	//knowCommands["Mail"] = Command::mail;
+	//knowCommands["Music"] = Command::music;
+	//knowCommands["music"] = Command::music;
 }
 
 void ScreenState::switchStates(ScreenState* newState)

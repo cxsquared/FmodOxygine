@@ -21,6 +21,9 @@
     <Filter Include="Header Files\Commands">
       <UniqueIdentifier>{18a9f963-be85-4fd5-9174-4dba8aebdd46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screens">
+      <UniqueIdentifier>{b187fb25-a578-4d14-85d4-e9526027ff8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../src/AudioEngine.cpp">
@@ -59,12 +62,12 @@
     <ClCompile Include="..\src\Music.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MainMenuState.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ScreenState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\example.h">
@@ -82,9 +85,6 @@
     <ClInclude Include="..\src\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ScreenActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Command.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
@@ -96,6 +96,15 @@
     </ClInclude>
     <ClInclude Include="..\src\Music.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ScreenState.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ScreenActor.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MainMenuState.h">
+      <Filter>Header Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

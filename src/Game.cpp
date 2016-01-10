@@ -25,7 +25,7 @@ void Game::init() {
 	_inputText->setPosition(0, getStage()->getSize().y - 60);
 
 	// Create screen
-	_screen = new ScreenActor(new ScreenState());
+	_screen = new ScreenActor(ScreenState::mainMenu);
 	_screen->attachTo(this);
 	_screen->setSize(getStage()->getSize().x, getStage()->getSize().y - 60);
 	_screen->setPosition(0, 0);
