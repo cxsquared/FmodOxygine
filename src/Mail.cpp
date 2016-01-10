@@ -4,10 +4,13 @@
 string Mail::parseNoun(vector<string> options, ScreenState* state)
 {
 	if (options.size() > 0) {
+		if (options[0] == "help" || options[0] == "-h") {
+			return "The mail command is used to check your messages";
+		}
 		return "Mail takes no arguments.";
 	}
 
-	state->switchStates(new ScreenState());
+	state->switchStates(ScreenState::mainMenu);
 
 	return "Switching States";
 }

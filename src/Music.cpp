@@ -39,5 +39,6 @@ string Music::parseNoun(vector<string> options, ScreenState * state)
 		}
 	}
 
+	//TODO: Figure out how to allow commands to send multiple lines to screen instead of just one.
 	return "The music commands takes arguments that include: music set music *intensity*, music set rain *volume*, music play *rain/music*, music stop *rain/music* ";
 }

@@ -45,7 +45,9 @@ public:
 	void init(TextField& actor) {
 		_lastText = actor.getText();
 	}
+
 	void update(TextField& actor, float p, const UpdateState& us) {
+		// TODO: Figuer out how to color commands automatically
 		int v = lerp<int>(0, (int)_text.size(), p);
 		wstring res = utf8tows(_lastText.c_str()) + _text.substr(0, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
 

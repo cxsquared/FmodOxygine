@@ -17,8 +17,10 @@ ScreenActor::~ScreenActor()
 void ScreenActor::doUpdate(const UpdateState & us)
 {
 	ScreenState* newState = state->update(*this);
-	if (newState != NULL && !isTextTweening) {
+	if (newState != NULL && !isTextTweening && textQueue.size() <= 0) {
 		cout << "Switching to a new state!" << endl;
+		// Remove old text from queue
+		textQueue.clear();
 		// If state returns a new state then delete the old one
 		// And then set the current state to new state
 		state = newState;

@@ -20,9 +20,13 @@ ScreenState* ScreenState::update(ScreenActor& screen)
 
 void ScreenState::enter(ScreenActor& screen)
 {
+	// Reset variables add this actor to the screen
 	_screen = &screen;
-	screen.addChild(this);
+	if (this->getParent() != &screen) {
+		screen.addChild(this);
+	}
 	screen.clearText();
+	this->stateToSwitchTo = NULL;
 
 	//knowCommands["mail"] = Command::mail;
 	//knowCommands["Mail"] = Command::mail;
