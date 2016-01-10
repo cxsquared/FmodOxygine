@@ -123,7 +123,7 @@ public:
 		}
 		
         _current = 0;
-        //InputText::stopAnyInput();
+        InputText::stopAnyInput();
     }
                        
     ~InputTextHandler() {
