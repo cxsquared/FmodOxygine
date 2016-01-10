@@ -38,6 +38,7 @@ public:
         
         text->setStyle(style);
         text->setText(defText);
+		this->setColor(Color(0x00000000));
         
         addChild(text);
         
@@ -75,8 +76,8 @@ public:
         
         _input->addEventListener(Event::COMPLETE, CLOSURE(this, &InputTextHandler::onComplete));
         
-        spTextWithBackground t = new TextWithBackground("Sound Command");
-        t->setSize(getStage()->getSize().x, 60);
+        spTextWithBackground t = new TextWithBackground("Input Command here...");
+        t->setSize(getStage()->getSize().x - (40 * 2), 60);
         //t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
         t->attachTo(this);
         t->addEventListener(TouchEvent::CLICK, CLOSURE(this, &InputTextHandler::onClick));
@@ -85,18 +86,18 @@ public:
                        
     void onClick(Event* ev) {
         if (_current) {
-            _current->setColor(Color::White);
+            _current->setColor(Color(0x00000000));
         }
                            
         _current = safeSpCast<TextWithBackground>(ev->currentTarget);
         _input->start(_current->text);
-        _current->setColor(Color::Red);
+        _current->setColor(Color(0x00000000));
     }
                        
     void onComplete(Event* ev) {
         //cout << "Event complete called." << endl;
         if(_current) {
-            _current->setColor(Color::White);
+            _current->setColor(Color(0x00000000));
         }
         
         string curText = _current->text->getText();

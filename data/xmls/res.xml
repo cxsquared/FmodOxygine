@@ -3,6 +3,7 @@
 	<atlas>
 		<image file="anim.png" cols = "7" />
 		<image file="button.png" />
+		<image file="computerOutline.png" />
 	</atlas>
 
 	<set path="./../fonts" />

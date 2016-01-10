@@ -24,6 +24,7 @@ private:
     
     spInputTextHandler _inputText;
 	spDefaultScreenActor _screen;
+	spSprite _background;
 };
 
 

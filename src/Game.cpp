@@ -18,17 +18,23 @@ void Game::init() {
     SoundManager::playEvent("event:/Music/MusicTrack");
     
     setSize(getStage()->getSize());
+
+	// Create background
+	_background = new Sprite();
+	_background->setResAnim(Res::gameResources.getResAnim("computerOutline"));
+	_background->attachTo(this);
     
 	// Create text input
     _inputText = new InputTextHandler;
     _inputText->attachTo(this);
-	_inputText->setPosition(0, getStage()->getSize().y - 60);
+	_inputText->setSize(getStage()->getSize().x - (40 * 2), 60);
+	_inputText->setPosition(42, getStage()->getSize().y - 100);
 
 	// Create screen
 	_screen = new ScreenActor(ScreenState::mainMenu);
 	_screen->attachTo(this);
-	_screen->setSize(getStage()->getSize().x, getStage()->getSize().y - 60);
-	_screen->setPosition(0, 0);
+	_screen->setSize(getStage()->getSize().x - (42 * 2), getStage()->getSize().y - 12 - _inputText->getSize().y - _inputText->getY());
+	_screen->setPosition(42, 40);
 
 	this->addEventListener(HandleInputEvent::EVENT, CLOSURE(this, &Game::handleInput));
 }
