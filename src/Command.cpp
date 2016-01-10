@@ -6,6 +6,8 @@
 #include "Go.h"
 #include "Clear.h"
 #include "Quit.h"
+#include "MainMenuCommand.h"
+#include "ResetGame.h"
 
 Command* Command::invalid = new InvalidCommand();
 Command* Command::mail = new Mail();
@@ -14,3 +16,5 @@ Command* Command::look = new Look();
 Command* Command::go = new Go();
 Command* Command::clear = new Clear();
 Command* Command::quit = new Quit();
+Command* Command::mainMenu = new MainMenuCommand();
+Command* Command::reset = new ResetGame();
