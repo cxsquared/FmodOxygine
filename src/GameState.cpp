@@ -12,6 +12,8 @@ void GameState::enter(ScreenActor & screen)
 	knowCommands["g"] = Command::go;
 	knowCommands["go"] = Command::go;
 	knowCommands["Go"] = Command::go;
+	knowCommands["clear"] = Command::clear;
+	knowCommands["Clear"] = Command::clear;
 
 	level = new Level();
 

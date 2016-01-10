@@ -28,6 +28,7 @@ public:
 	void switchStates(ScreenState* newState);
 	Command* parseVerb(const string& command);
 	void handleInput(const string& command, vector<string> options);
+	ScreenActor& getScreen();
 
 	// Holds all commands that the current state can use
 	// Also holds all possible ways to type commands

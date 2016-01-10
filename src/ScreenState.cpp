@@ -30,10 +30,8 @@ void ScreenState::enter(ScreenActor& screen)
 	screen.clearText();
 	this->stateToSwitchTo = NULL;
 
-	//knowCommands["mail"] = Command::mail;
-	//knowCommands["Mail"] = Command::mail;
-	//knowCommands["Music"] = Command::music;
-	//knowCommands["music"] = Command::music;
+	knowCommands["Quit"] = Command::quit;
+	knowCommands["quit"] = Command::quit;
 }
 
 void ScreenState::switchStates(ScreenState* newState)
@@ -55,6 +53,11 @@ void ScreenState::handleInput(const string & command, vector<string> options)
 {
 	Command* com = parseVerb(command);
 	_screen->addText(com->parseNoun(options, this));
+}
+
+ScreenActor & ScreenState::getScreen()
+{
+	return *_screen;
 }
 
 

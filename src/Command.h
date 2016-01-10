@@ -10,6 +10,10 @@ class Mail;
 class Music;
 class Look;
 class Go;
+class Clear;
+class Quit;
+class MainMenu;
+class Reset;
 
 class Command {
 public:
@@ -22,4 +26,10 @@ public:
 	static Command* music;
 	static Command* look;
 	static Command* go;
+	static Command* clear;
+	static Command* quit;
+	static Command* mainMenu;
+	static Command* reset;
+
+	//TODO: Allow for questions and responses to commands (mini states?)
 };

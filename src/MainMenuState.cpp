@@ -10,6 +10,8 @@ void MainMenuState::enter(ScreenActor & screen)
 	knowCommands["Mail"] = Command::mail;
 	knowCommands["music"] = Command::music;
 	knowCommands["music"] = Command::music;
+	knowCommands["clear"] = Command::clear;
+	knowCommands["Clear"] = Command::clear;
 
 	screen.addText("Welcome to Hightower Industries OS...");
 	screen.addText("Your number one leader in future technlogy.");

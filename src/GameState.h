@@ -7,4 +7,5 @@ class GameState : public ScreenState {
 public:
 	void enter(ScreenActor& screen);
 	Level* level;
+
 };
