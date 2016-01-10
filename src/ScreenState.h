@@ -10,12 +10,14 @@ using namespace std;
 class ScreenActor;
 class Command;
 class MainMenuState;
+class GameState;
 
 DECLARE_SMART(ScreenState, spDefaultScreenState)
 class ScreenState : public Actor{
 public:
 	// TODO: List all posible screens
 	static ScreenState* mainMenu;
+	static ScreenState* gameState;
 
 	//Methods
 	ScreenState();

@@ -3,8 +3,10 @@
 #include "Command.h"
 #include <iostream>
 #include "MainMenuState.h"
+#include "GameState.h"
 
 ScreenState* ScreenState::mainMenu = new MainMenuState();
+ScreenState* ScreenState::gameState = new GameState();
 
 ScreenState::ScreenState()
 {

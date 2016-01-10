@@ -6,6 +6,8 @@ ScreenActor::ScreenActor(ScreenState* startingState)
 	createScreen();
 	state = startingState;
 	state->enter(*this);
+	this->setTouchEnabled(false);
+	this->setTouchChildrenEnabled(false);
 }
 
 

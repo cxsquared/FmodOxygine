@@ -10,7 +10,7 @@ string Mail::parseNoun(vector<string> options, ScreenState* state)
 		return "Mail takes no arguments.";
 	}
 
-	state->switchStates(ScreenState::mainMenu);
+	state->switchStates(ScreenState::gameState);
 
 	return "Switching States";
 }

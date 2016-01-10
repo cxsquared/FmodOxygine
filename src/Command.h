@@ -8,6 +8,7 @@ class ScreenState;
 class InvalidCommand;
 class Mail;
 class Music;
+class Look;
 
 class Command {
 public:
@@ -18,4 +19,5 @@ public:
 	static Command* invalid;
 	static Command* mail;
 	static Command* music;
+	static Command* look;
 };

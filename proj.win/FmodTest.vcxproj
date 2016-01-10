@@ -125,10 +125,15 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/entry_point.cpp" />
     <ClCompile Include="../src/example.cpp" />
     <ClCompile Include="..\src\Command.cpp" />
+    <ClCompile Include="..\src\GameState.cpp" />
     <ClCompile Include="..\src\InvalidCommand.cpp" />
+    <ClCompile Include="..\src\Level.cpp" />
+    <ClCompile Include="..\src\Look.cpp" />
     <ClCompile Include="..\src\Mail.cpp" />
     <ClCompile Include="..\src\MainMenuState.cpp" />
     <ClCompile Include="..\src\Music.cpp" />
+    <ClCompile Include="..\src\Player.cpp" />
+    <ClCompile Include="..\src\Room.cpp" />
     <ClCompile Include="..\src\ScreenActor.cpp" />
     <ClCompile Include="..\src\ScreenState.cpp" />
   </ItemGroup>
@@ -137,12 +142,17 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\Command.h" />
     <ClInclude Include="..\src\example.h" />
     <ClInclude Include="..\src\Game.h" />
+    <ClInclude Include="..\src\GameState.h" />
     <ClInclude Include="..\src\InputTextHandler.h" />
     <ClInclude Include="..\src\InvalidCommand.h" />
+    <ClInclude Include="..\src\Level.h" />
+    <ClInclude Include="..\src\Look.h" />
     <ClInclude Include="..\src\Mail.h" />
     <ClInclude Include="..\src\MainMenuState.h" />
     <ClInclude Include="..\src\Music.h" />
+    <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\Res.h" />
+    <ClInclude Include="..\src\Room.h" />
     <ClInclude Include="..\src\ScreenActor.h" />
     <ClInclude Include="..\src\ScreenState.h" />
     <ClInclude Include="..\src\SoundManager.h" />
