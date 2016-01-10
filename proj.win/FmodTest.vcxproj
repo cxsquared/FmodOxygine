@@ -126,6 +126,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/example.cpp" />
     <ClCompile Include="..\src\Command.cpp" />
     <ClCompile Include="..\src\GameState.cpp" />
+    <ClCompile Include="..\src\Go.cpp" />
     <ClCompile Include="..\src\InvalidCommand.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Look.cpp" />
@@ -143,6 +144,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\example.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameState.h" />
+    <ClInclude Include="..\src\Go.h" />
     <ClInclude Include="..\src\InputTextHandler.h" />
     <ClInclude Include="..\src\InvalidCommand.h" />
     <ClInclude Include="..\src\Level.h" />

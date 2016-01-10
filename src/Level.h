@@ -13,7 +13,7 @@ public:
 	Player* player;
 private:
 	vector<Room*> rooms;
-	Room generateLevel(int roomsPerFloor, int floors);
-	Room* makeRoom(Room connectingRoom, string direction, int floor);
+	Room* generateLevel(int roomsPerFloor, int floors);
+	Room* makeRoom(Room& connectingRoom, string direction, int floor);
 	string getRandomDirection(Room connectionRoom);
 };

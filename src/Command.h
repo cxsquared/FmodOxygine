@@ -9,6 +9,7 @@ class InvalidCommand;
 class Mail;
 class Music;
 class Look;
+class Go;
 
 class Command {
 public:
@@ -20,4 +21,5 @@ public:
 	static Command* mail;
 	static Command* music;
 	static Command* look;
+	static Command* go;
 };

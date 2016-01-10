@@ -7,7 +7,7 @@ using namespace std;
 class Room {
 public:
 	Room(int floor=0);
-	map<string, Room> exits;
+	map<string, Room*> exits;
 	string description = "";
 	string enteringRoom();
 	string getExits();

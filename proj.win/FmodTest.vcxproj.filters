@@ -86,6 +86,9 @@
     <ClCompile Include="..\src\Look.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Go.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
@@ -140,6 +143,9 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Look.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Go.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>

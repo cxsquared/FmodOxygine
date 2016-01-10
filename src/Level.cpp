@@ -7,7 +7,7 @@
 using namespace std;
 
 Level::Level() {
-	player = new Player(generateLevel(6, 3));
+	player = new Player(*generateLevel(6, 3));
 }
 
 Level::Level(int minRooms=3, int maxRooms=6, int minFloors=3, int maxFloors=6) {
@@ -26,21 +26,21 @@ Level::~Level()
 	delete player;
 }
 
-Room Level::generateLevel(int roomsPerFloor, int floors)
+Room* Level::generateLevel(int roomsPerFloor, int floors)
 {
 	int currentFloor = 0;
-	Room exitRoom;
-	Room startingRoom;
+	Room* exitRoom;
+	Room* startingRoom;
 
 	while (currentFloor < floors) {
 		int numberOfRooms = 0;
 		// make entrance room
 		if (currentFloor == 0) {
 			Room* room = new Room(currentFloor);
-			startingRoom = *room;
+			startingRoom = room;
 			rooms.push_back(room);
 		} else {
-			rooms.push_back(makeRoom(exitRoom, "up", currentFloor));
+			rooms.push_back(makeRoom(*exitRoom, "up", currentFloor));
 		}
 		numberOfRooms++;
 		while (numberOfRooms < roomsPerFloor) {
@@ -59,7 +59,7 @@ Room Level::generateLevel(int roomsPerFloor, int floors)
 			if ((*it)->getFloor()== currentFloor) {
 				auto w = (*it)->exits.find("down");
 				if (w == (*it)->exits.end()) {
-					exitRoom = *(*it);
+					exitRoom = (*it);
 					break;
 				}
 			}
@@ -70,28 +70,28 @@ Room Level::generateLevel(int roomsPerFloor, int floors)
 	return startingRoom;
 }
 
-Room* Level::makeRoom(Room connectingRoom, string direction, int floor)
+Room* Level::makeRoom(Room& connectingRoom, string direction, int floor)
 {
 	Room* room = new Room(floor);
 	if (direction == "n") {
-		room->exits["s"] = connectingRoom;
+		room->exits["s"] = &connectingRoom;
 	}
 	else if (direction == "s") {
-		room->exits["n"] = connectingRoom;
+		room->exits["n"] = &connectingRoom;
 	}
 	else if (direction == "w") {
-		room->exits["e"] = connectingRoom;
+		room->exits["e"] = &connectingRoom;
 	}
 	else if (direction == "e") {
-		room->exits["w"] = connectingRoom;
+		room->exits["w"] = &connectingRoom;
 	}
 	else if (direction == "up") {
-		room->exits["down"] = connectingRoom;
+		room->exits["down"] = &connectingRoom;
 	}
 	else if (direction == "down") {
-		room->exits["up"] = connectingRoom;
+		room->exits["up"] = &connectingRoom;
 	}
-	connectingRoom.exits[direction] = *room;
+	connectingRoom.exits[direction] = room;
 	return room;
 }
 

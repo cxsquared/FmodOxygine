@@ -3,9 +3,9 @@
 
 class Player {
 public:
-	Player(Room startingRoom);
+	Player(Room& startingRoom);
 	~Player();
-	Room currentRoom;
+	Room* currentRoom;
 	int health;
 
 	bool move(string dir);
