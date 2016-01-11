@@ -1,7 +1,7 @@
 #pragma once
 #include "oxygine-framework.h"
 #include "Res.h"
-#include "utils\stringUtils.h"
+#include "utils/stringUtils.h"
 
 using namespace oxygine;
 using namespace std;

@@ -10,7 +10,7 @@ Level::Level() {
 	player = new Player(*generateLevel(6, 3));
 }
 
-Level::Level(int minRooms=3, int maxRooms=6, int minFloors=3, int maxFloors=6) {
+Level::Level(int minRooms, int maxRooms, int minFloors, int maxFloors) {
 	
 }
 

@@ -15,6 +15,23 @@
 		0405A00118720D2200BA6557 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FF11872031A00BA6557 /* libpng.a */; };
 		049B57321871FBE900EF3C66 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B57311871FBE900EF3C66 /* Cocoa.framework */; };
 		049B574A1871FBE900EF3C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049B57491871FBE900EF3C66 /* Images.xcassets */; };
+		E55F67471C4436F900F29755 /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F671F1C4436F900F29755 /* Clear.cpp */; };
+		E55F67481C4436F900F29755 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67211C4436F900F29755 /* Command.cpp */; };
+		E55F67491C4436F900F29755 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67251C4436F900F29755 /* GameState.cpp */; };
+		E55F674A1C4436F900F29755 /* Go.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67271C4436F900F29755 /* Go.cpp */; };
+		E55F674B1C4436F900F29755 /* InvalidCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F672A1C4436F900F29755 /* InvalidCommand.cpp */; };
+		E55F674C1C4436F900F29755 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F672C1C4436F900F29755 /* Level.cpp */; };
+		E55F674D1C4436F900F29755 /* Look.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F672E1C4436F900F29755 /* Look.cpp */; };
+		E55F674E1C4436F900F29755 /* Mail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67301C4436F900F29755 /* Mail.cpp */; };
+		E55F674F1C4436F900F29755 /* MainMenuCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67321C4436F900F29755 /* MainMenuCommand.cpp */; };
+		E55F67501C4436F900F29755 /* MainMenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67341C4436F900F29755 /* MainMenuState.cpp */; };
+		E55F67511C4436F900F29755 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67361C4436F900F29755 /* Music.cpp */; };
+		E55F67521C4436F900F29755 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67381C4436F900F29755 /* Player.cpp */; };
+		E55F67531C4436F900F29755 /* Quit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F673A1C4436F900F29755 /* Quit.cpp */; };
+		E55F67541C4436F900F29755 /* ResetGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F673D1C4436F900F29755 /* ResetGame.cpp */; };
+		E55F67551C4436F900F29755 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F673F1C4436F900F29755 /* Room.cpp */; };
+		E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67411C4436F900F29755 /* ScreenActor.cpp */; };
+		E55F67571C4436F900F29755 /* ScreenState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67431C4436F900F29755 /* ScreenState.cpp */; };
 		E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A41C1092AE00FFCF2E /* entry_point.cpp */; };
 		E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A61C1092CC00FFCF2E /* example.cpp */; };
 		E57C11B01C109C4800FFCF2E /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AD1C109C4800FFCF2E /* fonts */; };
@@ -127,9 +144,48 @@
 		049B57501871FBE900EF3C66 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = oxygine_macosx.xcodeproj; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/SDL/macosx/oxygine_macosx/oxygine_macosx.xcodeproj"; sourceTree = "<group>"; };
 		04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL.xcodeproj; path = "../../oxygine-framework-with-sdl//SDL/Xcode/SDL/SDL.xcodeproj"; sourceTree = "<group>"; };
+		E55F671F1C4436F900F29755 /* Clear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clear.cpp; sourceTree = "<group>"; };
+		E55F67201C4436F900F29755 /* Clear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clear.h; sourceTree = "<group>"; };
+		E55F67211C4436F900F29755 /* Command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.cpp; sourceTree = "<group>"; };
+		E55F67221C4436F900F29755 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
+		E55F67231C4436F900F29755 /* example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = example.h; sourceTree = "<group>"; };
+		E55F67241C4436F900F29755 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		E55F67251C4436F900F29755 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		E55F67261C4436F900F29755 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		E55F67271C4436F900F29755 /* Go.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Go.cpp; sourceTree = "<group>"; };
+		E55F67281C4436F900F29755 /* Go.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Go.h; sourceTree = "<group>"; };
+		E55F67291C4436F900F29755 /* InputTextHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputTextHandler.h; sourceTree = "<group>"; };
+		E55F672A1C4436F900F29755 /* InvalidCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InvalidCommand.cpp; sourceTree = "<group>"; };
+		E55F672B1C4436F900F29755 /* InvalidCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvalidCommand.h; sourceTree = "<group>"; };
+		E55F672C1C4436F900F29755 /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Level.cpp; sourceTree = "<group>"; };
+		E55F672D1C4436F900F29755 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		E55F672E1C4436F900F29755 /* Look.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Look.cpp; sourceTree = "<group>"; };
+		E55F672F1C4436F900F29755 /* Look.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Look.h; sourceTree = "<group>"; };
+		E55F67301C4436F900F29755 /* Mail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mail.cpp; sourceTree = "<group>"; };
+		E55F67311C4436F900F29755 /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
+		E55F67321C4436F900F29755 /* MainMenuCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuCommand.cpp; sourceTree = "<group>"; };
+		E55F67331C4436F900F29755 /* MainMenuCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCommand.h; sourceTree = "<group>"; };
+		E55F67341C4436F900F29755 /* MainMenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuState.cpp; sourceTree = "<group>"; };
+		E55F67351C4436F900F29755 /* MainMenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuState.h; sourceTree = "<group>"; };
+		E55F67361C4436F900F29755 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
+		E55F67371C4436F900F29755 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
+		E55F67381C4436F900F29755 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		E55F67391C4436F900F29755 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		E55F673A1C4436F900F29755 /* Quit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quit.cpp; sourceTree = "<group>"; };
+		E55F673B1C4436F900F29755 /* Quit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quit.h; sourceTree = "<group>"; };
+		E55F673C1C4436F900F29755 /* Res.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Res.h; sourceTree = "<group>"; };
+		E55F673D1C4436F900F29755 /* ResetGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResetGame.cpp; sourceTree = "<group>"; };
+		E55F673E1C4436F900F29755 /* ResetGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetGame.h; sourceTree = "<group>"; };
+		E55F673F1C4436F900F29755 /* Room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Room.cpp; sourceTree = "<group>"; };
+		E55F67401C4436F900F29755 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
+		E55F67411C4436F900F29755 /* ScreenActor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenActor.cpp; sourceTree = "<group>"; };
+		E55F67421C4436F900F29755 /* ScreenActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenActor.h; sourceTree = "<group>"; };
+		E55F67431C4436F900F29755 /* ScreenState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenState.cpp; sourceTree = "<group>"; };
+		E55F67441C4436F900F29755 /* ScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenState.h; sourceTree = "<group>"; };
+		E55F67451C4436F900F29755 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		E55F67461C4436F900F29755 /* TestScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScreenState.h; sourceTree = "<group>"; };
 		E57C11A41C1092AE00FFCF2E /* entry_point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entry_point.cpp; sourceTree = "<group>"; };
 		E57C11A61C1092CC00FFCF2E /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
-		E57C11A71C1092CC00FFCF2E /* example.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = example.hpp; sourceTree = "<group>"; };
 		E57C11AD1C109C4800FFCF2E /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../data/fonts; sourceTree = "<group>"; };
 		E57C11AE1C109C4800FFCF2E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../data/images; sourceTree = "<group>"; };
 		E57C11AF1C109C4800FFCF2E /* xmls */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xmls; path = ../data/xmls; sourceTree = "<group>"; };
@@ -141,12 +197,8 @@
 		E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudioL.dylib; path = ../lib/libfmodstudioL.dylib; sourceTree = "<group>"; };
 		E57C12041C11563E00FFCF2E /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../data/sounds; sourceTree = "<group>"; };
 		E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
-		E57C12091C12A60000FFCF2E /* SoundManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoundManager.hpp; sourceTree = "<group>"; };
 		E5985A811C192A1200699084 /* Res.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Res.cpp; sourceTree = "<group>"; };
-		E5985A821C192A1200699084 /* Res.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Res.hpp; sourceTree = "<group>"; };
 		E5985A871C192B7900699084 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		E5985A881C192B7900699084 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
-		E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputTextHandler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,18 +290,21 @@
 		04A57D391871FF8B0068B1E5 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E55F675D1C4439E800F29755 /* Screens */,
+				E55F675C1C4439D000F29755 /* Game */,
+				E55F675B1C44399C00F29755 /* Commands */,
+				E55F67231C4436F900F29755 /* example.h */,
+				E55F67241C4436F900F29755 /* Game.h */,
+				E55F67291C4436F900F29755 /* InputTextHandler.h */,
+				E55F673C1C4436F900F29755 /* Res.h */,
+				E55F67451C4436F900F29755 /* SoundManager.h */,
 				E57C11D31C10A80C00FFCF2E /* AudioEngine.cpp */,
 				E57C11D41C10A80C00FFCF2E /* AudioEngine.h */,
 				E57C11A41C1092AE00FFCF2E /* entry_point.cpp */,
 				E57C11A61C1092CC00FFCF2E /* example.cpp */,
-				E57C11A71C1092CC00FFCF2E /* example.hpp */,
 				E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */,
-				E57C12091C12A60000FFCF2E /* SoundManager.hpp */,
-				E5AABB1D1C17CAD6009B62D5 /* InputTextHandler.hpp */,
 				E5985A811C192A1200699084 /* Res.cpp */,
-				E5985A821C192A1200699084 /* Res.hpp */,
 				E5985A871C192B7900699084 /* Game.cpp */,
-				E5985A881C192B7900699084 /* Game.hpp */,
 			);
 			name = src;
 			path = ../src;
@@ -264,6 +319,62 @@
 				04A57D8C1872012D0068B1E5 /* Standard DMG */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E55F675B1C44399C00F29755 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				E55F672A1C4436F900F29755 /* InvalidCommand.cpp */,
+				E55F672B1C4436F900F29755 /* InvalidCommand.h */,
+				E55F67321C4436F900F29755 /* MainMenuCommand.cpp */,
+				E55F67331C4436F900F29755 /* MainMenuCommand.h */,
+				E55F671F1C4436F900F29755 /* Clear.cpp */,
+				E55F67201C4436F900F29755 /* Clear.h */,
+				E55F67271C4436F900F29755 /* Go.cpp */,
+				E55F67281C4436F900F29755 /* Go.h */,
+				E55F672E1C4436F900F29755 /* Look.cpp */,
+				E55F672F1C4436F900F29755 /* Look.h */,
+				E55F67301C4436F900F29755 /* Mail.cpp */,
+				E55F67311C4436F900F29755 /* Mail.h */,
+				E55F67361C4436F900F29755 /* Music.cpp */,
+				E55F67371C4436F900F29755 /* Music.h */,
+				E55F673A1C4436F900F29755 /* Quit.cpp */,
+				E55F673B1C4436F900F29755 /* Quit.h */,
+				E55F673D1C4436F900F29755 /* ResetGame.cpp */,
+				E55F673E1C4436F900F29755 /* ResetGame.h */,
+				E55F67211C4436F900F29755 /* Command.cpp */,
+				E55F67221C4436F900F29755 /* Command.h */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
+		E55F675C1C4439D000F29755 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				E55F672C1C4436F900F29755 /* Level.cpp */,
+				E55F672D1C4436F900F29755 /* Level.h */,
+				E55F67381C4436F900F29755 /* Player.cpp */,
+				E55F67391C4436F900F29755 /* Player.h */,
+				E55F673F1C4436F900F29755 /* Room.cpp */,
+				E55F67401C4436F900F29755 /* Room.h */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		E55F675D1C4439E800F29755 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E55F67461C4436F900F29755 /* TestScreenState.h */,
+				E55F67251C4436F900F29755 /* GameState.cpp */,
+				E55F67261C4436F900F29755 /* GameState.h */,
+				E55F67341C4436F900F29755 /* MainMenuState.cpp */,
+				E55F67351C4436F900F29755 /* MainMenuState.h */,
+				E55F67411C4436F900F29755 /* ScreenActor.cpp */,
+				E55F67421C4436F900F29755 /* ScreenActor.h */,
+				E55F67431C4436F900F29755 /* ScreenState.cpp */,
+				E55F67441C4436F900F29755 /* ScreenState.h */,
+			);
+			name = Screens;
 			sourceTree = "<group>";
 		};
 		E57C11F71C1143D600FFCF2E /* Libraries */ = {
@@ -396,12 +507,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E55F674E1C4436F900F29755 /* Mail.cpp in Sources */,
+				E55F674B1C4436F900F29755 /* InvalidCommand.cpp in Sources */,
+				E55F67521C4436F900F29755 /* Player.cpp in Sources */,
+				E55F674D1C4436F900F29755 /* Look.cpp in Sources */,
+				E55F67511C4436F900F29755 /* Music.cpp in Sources */,
 				E5985A831C192A1200699084 /* Res.cpp in Sources */,
+				E55F67551C4436F900F29755 /* Room.cpp in Sources */,
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
+				E55F67471C4436F900F29755 /* Clear.cpp in Sources */,
+				E55F67481C4436F900F29755 /* Command.cpp in Sources */,
+				E55F67571C4436F900F29755 /* ScreenState.cpp in Sources */,
 				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,
+				E55F674C1C4436F900F29755 /* Level.cpp in Sources */,
+				E55F67531C4436F900F29755 /* Quit.cpp in Sources */,
+				E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */,
+				E55F674A1C4436F900F29755 /* Go.cpp in Sources */,
 				E5985A891C192B7900699084 /* Game.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
+				E55F67491C4436F900F29755 /* GameState.cpp in Sources */,
+				E55F67501C4436F900F29755 /* MainMenuState.cpp in Sources */,
+				E55F674F1C4436F900F29755 /* MainMenuCommand.cpp in Sources */,
 				E57C11E01C10A80C00FFCF2E /* AudioEngine.cpp in Sources */,
+				E55F67541C4436F900F29755 /* ResetGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
