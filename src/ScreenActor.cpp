@@ -3,11 +3,7 @@
 
 ScreenActor::ScreenActor(ScreenState* startingState)
 {
-	createScreen();
 	state = startingState;
-	state->enter(*this);
-	this->setTouchEnabled(false);
-	this->setTouchChildrenEnabled(false);
 }
 
 
@@ -36,6 +32,8 @@ void ScreenActor::doUpdate(const UpdateState & us)
 		addText(textQueue[0]);
 		textQueue.erase(textQueue.begin());
 	}
+
+	_sliding->snap();
 }
 
 void ScreenActor::onTextTweenDone(Event * event)
@@ -46,9 +44,13 @@ void ScreenActor::onTextTweenDone(Event * event)
 
 void ScreenActor::createScreen()
 {
+	// Create slidding background
+	spSlidingActor slidding = new SlidingActor();
+	slidding->setSize(getSize());
+
 	// Createing a new Text Field and making it non interactable
 	_text = new TextField;
-	_text->setTouchEnabled(false);
+	_text->setTouchEnabled(true);
 
 	TextStyle style;
 	style.color = Color::White;
@@ -59,8 +61,14 @@ void ScreenActor::createScreen()
 
 	_text->setStyle(style);
 	_text->setText("");
+	_text->setWidth(this->getWidth());
+	_text->setHeight(this->getHeight() * 2);
 
-	addChild(_text);
+	slidding->setContent(_text);
+	slidding->attachTo(this);
+
+	_sliding = slidding;
+	//addChild(_text);
 }
 
 void ScreenActor::addText(const string& line)
@@ -81,4 +89,11 @@ void ScreenActor::addText(const string& line)
 void ScreenActor::clearText()
 {
 	_text->setHtmlText("");
+	_text->setPosition(this->getPosition());
+}
+
+void ScreenActor::init()
+{
+	createScreen();
+	state->enter(*this);
 }

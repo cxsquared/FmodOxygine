@@ -21,6 +21,7 @@ public:
 
 	void addText(const string& line);
 	void clearText();
+	virtual void init();
 protected:
 	void doUpdate(const UpdateState& us);
 	void onTextTweenDone(Event *event);
@@ -29,6 +30,7 @@ protected:
 
 private:
 	spTextField _text;
+	spSlidingActor _sliding;
 	vector<string> textQueue;
 };
 
