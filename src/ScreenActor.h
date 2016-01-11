@@ -32,6 +32,7 @@ private:
 	spTextField _text;
 	spSlidingActor _sliding;
 	vector<string> textQueue;
+	int _numberOfLines;
 };
 
 // Class that controls how the text shows up on the screen

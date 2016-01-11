@@ -3,6 +3,7 @@
 
 ScreenActor::ScreenActor(ScreenState* startingState)
 {
+	_numberOfLines = 0;
 	state = startingState;
 }
 
@@ -81,6 +82,13 @@ void ScreenActor::addText(const string& line)
 	}
 	else {
 		// Add a line then add new text
+		_numberOfLines++;
+		if (_numberOfLines > 28) {
+			_text->setPosition(_text->getPosition().x, _text->getPosition().y - 48);
+		}
+		else if (_numberOfLines > 53) {
+			clearText();
+		}
 		_text->addTween(TweenText(line), 1000, 1, false)->setDoneCallback(CLOSURE(this, &ScreenActor::onTextTweenDone));
 		isTextTweening = true;
 	}
@@ -89,6 +97,7 @@ void ScreenActor::addText(const string& line)
 void ScreenActor::clearText()
 {
 	_text->setHtmlText("");
+	_numberOfLines = 0;
 	_text->setPosition(this->getPosition());
 }
 
