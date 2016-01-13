@@ -20,6 +20,7 @@ class West;
 class East;
 class Up;
 class Down;
+class Exits;
 
 class Command {
 public:
@@ -42,6 +43,7 @@ public:
 	static Command* west;
 	static Command* up;
 	static Command* down;
+	static Command* exits;
 
 	//TODO: Allow for questions and responses to commands (mini states?)
 };

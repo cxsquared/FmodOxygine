@@ -42,6 +42,8 @@ void GameState::enter(ScreenActor & screen)
 	knowCommands["down"] = Command::down;
 	knowCommands["d"] = Command::down;
 	knowCommands["D"] = Command::down;
+	knowCommands["Exits"] = Command::exits;
+	knowCommands["exits"] = Command::exits;
 
 	level = new Level();
 

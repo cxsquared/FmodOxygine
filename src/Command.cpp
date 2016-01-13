@@ -14,6 +14,7 @@
 #include "West.h"
 #include "Up.h"
 #include "Down.h"
+#include "Exits.h"
 
 Command* Command::invalid = new InvalidCommand();
 Command* Command::mail = new Mail();
@@ -30,3 +31,4 @@ Command* Command::east = new East();
 Command* Command::west = new West();
 Command* Command::up = new Up();
 Command* Command::down = new Down();
+Command* Command::exits = new Exits();
