@@ -126,6 +126,8 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/example.cpp" />
     <ClCompile Include="..\src\Clear.cpp" />
     <ClCompile Include="..\src\Command.cpp" />
+    <ClCompile Include="..\src\Down.cpp" />
+    <ClCompile Include="..\src\East.cpp" />
     <ClCompile Include="..\src\GameState.cpp" />
     <ClCompile Include="..\src\Go.cpp" />
     <ClCompile Include="..\src\InvalidCommand.cpp" />
@@ -135,17 +137,23 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\MainMenuCommand.cpp" />
     <ClCompile Include="..\src\MainMenuState.cpp" />
     <ClCompile Include="..\src\Music.cpp" />
+    <ClCompile Include="..\src\North.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Quit.cpp" />
     <ClCompile Include="..\src\ResetGame.cpp" />
     <ClCompile Include="..\src\Room.cpp" />
     <ClCompile Include="..\src\ScreenActor.cpp" />
     <ClCompile Include="..\src\ScreenState.cpp" />
+    <ClCompile Include="..\src\South.cpp" />
+    <ClCompile Include="..\src\Up.cpp" />
+    <ClCompile Include="..\src\West.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h" />
     <ClInclude Include="..\src\Clear.h" />
     <ClInclude Include="..\src\Command.h" />
+    <ClInclude Include="..\src\Down.h" />
+    <ClInclude Include="..\src\East.h" />
     <ClInclude Include="..\src\example.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\GameState.h" />
@@ -158,6 +166,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\MainMenuCommand.h" />
     <ClInclude Include="..\src\MainMenuState.h" />
     <ClInclude Include="..\src\Music.h" />
+    <ClInclude Include="..\src\North.h" />
     <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\Quit.h" />
     <ClInclude Include="..\src\Res.h" />
@@ -166,6 +175,9 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\ScreenActor.h" />
     <ClInclude Include="..\src\ScreenState.h" />
     <ClInclude Include="..\src\SoundManager.h" />
+    <ClInclude Include="..\src\South.h" />
+    <ClInclude Include="..\src\Up.h" />
+    <ClInclude Include="..\src\West.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

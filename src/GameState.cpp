@@ -18,6 +18,30 @@ void GameState::enter(ScreenActor & screen)
 	knowCommands["main"] = Command::mainMenu;
 	knowCommands["reset"] = Command::reset;
 	knowCommands["Reset"] = Command::reset;
+	knowCommands["South"] = Command::south;
+	knowCommands["south"] = Command::south;
+	knowCommands["s"] = Command::south;
+	knowCommands["S"] = Command::south;
+	knowCommands["North"] = Command::north;
+	knowCommands["north"] = Command::north;
+	knowCommands["n"] = Command::north;
+	knowCommands["N"] = Command::north;
+	knowCommands["West"] = Command::west;
+	knowCommands["west"] = Command::west;
+	knowCommands["W"] = Command::west;
+	knowCommands["w"] = Command::west;
+	knowCommands["East"] = Command::east;
+	knowCommands["east"] = Command::east;
+	knowCommands["E"] = Command::east;
+	knowCommands["e"] = Command::east;
+	knowCommands["Up"] = Command::up;
+	knowCommands["up"] = Command::up;
+	knowCommands["u"] = Command::up;
+	knowCommands["U"] = Command::up;
+	knowCommands["Down"] = Command::down;
+	knowCommands["down"] = Command::down;
+	knowCommands["d"] = Command::down;
+	knowCommands["D"] = Command::down;
 
 	level = new Level();
 

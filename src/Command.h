@@ -13,7 +13,13 @@ class Go;
 class Clear;
 class Quit;
 class MainMenu;
-class Reset;
+class Reset; 
+class South;
+class North;
+class West;
+class East;
+class Up;
+class Down;
 
 class Command {
 public:
@@ -30,6 +36,12 @@ public:
 	static Command* quit;
 	static Command* mainMenu;
 	static Command* reset;
+	static Command* south;
+	static Command* north;
+	static Command* east;
+	static Command* west;
+	static Command* up;
+	static Command* down;
 
 	//TODO: Allow for questions and responses to commands (mini states?)
 };
