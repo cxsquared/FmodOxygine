@@ -81,7 +81,6 @@ public:
         //t->setPosition(getWidth() / 2 - t->getWidth() /2, 0);
         t->attachTo(this);
         t->addEventListener(TouchEvent::CLICK, CLOSURE(this, &InputTextHandler::onClick));
-
     }
                        
     void onClick(Event* ev) {
@@ -123,8 +122,9 @@ public:
 			cout << "Event sent" << endl;
 		}
 		
-        _current = 0;
+        //_current = 0;
         InputText::stopAnyInput();
+        _input->start(_current->text); // Starts to listen again
     }
                        
     ~InputTextHandler() {
