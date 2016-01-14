@@ -47,6 +47,13 @@
 		E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */; };
 		E5985A831C192A1200699084 /* Res.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A811C192A1200699084 /* Res.cpp */; };
 		E5985A891C192B7900699084 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A871C192B7900699084 /* Game.cpp */; };
+		E5B539E81C4715F5009A0201 /* Down.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539DA1C4715F5009A0201 /* Down.cpp */; };
+		E5B539E91C4715F5009A0201 /* East.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539DC1C4715F5009A0201 /* East.cpp */; };
+		E5B539EA1C4715F5009A0201 /* Exits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539DE1C4715F5009A0201 /* Exits.cpp */; };
+		E5B539EB1C4715F5009A0201 /* North.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539E01C4715F5009A0201 /* North.cpp */; };
+		E5B539EC1C4715F5009A0201 /* South.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539E21C4715F5009A0201 /* South.cpp */; };
+		E5B539ED1C4715F5009A0201 /* Up.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539E41C4715F5009A0201 /* Up.cpp */; };
+		E5B539EE1C4715F5009A0201 /* West.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539E61C4715F5009A0201 /* West.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +206,20 @@
 		E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		E5985A811C192A1200699084 /* Res.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Res.cpp; sourceTree = "<group>"; };
 		E5985A871C192B7900699084 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		E5B539DA1C4715F5009A0201 /* Down.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Down.cpp; sourceTree = "<group>"; };
+		E5B539DB1C4715F5009A0201 /* Down.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Down.h; sourceTree = "<group>"; };
+		E5B539DC1C4715F5009A0201 /* East.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = East.cpp; sourceTree = "<group>"; };
+		E5B539DD1C4715F5009A0201 /* East.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = East.h; sourceTree = "<group>"; };
+		E5B539DE1C4715F5009A0201 /* Exits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Exits.cpp; sourceTree = "<group>"; };
+		E5B539DF1C4715F5009A0201 /* Exits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exits.h; sourceTree = "<group>"; };
+		E5B539E01C4715F5009A0201 /* North.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = North.cpp; sourceTree = "<group>"; };
+		E5B539E11C4715F5009A0201 /* North.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = North.h; sourceTree = "<group>"; };
+		E5B539E21C4715F5009A0201 /* South.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = South.cpp; sourceTree = "<group>"; };
+		E5B539E31C4715F5009A0201 /* South.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = South.h; sourceTree = "<group>"; };
+		E5B539E41C4715F5009A0201 /* Up.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Up.cpp; sourceTree = "<group>"; };
+		E5B539E51C4715F5009A0201 /* Up.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Up.h; sourceTree = "<group>"; };
+		E5B539E61C4715F5009A0201 /* West.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = West.cpp; sourceTree = "<group>"; };
+		E5B539E71C4715F5009A0201 /* West.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = West.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +345,20 @@
 		E55F675B1C44399C00F29755 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				E5B539DA1C4715F5009A0201 /* Down.cpp */,
+				E5B539DB1C4715F5009A0201 /* Down.h */,
+				E5B539DC1C4715F5009A0201 /* East.cpp */,
+				E5B539DD1C4715F5009A0201 /* East.h */,
+				E5B539DE1C4715F5009A0201 /* Exits.cpp */,
+				E5B539DF1C4715F5009A0201 /* Exits.h */,
+				E5B539E01C4715F5009A0201 /* North.cpp */,
+				E5B539E11C4715F5009A0201 /* North.h */,
+				E5B539E21C4715F5009A0201 /* South.cpp */,
+				E5B539E31C4715F5009A0201 /* South.h */,
+				E5B539E41C4715F5009A0201 /* Up.cpp */,
+				E5B539E51C4715F5009A0201 /* Up.h */,
+				E5B539E61C4715F5009A0201 /* West.cpp */,
+				E5B539E71C4715F5009A0201 /* West.h */,
 				E55F672A1C4436F900F29755 /* InvalidCommand.cpp */,
 				E55F672B1C4436F900F29755 /* InvalidCommand.h */,
 				E55F67321C4436F900F29755 /* MainMenuCommand.cpp */,
@@ -512,19 +547,26 @@
 				E55F67521C4436F900F29755 /* Player.cpp in Sources */,
 				E55F674D1C4436F900F29755 /* Look.cpp in Sources */,
 				E55F67511C4436F900F29755 /* Music.cpp in Sources */,
+				E5B539ED1C4715F5009A0201 /* Up.cpp in Sources */,
+				E5B539EC1C4715F5009A0201 /* South.cpp in Sources */,
 				E5985A831C192A1200699084 /* Res.cpp in Sources */,
 				E55F67551C4436F900F29755 /* Room.cpp in Sources */,
+				E5B539EB1C4715F5009A0201 /* North.cpp in Sources */,
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
 				E55F67471C4436F900F29755 /* Clear.cpp in Sources */,
+				E5B539E81C4715F5009A0201 /* Down.cpp in Sources */,
 				E55F67481C4436F900F29755 /* Command.cpp in Sources */,
 				E55F67571C4436F900F29755 /* ScreenState.cpp in Sources */,
 				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,
 				E55F674C1C4436F900F29755 /* Level.cpp in Sources */,
 				E55F67531C4436F900F29755 /* Quit.cpp in Sources */,
+				E5B539EA1C4715F5009A0201 /* Exits.cpp in Sources */,
 				E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */,
 				E55F674A1C4436F900F29755 /* Go.cpp in Sources */,
 				E5985A891C192B7900699084 /* Game.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
+				E5B539E91C4715F5009A0201 /* East.cpp in Sources */,
+				E5B539EE1C4715F5009A0201 /* West.cpp in Sources */,
 				E55F67491C4436F900F29755 /* GameState.cpp in Sources */,
 				E55F67501C4436F900F29755 /* MainMenuState.cpp in Sources */,
 				E55F674F1C4436F900F29755 /* MainMenuCommand.cpp in Sources */,

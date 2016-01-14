@@ -47,6 +47,6 @@ void GameState::enter(ScreenActor & screen)
 
 	level = new Level();
 
-	screen.addText(level->player->currentRoom->description);
+	screen.addText(level->player->currentRoom->getDescritption());
 	screen.addText(level->player->currentRoom->getExits());
 }
