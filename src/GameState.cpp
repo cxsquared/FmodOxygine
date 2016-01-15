@@ -50,3 +50,11 @@ void GameState::enter(ScreenActor & screen)
 	screen.addText(level->player->currentRoom->getDescritption());
 	screen.addText(level->player->currentRoom->getExits());
 }
+
+void GameState::doUpdate(const UpdateState &us) {
+    level->player->currentRoom->update();
+    
+    ScreenState::doUpdate(us);
+}
+
+

@@ -33,8 +33,6 @@ void ScreenActor::doUpdate(const UpdateState & us)
 		addText(textQueue[0]);
 		textQueue.erase(textQueue.begin());
 	}
-
-	_sliding->snap();
 }
 
 void ScreenActor::onTextTweenDone(Event * event)

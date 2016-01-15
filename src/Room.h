@@ -13,6 +13,7 @@ public:
 	int getFloor();
     string getShortDescription();
     string getDescritption();
+    virtual void update();
 
 private:
     int _roomDescription;

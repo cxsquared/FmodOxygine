@@ -1,5 +1,8 @@
 #include "Room.h"
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 Room::Room(int floor)
 {
@@ -103,4 +106,8 @@ string Room::getDescritption()
 	}
     
     return "This room has no description.";
+}
+
+void Room::update() {
+    
 }
