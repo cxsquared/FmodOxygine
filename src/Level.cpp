@@ -28,6 +28,8 @@ Level::~Level()
 
 Room* Level::generateLevel(int roomsPerFloor, int floors)
 {
+	// TODO: Random seems much less random for some reason?
+
 	int currentFloor = 0;
 	Room* exitRoom;
 	Room* startingRoom;
@@ -91,6 +93,7 @@ Room* Level::makeRoom(Room& connectingRoom, string direction, int floor)
 	else if (direction == "down") {
 		room->exits["up"] = &connectingRoom;
 	}
+	room->generateEnemies(*this);
 	connectingRoom.exits[direction] = room;
 	return room;
 }

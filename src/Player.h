@@ -1,6 +1,8 @@
 #pragma once
 #include "Room.h"
 
+class Enemy;
+
 class Player {
 public:
 	Player(Room& startingRoom);
@@ -11,4 +13,8 @@ public:
 	bool move(string dir);
 
 	// TODO: Implement an inventory system
+
+	string attack(Enemy& enemy);
+	string hit(int damage);
+
 };

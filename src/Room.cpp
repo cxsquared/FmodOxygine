@@ -1,6 +1,7 @@
 #include "Room.h"
 #include <stdlib.h>
 #include <iostream>
+#include "Enemy.h"
 
 using namespace std;
 
@@ -8,6 +9,10 @@ Room::Room(int floor)
 {
 	_floor = floor;
 	_roomDescription = rand() % 4; // Random number for description
+}
+
+Room::~Room()
+{
 }
 
 string Room::enteringRoom()
@@ -89,25 +94,43 @@ int Room::getFloor()
 
 string Room::getDescritption()
 {
+	string desc = "";
     if ( _roomDescription < 0){
         _roomDescription = rand() % 4;
     }
 	if (_roomDescription == 0) {
-		return "Peeling wallpaper is slowly falling off the walls. You can see the time on the walls based on the thin level of grime covering the floor.";
+		desc += "Peeling wallpaper is slowly falling off the walls. You can see the time on the walls based on the thin level of grime covering the floor.";
 	}
 	else if (_roomDescription == 1) {
-		return "Broken tech lies in the corner of the room. Each corner of the brown carpet on the floor is starting to seperate from the floor underneath.";
+		desc += "Broken tech lies in the corner of the room. Each corner of the brown carpet on the floor is starting to seperate from the floor underneath.";
 	}
 	else if (_roomDescription == 2) {
-		return "Everything is so plain here that it physically hurts you from the bordom you're experiencing.";
+		desc += "Everything is so plain here that it physically hurts you from the bordom you're experiencing.";
 	}
 	else if (_roomDescription == 3) {
-		return "Butterflies fill the room with humming that generates a white noise the penatrates your ears. The longer you stay in the room the louder it gets.";
+		desc += "Butterflies fill the room with humming that generates a white noise the penatrates your ears. The longer you stay in the room the louder it gets.";
+	}
+	else {
+		desc += "This room has no description.";
+	}
+
+	if (enemies.size() > 0) {
+		desc += " There's a " + enemies[0]->getDescription();
 	}
     
-    return "This room has no description.";
+    return desc;
 }
 
 void Room::update() {
     
+}
+
+void Room::generateEnemies(Level& level)
+{
+	int spawnEnemy = rand() % 3;
+	if (spawnEnemy >= 2) {
+		cout << "Enemy created!" << endl;
+		Enemy enemy = Enemy(level);
+		enemies.push_back(&enemy);
+	}
 }

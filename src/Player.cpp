@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Room.h"
+#include "Enemy.h"
 
 Player::Player(Room& startingRoom)
 {
@@ -21,4 +22,21 @@ bool Player::move(string dir)
 	}
 	// return false if could move
 	return false;
+}
+
+string Player::attack(Enemy & enemy)
+{
+	// TODO: Implemet a weapon system
+	return enemy.hit(2);
+}
+
+string Player::hit(int damage)
+{
+	health -= damage;
+
+	if (health <= 0) {
+		return "The player has been killed.";
+	}
+
+	return "The player has recieved " + to_string(damage) + ".";
 }
