@@ -74,7 +74,8 @@ void ScreenActor::createScreen()
 
 void ScreenActor::addText(const string& line)
 {
-	//TODO: Add text scrolling
+	//TODO: Prevent text from scrolling when there isn't enough
+    //TODO: Clear the oldest text lines when we get so far
 
 	// Check if we are adding a line right now
 	if (isTextTweening) {
