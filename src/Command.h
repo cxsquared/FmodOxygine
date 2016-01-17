@@ -24,6 +24,7 @@ class Up;
 class Down;
 class Exits;
 class Attack;
+class Login;
 
 class Command {
 public:
@@ -48,6 +49,7 @@ public:
 	static Command* down;
 	static Command* exits;
 	static Command* attack;
+	static Command* login;
 
 	//TODO: Allow for questions and responses to commands (mini states?)
 };

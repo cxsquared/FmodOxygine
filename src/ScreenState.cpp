@@ -29,7 +29,9 @@ void ScreenState::enter(ScreenActor& screen)
 	}
 	screen.clearText();
 	this->stateToSwitchTo = NULL;
+	_waitingForResponse = false;
 
+	// Commands accross all 
 	knowCommands["Quit"] = Command::quit;
 	knowCommands["quit"] = Command::quit;
 }
@@ -51,13 +53,37 @@ Command* ScreenState::parseVerb(const string& command) {
 
 void ScreenState::handleInput(const string & command, vector<string> options)
 {
-	Command* com = parseVerb(command);
-	_screen->addText(com->parseNoun(options, this));
+	if (_waitingForResponse) {
+		options.clear();
+		options.push_back(command);
+		_screen->addText(_lastCommand->parseNoun(options, this));
+	}
+	else {
+		// Need to see if the command is a real one
+		Command* com = parseVerb(command);
+		_screen->addText(com->parseNoun(options, this));
+	}
 }
 
 ScreenActor & ScreenState::getScreen()
 {
 	return *_screen;
+}
+
+void ScreenState::setLastCommand(Command * command)
+{
+	_lastCommand = command;
+	_waitingForResponse = true;
+}
+
+void ScreenState::clearLastCommand() {
+	_lastCommand = NULL;
+	_waitingForResponse = false;
+}
+
+bool ScreenState::isWaiting()
+{
+	return _waitingForResponse;
 }
 
 

@@ -16,6 +16,8 @@ void MainMenuState::enter(ScreenActor & screen)
     knowCommands["game"] = Command::mail;
     knowCommands["start"] = Command::mail;
     knowCommands["Start"] = Command::mail;
+	knowCommands["Login"] = Command::login;
+	knowCommands["login"] = Command::login;
 
 	screen.addText("Welcome to Hightower Industries OS...");
 	screen.addText("Your number one leader in future technlogy.");

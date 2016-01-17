@@ -16,6 +16,7 @@
 #include "Down.h"
 #include "Exits.h"
 #include "Attack.h"
+#include "Login.h"
 
 Command* Command::invalid = new InvalidCommand();
 Command* Command::mail = new Mail();
@@ -34,3 +35,4 @@ Command* Command::up = new Up();
 Command* Command::down = new Down();
 Command* Command::exits = new Exits();
 Command* Command::attack = new Attack();
+Command* Command::login = new Login();

@@ -29,6 +29,9 @@ public:
 	Command* parseVerb(const string& command);
 	void handleInput(const string& command, vector<string> options);
 	ScreenActor& getScreen();
+	void setLastCommand(Command* command);
+	void clearLastCommand();
+	bool isWaiting();
 
 	// Holds all commands that the current state can use
 	// Also holds all possible ways to type commands
@@ -36,4 +39,6 @@ public:
 protected:
 	ScreenState* stateToSwitchTo = NULL;
 	ScreenActor* _screen;
+	bool _waitingForResponse;
+	Command* _lastCommand;
 };
