@@ -22,7 +22,7 @@ Enemy::~Enemy()
 string Enemy::getName()
 {
 	// TODO: Generate names
-	return "Cool Enemy Guy";
+	return "Bob";
 }
 
 string Enemy::getDescription()

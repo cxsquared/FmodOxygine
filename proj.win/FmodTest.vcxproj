@@ -124,6 +124,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="../src/SoundManager.cpp" />
     <ClCompile Include="../src/entry_point.cpp" />
     <ClCompile Include="../src/example.cpp" />
+    <ClCompile Include="..\src\Attack.cpp" />
     <ClCompile Include="..\src\Clear.cpp" />
     <ClCompile Include="..\src\Command.cpp" />
     <ClCompile Include="..\src\Down.cpp" />
@@ -152,6 +153,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h" />
+    <ClInclude Include="..\src\Attack.h" />
     <ClInclude Include="..\src\Clear.h" />
     <ClInclude Include="..\src\Command.h" />
     <ClInclude Include="..\src\Down.h" />

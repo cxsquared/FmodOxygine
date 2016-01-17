@@ -3,7 +3,9 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
+using namespace std;\
+
+// Listing all classes so we can reference them
 class ScreenState;
 class InvalidCommand;
 class Mail;
@@ -21,6 +23,7 @@ class East;
 class Up;
 class Down;
 class Exits;
+class Attack;
 
 class Command {
 public:
@@ -44,6 +47,7 @@ public:
 	static Command* up;
 	static Command* down;
 	static Command* exits;
+	static Command* attack;
 
 	//TODO: Allow for questions and responses to commands (mini states?)
 };
