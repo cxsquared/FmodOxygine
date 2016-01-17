@@ -130,7 +130,6 @@ void Room::generateEnemies(Level& level)
 	int spawnEnemy = rand() % 3;
 	if (spawnEnemy >= 2) {
 		cout << "Enemy created!" << endl;
-		Enemy enemy = Enemy(level);
-		enemies.push_back(&enemy);
+		enemies.push_back( make_shared<Enemy>(level));
 	}
 }

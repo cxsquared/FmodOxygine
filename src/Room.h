@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ public:
 	Room(int floor=0);
 	~Room();
     map<string, Room*> exits;
-	vector<Enemy*> enemies;
+	vector< shared_ptr<Enemy> > enemies;
 	string enteringRoom();
 	string getExits();
 	int getFloor();
