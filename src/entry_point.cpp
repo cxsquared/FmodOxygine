@@ -14,8 +14,11 @@
 #include "Stage.h"
 #include "DebugActor.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 #include "example.h"
+
 
 using namespace oxygine;
 
@@ -57,6 +60,9 @@ void run() {
     std::cout << "Current Path: " << path << std::endl;
     #endif
     // ----------------------------------------------------------------------------
+
+	// Making random random
+	srand(time(NULL));
 
     ObjectBase::__startTracingLeaks();
     
