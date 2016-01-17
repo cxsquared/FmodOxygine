@@ -28,8 +28,6 @@ Level::~Level()
 
 Room* Level::generateLevel(int roomsPerFloor, int floors)
 {
-	// TODO: Random seems much less random for some reason?
-
 	int currentFloor = 0;
 	Room* exitRoom;
 	Room* startingRoom;

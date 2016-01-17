@@ -10,7 +10,7 @@ Enemy::Enemy(Level& level)
 	//TODO: Figure out a better way for health and what not
 	//TODO: Figure out why health is being set so weird
 	_health = 10;
-	isAlive = false;
+	isAlive = true;
 
 	cout << "Enemy created with " << _health << " health" << endl;
 }
