@@ -50,6 +50,4 @@ public:
 	static Command* exits;
 	static Command* attack;
 	static Command* login;
-
-	//TODO: Allow for questions and responses to commands (mini states?)
 };
