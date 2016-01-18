@@ -8,23 +8,6 @@ using namespace std;\
 // Listing all classes so we can reference them
 class ScreenState;
 class InvalidCommand;
-class Mail;
-class Music;
-class Look;
-class Go;
-class Clear;
-class Quit;
-class MainMenu;
-class Reset; 
-class South;
-class North;
-class West;
-class East;
-class Up;
-class Down;
-class Exits;
-class Attack;
-class Login;
 
 class Command {
 public:
@@ -50,4 +33,5 @@ public:
 	static Command* exits;
 	static Command* attack;
 	static Command* login;
+    static Command* logout;
 };

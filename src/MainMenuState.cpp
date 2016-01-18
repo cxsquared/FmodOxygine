@@ -13,6 +13,8 @@ void MainMenuState::enter(ScreenActor & screen)
     knowCommands["game"] = Command::mail;
     knowCommands["start"] = Command::mail;
     knowCommands["Start"] = Command::mail;
+    knowCommands["Logout"] = Command::logout;
+    knowCommands["logout"] = Command::logout;
     
     Login* login = dynamic_cast<Login*>(Command::login);
     screen.addText("Welcome " + login->currentUser);

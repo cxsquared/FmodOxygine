@@ -36,6 +36,7 @@
 		E56A9B361C4D4AEA000B41AF /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B311C4D4AEA000B41AF /* Enemy.cpp */; };
 		E56A9B371C4D4AEA000B41AF /* Login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B331C4D4AEA000B41AF /* Login.cpp */; };
 		E56A9B401C4D54AB000B41AF /* LoginScreenState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B3E1C4D54AB000B41AF /* LoginScreenState.cpp */; };
+		E56A9B431C4D5A57000B41AF /* Logout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B411C4D5A57000B41AF /* Logout.cpp */; };
 		E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A41C1092AE00FFCF2E /* entry_point.cpp */; };
 		E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A61C1092CC00FFCF2E /* example.cpp */; };
 		E57C11B01C109C4800FFCF2E /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AD1C109C4800FFCF2E /* fonts */; };
@@ -203,6 +204,8 @@
 		E56A9B341C4D4AEA000B41AF /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		E56A9B3E1C4D54AB000B41AF /* LoginScreenState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoginScreenState.cpp; sourceTree = "<group>"; };
 		E56A9B3F1C4D54AB000B41AF /* LoginScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenState.h; sourceTree = "<group>"; };
+		E56A9B411C4D5A57000B41AF /* Logout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logout.cpp; sourceTree = "<group>"; };
+		E56A9B421C4D5A57000B41AF /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logout.h; sourceTree = "<group>"; };
 		E57C11A41C1092AE00FFCF2E /* entry_point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entry_point.cpp; sourceTree = "<group>"; };
 		E57C11A61C1092CC00FFCF2E /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
 		E57C11AD1C109C4800FFCF2E /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../data/fonts; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 				E55F673E1C4436F900F29755 /* ResetGame.h */,
 				E55F67211C4436F900F29755 /* Command.cpp */,
 				E55F67221C4436F900F29755 /* Command.h */,
+				E56A9B411C4D5A57000B41AF /* Logout.cpp */,
+				E56A9B421C4D5A57000B41AF /* Logout.h */,
 			);
 			name = Commands;
 			sourceTree = "<group>";
@@ -583,6 +588,7 @@
 				E55F674C1C4436F900F29755 /* Level.cpp in Sources */,
 				E55F67531C4436F900F29755 /* Quit.cpp in Sources */,
 				E5B539EA1C4715F5009A0201 /* Exits.cpp in Sources */,
+				E56A9B431C4D5A57000B41AF /* Logout.cpp in Sources */,
 				E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */,
 				E55F674A1C4436F900F29755 /* Go.cpp in Sources */,
 				E56A9B401C4D54AB000B41AF /* LoginScreenState.cpp in Sources */,
