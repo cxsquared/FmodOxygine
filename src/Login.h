@@ -9,6 +9,7 @@ class Login : public Command {
 public:
 	// Inherited via Command
 	virtual string parseNoun(vector<string> options, ScreenState * state) override;
+    string currentUser = "";
 	
 private:
 	string _username = "";

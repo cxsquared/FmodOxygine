@@ -1,6 +1,7 @@
 #include "MainMenuState.h"
 #include "Command.h"
 #include "ScreenActor.h"
+#include "Login.h"
 
 void MainMenuState::enter(ScreenActor & screen)
 {
@@ -13,7 +14,7 @@ void MainMenuState::enter(ScreenActor & screen)
     knowCommands["start"] = Command::mail;
     knowCommands["Start"] = Command::mail;
     
-    // TODO : replace user with actual name
-    screen.addText("Welcome user");
+    Login* login = dynamic_cast<Login*>(Command::login);
+    screen.addText("Welcome " + login->currentUser);
     screen.addText("Type game to start playing");
 }

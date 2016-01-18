@@ -4,8 +4,6 @@
 string Login::parseNoun(vector<string> options, ScreenState * state)
 {
 	// TODO: Store login data
-	// TODO: Make the command able to use login username. then ask for password
-
 	if (state->isWaiting()) {
 		if (options.size() > 0) {
 			if (_username != "") {
@@ -16,6 +14,7 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 					string tempUser = _username;
 					_username = "";
                     state->switchStates(ScreenState::mainMenu);
+                    currentUser = tempUser;
 					return "Welcome " + tempUser;
 				}
 				else {
