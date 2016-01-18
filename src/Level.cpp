@@ -7,7 +7,7 @@
 using namespace std;
 
 Level::Level() {
-	player = new Player(*generateLevel(6, 3));
+	player = new Player(*generateLevel(12, 6));
 }
 
 Level::Level(int minRooms, int maxRooms, int minFloors, int maxFloors) {

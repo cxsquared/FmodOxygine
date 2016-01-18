@@ -4,9 +4,11 @@
 #include <iostream>
 #include "MainMenuState.h"
 #include "GameState.h"
+#include "LoginScreenState.h"
 
 ScreenState* ScreenState::mainMenu = new MainMenuState();
 ScreenState* ScreenState::gameState = new GameState();
+ScreenState* ScreenState::loginState = new LoginScreenState();
 
 ScreenState::ScreenState()
 {
@@ -34,6 +36,8 @@ void ScreenState::enter(ScreenActor& screen)
 	// Commands accross all 
 	knowCommands["Quit"] = Command::quit;
 	knowCommands["quit"] = Command::quit;
+    knowCommands["music"] = Command::music;
+    knowCommands["Music"] = Command::music;
 }
 
 void ScreenState::switchStates(ScreenState* newState)

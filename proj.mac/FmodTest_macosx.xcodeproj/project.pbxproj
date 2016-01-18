@@ -32,6 +32,10 @@
 		E55F67551C4436F900F29755 /* Room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F673F1C4436F900F29755 /* Room.cpp */; };
 		E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67411C4436F900F29755 /* ScreenActor.cpp */; };
 		E55F67571C4436F900F29755 /* ScreenState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67431C4436F900F29755 /* ScreenState.cpp */; };
+		E56A9B351C4D4AEA000B41AF /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B2F1C4D4AEA000B41AF /* Attack.cpp */; };
+		E56A9B361C4D4AEA000B41AF /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B311C4D4AEA000B41AF /* Enemy.cpp */; };
+		E56A9B371C4D4AEA000B41AF /* Login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B331C4D4AEA000B41AF /* Login.cpp */; };
+		E56A9B401C4D54AB000B41AF /* LoginScreenState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E56A9B3E1C4D54AB000B41AF /* LoginScreenState.cpp */; };
 		E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A41C1092AE00FFCF2E /* entry_point.cpp */; };
 		E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C11A61C1092CC00FFCF2E /* example.cpp */; };
 		E57C11B01C109C4800FFCF2E /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E57C11AD1C109C4800FFCF2E /* fonts */; };
@@ -191,6 +195,14 @@
 		E55F67441C4436F900F29755 /* ScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenState.h; sourceTree = "<group>"; };
 		E55F67451C4436F900F29755 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 		E55F67461C4436F900F29755 /* TestScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScreenState.h; sourceTree = "<group>"; };
+		E56A9B2F1C4D4AEA000B41AF /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Attack.cpp; sourceTree = "<group>"; };
+		E56A9B301C4D4AEA000B41AF /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
+		E56A9B311C4D4AEA000B41AF /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		E56A9B321C4D4AEA000B41AF /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		E56A9B331C4D4AEA000B41AF /* Login.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Login.cpp; sourceTree = "<group>"; };
+		E56A9B341C4D4AEA000B41AF /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
+		E56A9B3E1C4D54AB000B41AF /* LoginScreenState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoginScreenState.cpp; sourceTree = "<group>"; };
+		E56A9B3F1C4D54AB000B41AF /* LoginScreenState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScreenState.h; sourceTree = "<group>"; };
 		E57C11A41C1092AE00FFCF2E /* entry_point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = entry_point.cpp; sourceTree = "<group>"; };
 		E57C11A61C1092CC00FFCF2E /* example.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = example.cpp; sourceTree = "<group>"; };
 		E57C11AD1C109C4800FFCF2E /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../data/fonts; sourceTree = "<group>"; };
@@ -345,6 +357,10 @@
 		E55F675B1C44399C00F29755 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				E56A9B2F1C4D4AEA000B41AF /* Attack.cpp */,
+				E56A9B301C4D4AEA000B41AF /* Attack.h */,
+				E56A9B331C4D4AEA000B41AF /* Login.cpp */,
+				E56A9B341C4D4AEA000B41AF /* Login.h */,
 				E5B539DA1C4715F5009A0201 /* Down.cpp */,
 				E5B539DB1C4715F5009A0201 /* Down.h */,
 				E5B539DC1C4715F5009A0201 /* East.cpp */,
@@ -386,6 +402,8 @@
 		E55F675C1C4439D000F29755 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E56A9B311C4D4AEA000B41AF /* Enemy.cpp */,
+				E56A9B321C4D4AEA000B41AF /* Enemy.h */,
 				E55F672C1C4436F900F29755 /* Level.cpp */,
 				E55F672D1C4436F900F29755 /* Level.h */,
 				E55F67381C4436F900F29755 /* Player.cpp */,
@@ -408,6 +426,8 @@
 				E55F67421C4436F900F29755 /* ScreenActor.h */,
 				E55F67431C4436F900F29755 /* ScreenState.cpp */,
 				E55F67441C4436F900F29755 /* ScreenState.h */,
+				E56A9B3E1C4D54AB000B41AF /* LoginScreenState.cpp */,
+				E56A9B3F1C4D54AB000B41AF /* LoginScreenState.h */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -544,11 +564,13 @@
 			files = (
 				E55F674E1C4436F900F29755 /* Mail.cpp in Sources */,
 				E55F674B1C4436F900F29755 /* InvalidCommand.cpp in Sources */,
+				E56A9B371C4D4AEA000B41AF /* Login.cpp in Sources */,
 				E55F67521C4436F900F29755 /* Player.cpp in Sources */,
 				E55F674D1C4436F900F29755 /* Look.cpp in Sources */,
 				E55F67511C4436F900F29755 /* Music.cpp in Sources */,
 				E5B539ED1C4715F5009A0201 /* Up.cpp in Sources */,
 				E5B539EC1C4715F5009A0201 /* South.cpp in Sources */,
+				E56A9B351C4D4AEA000B41AF /* Attack.cpp in Sources */,
 				E5985A831C192A1200699084 /* Res.cpp in Sources */,
 				E55F67551C4436F900F29755 /* Room.cpp in Sources */,
 				E5B539EB1C4715F5009A0201 /* North.cpp in Sources */,
@@ -563,8 +585,10 @@
 				E5B539EA1C4715F5009A0201 /* Exits.cpp in Sources */,
 				E55F67561C4436F900F29755 /* ScreenActor.cpp in Sources */,
 				E55F674A1C4436F900F29755 /* Go.cpp in Sources */,
+				E56A9B401C4D54AB000B41AF /* LoginScreenState.cpp in Sources */,
 				E5985A891C192B7900699084 /* Game.cpp in Sources */,
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
+				E56A9B361C4D4AEA000B41AF /* Enemy.cpp in Sources */,
 				E5B539E91C4715F5009A0201 /* East.cpp in Sources */,
 				E5B539EE1C4715F5009A0201 /* West.cpp in Sources */,
 				E55F67491C4436F900F29755 /* GameState.cpp in Sources */,

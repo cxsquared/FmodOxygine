@@ -15,6 +15,7 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 					state->clearLastCommand();
 					string tempUser = _username;
 					_username = "";
+                    state->switchStates(ScreenState::mainMenu);
 					return "Welcome " + tempUser;
 				}
 				else {
@@ -41,7 +42,22 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 		state->clearLastCommand();
 		_username = "";
 		return "Error.. please try to login again.";
-	}
+    }
+    
+    if (options.size() > 0) {
+        if (isUser(options[0])) {
+            _username = options[0];
+            _newUser = false;
+            state->setLastCommand(this);
+            return "Please input your password...";
+        } else {
+            // user doesn't exist
+            _username = options[0];
+            _newUser = true;
+            state->setLastCommand(this);
+            return "Welcome new user " + options[0] + ". Please enter your new password...";
+        }
+    }
 
 	// First time asking to login in
 	state->setLastCommand(this);

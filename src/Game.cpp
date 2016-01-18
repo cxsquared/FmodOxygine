@@ -31,7 +31,7 @@ void Game::init() {
 	_inputText->setPosition(42, getStage()->getSize().y - 100);
 
 	// Create screen
-	_screen = new ScreenActor(ScreenState::mainMenu);
+	_screen = new ScreenActor(ScreenState::loginState);
 	_screen->attachTo(this);
 	_screen->setSize(getStage()->getSize().x - (42 * 2), getStage()->getSize().y - 12 - _inputText->getSize().y - (getStage()->getSize().y - _inputText->getY()));
 	_screen->setPosition(42, 40);

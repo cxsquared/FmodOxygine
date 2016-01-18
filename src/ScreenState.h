@@ -18,6 +18,7 @@ public:
 	// TODO: List all posible screens
 	static ScreenState* mainMenu;
 	static ScreenState* gameState;
+    static ScreenState* loginState;
 
 	//Methods
 	ScreenState();
