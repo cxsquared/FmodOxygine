@@ -18,5 +18,5 @@ void LoginScreenState::enter(ScreenActor &screen) {
     
     screen.addText("Welcome to Hightower Industries OS...");
     screen.addText("Your number one leader in future technlogy.");
-    screen.addText("Please login...");
+    screen.addText("Please *login*...");
 }

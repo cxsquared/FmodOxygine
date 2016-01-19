@@ -42,6 +42,7 @@ public:
 
 	TweenText(const string& text) {
 		//convert utf8 string to wide string
+        colorCommands(text);
 		_text = utf8tows(text.c_str());
 	}
 
@@ -52,15 +53,44 @@ public:
 	void update(TextField& actor, float p, const UpdateState& us) {
 		// TODO: Figuer out how to color commands automatically
 		int v = lerp<int>(0, (int)_text.size(), p);
-		wstring res = utf8tows(_lastText.c_str()) + _text.substr(0, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        wstring res;
+        wstring startCommand = L"<div c = '0x00E5FFFF'>";
+        wstring endCommand = L"</div>";
+        
+        if (v > _endCommandIndex && _endCommandIndex != 0){
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex) + startCommand + _text.substr(_startCommandIndex+1, _endCommandIndex-8) + endCommand + _text.substr(_endCommandIndex+1, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        } else {
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        }
 
 		// convert back to utf8 string
 		string t = ws2utf8(res.c_str());
 		actor.setHtmlText(t);
 	}
+    
+    void colorCommands(string text) {
+        string result = "";
+        int marksFound = 0;
+        wstring startCommand = L"<div c = '0x00E5FFFF'>";
+        wstring endCommand = L"</div>";
+        for(string::size_type i = 0; i < text.size(); ++i) {
+            if (text[i] == '*') {
+                if (marksFound % 2 == 0) {
+                    _startCommandIndex = i;
+                } else {
+                    _endCommandIndex = i;
+                }
+                marksFound++;
+            }
+        }
+    }
 
 private:
 	wstring _text;
 	string _lastText;
+    int _marksFound = 0;
+    int _startCommandIndex = 0;
+    int _endCommandIndex = 0;
+    bool _commandFound = false;
 };
 

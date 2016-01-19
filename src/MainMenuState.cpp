@@ -18,5 +18,5 @@ void MainMenuState::enter(ScreenActor & screen)
     
     Login* login = dynamic_cast<Login*>(Command::login);
     screen.addText("Welcome " + login->currentUser);
-    screen.addText("Type game to start playing");
+    screen.addText("Type *game* to start playing");
 }
