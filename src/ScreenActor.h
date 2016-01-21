@@ -2,6 +2,7 @@
 #include "oxygine-framework.h"
 #include "Res.h"
 #include "utils/stringUtils.h"
+#include "core/log.h"
 
 using namespace oxygine;
 using namespace std;
@@ -57,8 +58,12 @@ public:
         wstring startCommand = L"<div c = '0x00E5FFFF'>";
         wstring endCommand = L"</div>";
         
-        if (v > _endCommandIndex && _endCommandIndex != 0){
-            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex) + startCommand + _text.substr(_startCommandIndex+1, _endCommandIndex-8) + endCommand + _text.substr(_endCommandIndex+1, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        //log::messageln("Tweening text %d", v);
+        
+        if (v > _startCommandIndex + _spacesBeforeCommand && v < _startCommandIndex + _spacesBeforeCommand + _commandLength && _commandLength > 0){
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex + _spacesBeforeCommand - 1) + startCommand + _text.substr(_startCommandIndex+2, v-_startCommandIndex-_spacesBeforeCommand) + endCommand + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        } else if (v > _startCommandIndex + _commandLength + _spacesBeforeCommand && _commandLength > 0) {
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex + _spacesBeforeCommand - 1) + startCommand + _text.substr(_startCommandIndex+2, _commandLength) + endCommand + _text.substr(_startCommandIndex + 2 + _commandLength+2, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
         } else {
             res = utf8tows(_lastText.c_str()) + _text.substr(0, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
         }
@@ -69,28 +74,35 @@ public:
 	}
     
     void colorCommands(string text) {
-        string result = "";
-        int marksFound = 0;
-        wstring startCommand = L"<div c = '0x00E5FFFF'>";
-        wstring endCommand = L"</div>";
-        for(string::size_type i = 0; i < text.size(); ++i) {
-            if (text[i] == '*') {
-                if (marksFound % 2 == 0) {
-                    _startCommandIndex = i;
-                } else {
-                    _endCommandIndex = i;
-                }
-                marksFound++;
-            }
+        _startCommandIndex = text.find("*s");
+        _commandLength = text.find("*e") - _startCommandIndex - 2;
+        
+        if (_commandLength == string::npos || _startCommandIndex == string::npos){
+            _startCommandIndex = 0;
+            _commandLength = 0;
         }
+        
+        for (string::size_type i = 0; i < text.size(); ++i) {
+            if (string() + text[i] + text[i+1] == "*s"){
+                break;
+            }
+            
+            if (text[i] == ' '){
+                _spacesBeforeCommand++;
+            }
+            
+            log::messageln("Looking for spaces index %d: letter %c: number of spaces %d", i, text[i], _spacesBeforeCommand);
+        }
+        
+        log::messageln("Start command %d. Command length %d. Spaces before command %d.", _startCommandIndex, _commandLength, _spacesBeforeCommand);
+        
     }
 
 private:
 	wstring _text;
 	string _lastText;
-    int _marksFound = 0;
-    int _startCommandIndex = 0;
-    int _endCommandIndex = 0;
-    bool _commandFound = false;
+    size_t _startCommandIndex = 0;
+    size_t _commandLength = 0;
+    int _spacesBeforeCommand = 0;
 };
 
