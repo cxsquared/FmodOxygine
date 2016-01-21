@@ -52,13 +52,12 @@ public:
 	}
 
 	void update(TextField& actor, float p, const UpdateState& us) {
-		// TODO: Figuer out how to color commands automatically
+		// TODO: having multiple commands colored
+        // TODO: Make it less glitchy
 		int v = lerp<int>(0, (int)_text.size(), p);
         wstring res;
         wstring startCommand = L"<div c = '0x00E5FFFF'>";
         wstring endCommand = L"</div>";
-        
-        //log::messageln("Tweening text %d", v);
         
         if (v > _startCommandIndex + _spacesBeforeCommand && v < _startCommandIndex + _spacesBeforeCommand + _commandLength && _commandLength > 0){
             res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex + _spacesBeforeCommand - 1) + startCommand + _text.substr(_startCommandIndex+2, v-_startCommandIndex-_spacesBeforeCommand) + endCommand + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";

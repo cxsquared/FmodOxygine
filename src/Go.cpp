@@ -11,10 +11,10 @@ string Go::parseNoun(vector<string> options, ScreenState * state)
 			return game->level->player->currentRoom->enteringRoom();
 		}
 		else {
-			return "You can't move that way...";
+			return "You can't *sgo*e that way...";
 		}
 	}
 	else {
-		return "You need to give a direction to move. " + game->level->player->currentRoom->getExits();
+		return "You need to give a direction to *sgo*e. " + game->level->player->currentRoom->getExits();
 	}
 }

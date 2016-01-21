@@ -10,5 +10,5 @@ string West::parseNoun(vector<string> options, ScreenState * state)
 		return game->level->player->currentRoom->enteringRoom();
 	}
 
-	return "You can't go that way.";
+	return "You can't *sgo*e that way.";
 }

@@ -21,7 +21,7 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 					// password is wrong
 					state->clearLastCommand();
 					_username = "";
-					return "Password is wrong. Please try to login again.";
+					return "Password is wrong. Please try to *slogin*e again.";
 				}
 			}
 			else if (isUser(options[0])) {
@@ -40,7 +40,7 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 
 		state->clearLastCommand();
 		_username = "";
-		return "Error.. please try to login again.";
+		return "Error.. please try to *slogin*e again.";
     }
     
     if (options.size() > 0) {

@@ -11,6 +11,6 @@ string Quit::parseNoun(vector<string> options, ScreenState * state)
 		return "Quiting game";
 	}
 	else {
-		return "Are you sure? Type quit yes to really quit.";
+		return "Are you sure? Type *squit yes*e to really quit.";
 	}
 }
