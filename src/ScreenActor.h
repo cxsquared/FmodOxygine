@@ -59,10 +59,10 @@ public:
         wstring startCommand = L"<div c = '0x00E5FFFF'>";
         wstring endCommand = L"</div>";
         
-        if (v > _startCommandIndex + _spacesBeforeCommand && v < _startCommandIndex + _spacesBeforeCommand + _commandLength && _commandLength > 0){
-            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex + _spacesBeforeCommand - 1) + startCommand + _text.substr(_startCommandIndex+2, v-_startCommandIndex-_spacesBeforeCommand) + endCommand + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
-        } else if (v > _startCommandIndex + _commandLength + _spacesBeforeCommand && _commandLength > 0) {
-            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex + _spacesBeforeCommand - 1) + startCommand + _text.substr(_startCommandIndex+2, _commandLength) + endCommand + _text.substr(_startCommandIndex + 2 + _commandLength+2, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        if (v > _startCommandIndex - 1 && v < _startCommandIndex + _commandLength && _commandLength > 0){
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex) + startCommand + _text.substr(_startCommandIndex+2, v-_startCommandIndex) + endCommand + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
+        } else if (v > _startCommandIndex + _commandLength - 1 && _commandLength > 0) {
+            res = utf8tows(_lastText.c_str()) + _text.substr(0, _startCommandIndex) + startCommand + _text.substr(_startCommandIndex+2, _commandLength) + endCommand + _text.substr(_startCommandIndex + 2 + _commandLength+2, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
         } else {
             res = utf8tows(_lastText.c_str()) + _text.substr(0, v) + L"<div c = '0x00000000'>" + _text.substr(v, _text.size()) + L"</div><br/>";
         }
@@ -86,14 +86,10 @@ public:
                 break;
             }
             
-            if (text[i] == ' '){
-                _spacesBeforeCommand++;
-            }
-            
-            log::messageln("Looking for spaces index %d: letter %c: number of spaces %d", i, text[i], _spacesBeforeCommand);
+            //log::messageln("Looking for spaces index %d: letter %c", i, text[i]);
         }
         
-        log::messageln("Start command %d. Command length %d. Spaces before command %d.", _startCommandIndex, _commandLength, _spacesBeforeCommand);
+        //log::messageln("Start command %d. Command length %d", _startCommandIndex, _commandLength);
         
     }
 
@@ -102,6 +98,5 @@ private:
 	string _lastText;
     size_t _startCommandIndex = 0;
     size_t _commandLength = 0;
-    int _spacesBeforeCommand = 0;
 };
 

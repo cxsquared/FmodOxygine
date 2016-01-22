@@ -131,6 +131,12 @@
     <ClCompile Include="..\src\Login.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LoginScreenState.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Logout.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
@@ -230,6 +236,15 @@
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Login.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TestScreenState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LoginScreenState.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Logout.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
