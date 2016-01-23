@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Timer.h"
 
 using namespace std;
 
@@ -21,4 +22,6 @@ public:
 private:
 	Level& _level;
 	int _health;
+    Timer _attackTimer;
+    void onAttackTimer(Timer t);
 };

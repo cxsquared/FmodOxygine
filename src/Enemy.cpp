@@ -1,8 +1,13 @@
 #include "Enemy.h"
 #include "Level.h"
 #include <iostream>
+#include "core/log.h"
+#include "ScreenState.h"
+#include "GameState.h"
+#include "ScreenActor.h"
 
 using namespace std;
+
 
 Enemy::Enemy(Level& level)
 	:_level(level)
@@ -12,6 +17,9 @@ Enemy::Enemy(Level& level)
 	isAlive = true;
 
 	cout << "Enemy created with " << _health << " health" << endl;
+    
+    _attackTimer = Timer();
+    _attackTimer.start((rand() % 6)*.5, 1, [this](Timer t) {return this->onAttackTimer(t);});
 }
 
 Enemy::~Enemy()
@@ -37,6 +45,7 @@ string Enemy::attack()
 
 void Enemy::update()
 {
+    _attackTimer.update();
 }
 
 string Enemy::hit(int damage)
@@ -58,4 +67,11 @@ string Enemy::hit(int damage)
 int Enemy::getHealth()
 {
 	return _health;
+}
+
+void Enemy::onAttackTimer(Timer t) {
+    ScreenState& screen = dynamic_cast<ScreenState&>(*_level.state);
+    screen.getScreen().addText(this->attack());
+    t.start((rand() % 6)*.5, 1, [this](Timer t) {return this->onAttackTimer(t);});
+    oxygine::log::messageln ("Timer callback called");
 }

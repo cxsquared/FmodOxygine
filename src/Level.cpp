@@ -3,15 +3,16 @@
 #include "Room.h"
 #include <algorithm>
 #include <stdlib.h>
+#include "GameState.h"
 
 using namespace std;
 
-Level::Level() {
+Level::Level(GameState *state) {
 	player = new Player(*generateLevel(12, 6));
+    this->state = state;
 }
 
 Level::Level(int minRooms, int maxRooms, int minFloors, int maxFloors) {
-	
 }
 
 Level::~Level()

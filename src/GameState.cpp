@@ -49,7 +49,7 @@ void GameState::enter(ScreenActor & screen)
 	knowCommands["a"] = Command::attack;
 	knowCommands["A"] = Command::attack;
 
-	level = new Level();
+	level = new Level(this);
 
 	screen.addText(level->player->currentRoom->getDescritption());
 	screen.addText(level->player->currentRoom->getExits());

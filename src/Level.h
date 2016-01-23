@@ -3,14 +3,16 @@
 #include <vector>
 
 class Room;
+class GameState;
 
 class Level {
 public:
-	Level();
+	Level(GameState *state);
 	Level(int minRooms, int maxRooms, int minFloors, int maxFloors);
 	~Level();
 
 	Player* player;
+    GameState *state;
 private:
 	vector<Room*> rooms;
 	Room* generateLevel(int roomsPerFloor, int floors);

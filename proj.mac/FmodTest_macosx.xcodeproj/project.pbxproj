@@ -15,6 +15,7 @@
 		0405A00118720D2200BA6557 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04059FF11872031A00BA6557 /* libpng.a */; };
 		049B57321871FBE900EF3C66 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049B57311871FBE900EF3C66 /* Cocoa.framework */; };
 		049B574A1871FBE900EF3C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049B57491871FBE900EF3C66 /* Images.xcassets */; };
+		E53E2F471C52E6B70059E9B9 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E53E2F451C52E6B70059E9B9 /* Timer.cpp */; };
 		E55F67471C4436F900F29755 /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F671F1C4436F900F29755 /* Clear.cpp */; };
 		E55F67481C4436F900F29755 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67211C4436F900F29755 /* Command.cpp */; };
 		E55F67491C4436F900F29755 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E55F67251C4436F900F29755 /* GameState.cpp */; };
@@ -156,6 +157,8 @@
 		049B57501871FBE900EF3C66 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		04A57D761871FFEB0068B1E5 /* oxygine_macosx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = oxygine_macosx.xcodeproj; path = "../../oxygine-framework-with-sdl/oxygine-framework//oxygine/SDL/macosx/oxygine_macosx/oxygine_macosx.xcodeproj"; sourceTree = "<group>"; };
 		04A57D7E1872012A0068B1E5 /* SDL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL.xcodeproj; path = "../../oxygine-framework-with-sdl//SDL/Xcode/SDL/SDL.xcodeproj"; sourceTree = "<group>"; };
+		E53E2F451C52E6B70059E9B9 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		E53E2F461C52E6B70059E9B9 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		E55F671F1C4436F900F29755 /* Clear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clear.cpp; sourceTree = "<group>"; };
 		E55F67201C4436F900F29755 /* Clear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clear.h; sourceTree = "<group>"; };
 		E55F67211C4436F900F29755 /* Command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.cpp; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 				E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */,
 				E5985A811C192A1200699084 /* Res.cpp */,
 				E5985A871C192B7900699084 /* Game.cpp */,
+				E53E2F451C52E6B70059E9B9 /* Timer.cpp */,
+				E53E2F461C52E6B70059E9B9 /* Timer.h */,
 			);
 			name = src;
 			path = ../src;
@@ -582,6 +587,7 @@
 				E57C11A81C1092CC00FFCF2E /* example.cpp in Sources */,
 				E55F67471C4436F900F29755 /* Clear.cpp in Sources */,
 				E5B539E81C4715F5009A0201 /* Down.cpp in Sources */,
+				E53E2F471C52E6B70059E9B9 /* Timer.cpp in Sources */,
 				E55F67481C4436F900F29755 /* Command.cpp in Sources */,
 				E55F67571C4436F900F29755 /* ScreenState.cpp in Sources */,
 				E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */,

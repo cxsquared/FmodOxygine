@@ -115,14 +115,20 @@ string Room::getDescritption()
 	}
 
 	if (enemies.size() > 0) {
-		desc += " There's a " + enemies[0]->getDescription();
+        for (auto enemy : enemies){
+           		desc += " " + enemy->getDescription();
+        }
 	}
     
     return desc;
 }
 
 void Room::update() {
-    
+    if (enemies.size() > 0) {
+        for (auto enemy : enemies) {
+            enemy->update();
+        }
+    }
 }
 
 void Room::generateEnemies(Level& level)

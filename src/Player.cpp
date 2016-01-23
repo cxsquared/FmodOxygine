@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Room.h"
 #include "Enemy.h"
+#include "core/log.h"
 
 Player::Player(Room& startingRoom)
 {
@@ -33,6 +34,8 @@ string Player::attack(Enemy & enemy)
 string Player::hit(int damage)
 {
 	health -= damage;
+    
+    oxygine::log::messageln("Player attacked");
 
 	if (health <= 0) {
 		return "The player has been killed.";
