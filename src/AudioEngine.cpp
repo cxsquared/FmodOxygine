@@ -7,6 +7,8 @@ Implementation::Implementation() {
 
 	mpSystem = NULL;
 	CAudioEngine::ErrorCheck(mpStudioSystem->getLowLevelSystem(&mpSystem));
+
+	
 }
 
 Implementation::~Implementation() {

@@ -151,6 +151,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\ScreenActor.cpp" />
     <ClCompile Include="..\src\ScreenState.cpp" />
     <ClCompile Include="..\src\South.cpp" />
+    <ClCompile Include="..\src\Timer.cpp" />
     <ClCompile Include="..\src\Up.cpp" />
     <ClCompile Include="..\src\West.cpp" />
   </ItemGroup>
@@ -189,6 +190,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\SoundManager.h" />
     <ClInclude Include="..\src\South.h" />
     <ClInclude Include="..\src\TestScreenState.h" />
+    <ClInclude Include="..\src\Timer.h" />
     <ClInclude Include="..\src\Up.h" />
     <ClInclude Include="..\src\West.h" />
   </ItemGroup>

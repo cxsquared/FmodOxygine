@@ -8,14 +8,15 @@
 
 #pragma once
 #include <functional>
+#include <ctime>
 
 using namespace std;
 
 class Timer {
 public:
-    Timer();
+	Timer();
     ~Timer();
-    Timer start(double time, int loops = 1, function<void(Timer)> callback=NULL);
+	Timer start(double time, int loops = 1, function<void(Timer)> callback=NULL);
     void update();
     void stop();
     void pause();

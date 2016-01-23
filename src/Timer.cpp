@@ -44,7 +44,6 @@ void Timer::stop() {
     _running = false;
     _duration = 0;
     _loopsLeft = 0;
-    _callback = NULL;
     _pauseTime = 0;
 }
 
