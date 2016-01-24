@@ -7,51 +7,62 @@
 //
 
 #include "Timer.h"
+#include "core/log.h"
 
 Timer::Timer(){
+	//log::messageln("Timer created");
 }
 
 Timer::~Timer(){
 }
 
-Timer Timer::start(double time, int loops, function<void(Timer)> callback){
-    _duration = time;
+Timer Timer::start(double timerLength, int loops, function<void(Timer&)> callback){
+	log::messageln("Timer started time:%d, loops:%d", time, loops);
+	this->stop();
+    _duration = timerLength;
     _loopsLeft = loops;
     _callback = callback;
     
-    _start = clock();
+    _elapsed = 0;
     _running = true;
     _pauseTime = 0;
     
     return *this;
 }
 
-void Timer::update() {
-    if (_running && _duration < ( (clock() - _start ) / (double) CLOCKS_PER_SEC) + _pauseTime) {
+void Timer::update(const UpdateState &us) {
+	_elapsed += us.dt / 1000.0;
+    if (_running && _duration < _elapsed) {
+		log::messageln("Timer triggered");
         _loopsLeft--;
         if (_callback != NULL){
             _callback(*this);
+			log::messageln("Callback called");
         }
         if (_loopsLeft > 0){
-            _start = clock();
+			log::messageln("Timer going another loop");
+            _elapsed = 0;
         } else {
-            _running = false;
+			this->stop();
         }
     }
 }
 
 void Timer::stop() {
+	log::messageln("Timer stoped");
     _running = false;
     _duration = 0;
+	_elapsed = 0;
     _loopsLeft = 0;
     _pauseTime = 0;
 }
 
 void Timer::pause() {
-    _running = false;
-    _pauseTime += (clock() - _start ) / (double) CLOCKS_PER_SEC;
+	// TODO: Make this work
+    //_running = false;
+    //_pauseTime += (clock() - _start ) / (double) CLOCKS_PER_SEC;
 }
 
 void Timer::resume() {
-    _running = true;
+   // _running = true;
 }

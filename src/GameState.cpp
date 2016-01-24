@@ -56,7 +56,7 @@ void GameState::enter(ScreenActor & screen)
 }
 
 void GameState::doUpdate(const UpdateState &us) {
-    level->player->currentRoom->update();
+    level->player->currentRoom->update(us);
     
     ScreenState::doUpdate(us);
 }

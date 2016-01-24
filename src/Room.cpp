@@ -1,6 +1,5 @@
 #include "Room.h"
 #include <stdlib.h>
-#include <iostream>
 #include "Enemy.h"
 
 using namespace std;
@@ -17,6 +16,11 @@ Room::~Room()
 
 string Room::enteringRoom()
 {
+	if (enemies.size() > 0) {
+		for (auto enemy : enemies) {
+			enemy->onEnter();
+		}
+	}
 	return getDescritption() + " " +  getExits();
 }
 
@@ -123,10 +127,10 @@ string Room::getDescritption()
     return desc;
 }
 
-void Room::update() {
+void Room::update(const UpdateState &us) {
     if (enemies.size() > 0) {
         for (auto enemy : enemies) {
-            enemy->update();
+            enemy->update(us);
         }
     }
 }
@@ -135,7 +139,6 @@ void Room::generateEnemies(Level& level)
 {
 	int spawnEnemy = rand() % 3;
 	if (spawnEnemy >= 2) {
-		cout << "Enemy created!" << endl;
 		enemies.push_back( make_shared<Enemy>(level));
 	}
 }

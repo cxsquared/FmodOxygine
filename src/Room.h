@@ -3,7 +3,9 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "oxygine-framework.h"
 
+using namespace oxygine;
 using namespace std;
 
 class Enemy;
@@ -20,7 +22,7 @@ public:
 	int getFloor();
     string getShortDescription();
     string getDescritption();
-    virtual void update();
+    virtual void update(const UpdateState &us);
 	void generateEnemies(Level& level);
 
 private:

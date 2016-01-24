@@ -6,6 +6,7 @@
 Player::Player(Room& startingRoom)
 {
 	currentRoom = &startingRoom;
+	health = 10;
 }
 
 Player::~Player()

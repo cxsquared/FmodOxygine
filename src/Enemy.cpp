@@ -1,6 +1,5 @@
 #include "Enemy.h"
 #include "Level.h"
-#include <iostream>
 #include "core/log.h"
 #include "ScreenState.h"
 #include "GameState.h"
@@ -15,11 +14,8 @@ Enemy::Enemy(Level& level)
 	//TODO: Figure out a better way for health and what not
 	_health = 10;
 	isAlive = true;
-
-	cout << "Enemy created with " << _health << " health" << endl;
     
-    _attackTimer = Timer();
-    _attackTimer.start((rand() % 6)*.5, 1, [this](Timer t) {return this->onAttackTimer(t);});
+    _attackTimer = new Timer();
 }
 
 Enemy::~Enemy()
@@ -43,9 +39,14 @@ string Enemy::attack()
 	return _level.player->hit(2);
 }
 
-void Enemy::update()
+void Enemy::onEnter()
 {
-    _attackTimer.update();
+	_attackTimer->start(((rand() % 3) + 2) * 1.5, 1, [this](Timer &t) {return this->onAttackTimer(t); });
+}
+
+void Enemy::update(const UpdateState &us)
+{
+    _attackTimer->update(us);
 }
 
 string Enemy::hit(int damage)
@@ -69,9 +70,12 @@ int Enemy::getHealth()
 	return _health;
 }
 
-void Enemy::onAttackTimer(Timer t) {
+void Enemy::onAttackTimer(Timer& t) {
+	//TODO: make timer callback work better
     ScreenState& screen = dynamic_cast<ScreenState&>(*_level.state);
-    screen.getScreen().addText(this->attack());
-    t.start((rand() % 6)*.5, 1, [this](Timer t) {return this->onAttackTimer(t);});
-    oxygine::log::messageln ("Timer callback called");
+	if (_level.player->health > 0) {
+		screen.getScreen().addText(this->attack());
+		_attackTimer->start(((rand() % 3) + 2) * 1.5, 1, [this](Timer &t) {return this->onAttackTimer(t); });
+		oxygine::log::messageln("Timer callback called");
+	}
 }
