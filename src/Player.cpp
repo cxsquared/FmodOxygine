@@ -17,6 +17,19 @@ bool Player::move(string dir)
 {
 	//TODO: allow players to type in full words instead of one letter
 	// Check room to see if you can go that direction
+	if (dir == "south" || dir == "South") {
+		dir = "s";
+	}
+	else if (dir == "north" || dir == "North") {
+		dir = "n";
+	}
+	else if (dir == "east" || dir == "East") {
+		dir = "e";
+	}
+	else if (dir == "west" || dir == "West") {
+		dir = "w";
+	}
+
 	auto w = currentRoom->exits.find(dir);
 	if (w != currentRoom->exits.end()) {
 		currentRoom = currentRoom->exits[dir];
