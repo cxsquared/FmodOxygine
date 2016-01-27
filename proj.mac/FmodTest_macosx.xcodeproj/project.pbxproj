@@ -51,6 +51,8 @@
 		E57C12051C11563E00FFCF2E /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
 		E57C12071C1167D900FFCF2E /* sounds in CopyFiles */ = {isa = PBXBuildFile; fileRef = E57C12041C11563E00FFCF2E /* sounds */; };
 		E57C120A1C12A60000FFCF2E /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */; };
+		E594F7C81C5945B300A4E451 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E594F7C61C5945B300A4E451 /* Item.cpp */; };
+		E594F7CB1C5945DD00A4E451 /* Sign.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E594F7C91C5945DD00A4E451 /* Sign.cpp */; };
 		E5985A831C192A1200699084 /* Res.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A811C192A1200699084 /* Res.cpp */; };
 		E5985A891C192B7900699084 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5985A871C192B7900699084 /* Game.cpp */; };
 		E5B539E81C4715F5009A0201 /* Down.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5B539DA1C4715F5009A0201 /* Down.cpp */; };
@@ -222,6 +224,10 @@
 		E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodstudioL.dylib; path = ../lib/libfmodstudioL.dylib; sourceTree = "<group>"; };
 		E57C12041C11563E00FFCF2E /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../data/sounds; sourceTree = "<group>"; };
 		E57C12081C12A5FF00FFCF2E /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
+		E594F7C61C5945B300A4E451 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		E594F7C71C5945B300A4E451 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		E594F7C91C5945DD00A4E451 /* Sign.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sign.cpp; sourceTree = "<group>"; };
+		E594F7CA1C5945DD00A4E451 /* Sign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sign.h; sourceTree = "<group>"; };
 		E5985A811C192A1200699084 /* Res.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Res.cpp; sourceTree = "<group>"; };
 		E5985A871C192B7900699084 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		E5B539DA1C4715F5009A0201 /* Down.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Down.cpp; sourceTree = "<group>"; };
@@ -412,6 +418,7 @@
 		E55F675C1C4439D000F29755 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E594F7CC1C5945EE00A4E451 /* Items */,
 				E56A9B311C4D4AEA000B41AF /* Enemy.cpp */,
 				E56A9B321C4D4AEA000B41AF /* Enemy.h */,
 				E55F672C1C4436F900F29755 /* Level.cpp */,
@@ -451,6 +458,17 @@
 				E57C11FB1C1143E100FFCF2E /* libfmodstudioL.dylib */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		E594F7CC1C5945EE00A4E451 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				E594F7C91C5945DD00A4E451 /* Sign.cpp */,
+				E594F7CA1C5945DD00A4E451 /* Sign.h */,
+				E594F7C61C5945B300A4E451 /* Item.cpp */,
+				E594F7C71C5945B300A4E451 /* Item.h */,
+			);
+			name = Items;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -602,6 +620,8 @@
 				E57C11A51C1092AE00FFCF2E /* entry_point.cpp in Sources */,
 				E56A9B361C4D4AEA000B41AF /* Enemy.cpp in Sources */,
 				E5B539E91C4715F5009A0201 /* East.cpp in Sources */,
+				E594F7CB1C5945DD00A4E451 /* Sign.cpp in Sources */,
+				E594F7C81C5945B300A4E451 /* Item.cpp in Sources */,
 				E5B539EE1C4715F5009A0201 /* West.cpp in Sources */,
 				E55F67491C4436F900F29755 /* GameState.cpp in Sources */,
 				E55F67501C4436F900F29755 /* MainMenuState.cpp in Sources */,

@@ -26,7 +26,7 @@ private:
     int _loopsLeft;
     double _duration;
     double _elapsed;
-    function<void(Timer)> _callback;
+    function<void(Timer&)> _callback;
     bool _running;
     double _pauseTime = 0;
 };
