@@ -15,7 +15,6 @@ Player::~Player()
 
 bool Player::move(string dir)
 {
-	//TODO: allow players to type in full words instead of one letter
 	// Check room to see if you can go that direction
 	if (dir == "south" || dir == "South") {
 		dir = "s";

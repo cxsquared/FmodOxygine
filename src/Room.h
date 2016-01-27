@@ -10,6 +10,7 @@ using namespace std;
 
 class Enemy;
 class Level;
+class Item;
 
 class Room {
 public:
@@ -17,6 +18,7 @@ public:
 	~Room();
     map<string, Room*> exits;
 	vector< shared_ptr<Enemy> > enemies;
+	vector < shared_ptr<Item> > items;
 	string enteringRoom();
 	string getExits();
 	int getFloor();

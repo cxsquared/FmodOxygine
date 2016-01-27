@@ -134,6 +134,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\GameState.cpp" />
     <ClCompile Include="..\src\Go.cpp" />
     <ClCompile Include="..\src\InvalidCommand.cpp" />
+    <ClCompile Include="..\src\Item.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Login.cpp" />
     <ClCompile Include="..\src\LoginScreenState.cpp" />
@@ -150,6 +151,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\Room.cpp" />
     <ClCompile Include="..\src\ScreenActor.cpp" />
     <ClCompile Include="..\src\ScreenState.cpp" />
+    <ClCompile Include="..\src\Sign.cpp" />
     <ClCompile Include="..\src\South.cpp" />
     <ClCompile Include="..\src\Timer.cpp" />
     <ClCompile Include="..\src\Up.cpp" />
@@ -170,6 +172,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\Go.h" />
     <ClInclude Include="..\src\InputTextHandler.h" />
     <ClInclude Include="..\src\InvalidCommand.h" />
+    <ClInclude Include="..\src\Item.h" />
     <ClInclude Include="..\src\Level.h" />
     <ClInclude Include="..\src\Login.h" />
     <ClInclude Include="..\src\LoginScreenState.h" />
@@ -187,6 +190,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\Room.h" />
     <ClInclude Include="..\src\ScreenActor.h" />
     <ClInclude Include="..\src\ScreenState.h" />
+    <ClInclude Include="..\src\Sign.h" />
     <ClInclude Include="..\src\SoundManager.h" />
     <ClInclude Include="..\src\South.h" />
     <ClInclude Include="..\src\TestScreenState.h" />

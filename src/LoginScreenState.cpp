@@ -15,6 +15,8 @@ void LoginScreenState::enter(ScreenActor &screen) {
     
     knowCommands["login"] = Command::login;
     knowCommands["Login"] = Command::login;
+	knowCommands["l"] = Command::login;
+	knowCommands["L"] = Command::login;
     
     screen.addText("Welcome to Hightower Industries OS...");
     screen.addText("Your number one leader in future technlogy.");

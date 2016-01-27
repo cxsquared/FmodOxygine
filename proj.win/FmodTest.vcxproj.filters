@@ -30,6 +30,12 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{0600cc26-0864-425f-acc0-c5f74a7e1d68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Items">
+      <UniqueIdentifier>{53e0e63c-b3d0-4fd8-9986-15f18e313d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Items">
+      <UniqueIdentifier>{c2ed023f-d64e-47a9-9620-bc6e4ed970a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../src/AudioEngine.cpp">
@@ -139,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Timer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Item.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Sign.cpp">
+      <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +264,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Timer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Item.h">
+      <Filter>Header Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Sign.h">
+      <Filter>Header Files\Game\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

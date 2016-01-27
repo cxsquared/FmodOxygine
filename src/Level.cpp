@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <stdlib.h>
 #include "GameState.h"
+#include "Item.h"
+#include "Sign.h"
+#include <memory>
 
 using namespace std;
 
@@ -39,6 +42,9 @@ Room* Level::generateLevel(int roomsPerFloor, int floors)
 		if (currentFloor == 0) {
 			Room* room = new Room(currentFloor);
 			startingRoom = room;
+			// Making random sign
+			shared_ptr<Item> item = make_shared<Sign>("Welcome to the game.");
+			room->items.push_back(item);
 			rooms.push_back(room);
 		} else {
 			rooms.push_back(makeRoom(*exitRoom, "up", currentFloor));

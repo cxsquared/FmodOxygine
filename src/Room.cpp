@@ -1,6 +1,7 @@
 #include "Room.h"
 #include <stdlib.h>
 #include "Enemy.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -122,6 +123,20 @@ string Room::getDescritption()
         for (auto enemy : enemies){
            		desc += " " + enemy->getDescription();
         }
+	}
+
+	if (items.size() > 0) {
+		int numItems = 0;
+		for (auto item : items) {
+			if (numItems > 0) {
+				desc += " and a " + item->getDescription();
+			}
+			else {
+				desc += " There is a " + item->getDescription();
+			}
+			numItems++;
+		}
+		desc += " in the room.";
 	}
     
     return desc;
