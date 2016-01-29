@@ -1,7 +1,11 @@
 #pragma once
 #include "Room.h"
+#include <memory>
+
+using namespace std;
 
 class Enemy;
+class PickupItem;
 
 class Player {
 public:
@@ -12,9 +16,10 @@ public:
 
 	bool move(string dir);
 
-	// TODO: Implement an inventory system
-
 	string attack(Enemy& enemy);
 	string hit(int damage);
+private:
+	// TODO: Implement an inventory system
+	vector<shared_ptr<PickupItem>> inventory;
 
 };

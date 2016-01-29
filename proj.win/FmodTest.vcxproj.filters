@@ -152,6 +152,12 @@
     <ClCompile Include="..\src\Sign.cpp">
       <Filter>Source Files\Game\Items</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\PickupItem.cpp">
+      <Filter>Source Files\Game\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../src/AudioEngine.h">
@@ -270,6 +276,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Sign.h">
       <Filter>Header Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PickupItem.h">
+      <Filter>Header Files\Game\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Inventory.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -134,6 +134,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\GameState.cpp" />
     <ClCompile Include="..\src\Go.cpp" />
     <ClCompile Include="..\src\InvalidCommand.cpp" />
+    <ClCompile Include="..\src\Inventory.cpp" />
     <ClCompile Include="..\src\Item.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Login.cpp" />
@@ -145,6 +146,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="..\src\MainMenuState.cpp" />
     <ClCompile Include="..\src\Music.cpp" />
     <ClCompile Include="..\src\North.cpp" />
+    <ClCompile Include="..\src\PickupItem.cpp" />
     <ClCompile Include="..\src\Player.cpp" />
     <ClCompile Include="..\src\Quit.cpp" />
     <ClCompile Include="..\src\ResetGame.cpp" />
@@ -172,6 +174,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\Go.h" />
     <ClInclude Include="..\src\InputTextHandler.h" />
     <ClInclude Include="..\src\InvalidCommand.h" />
+    <ClInclude Include="..\src\Inventory.h" />
     <ClInclude Include="..\src\Item.h" />
     <ClInclude Include="..\src\Level.h" />
     <ClInclude Include="..\src\Login.h" />
@@ -183,6 +186,7 @@ xcopy /y /d "$(ProjectDir)\..\data\dll\FMODRelease\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="..\src\MainMenuState.h" />
     <ClInclude Include="..\src\Music.h" />
     <ClInclude Include="..\src\North.h" />
+    <ClInclude Include="..\src\PickupItem.h" />
     <ClInclude Include="..\src\Player.h" />
     <ClInclude Include="..\src\Quit.h" />
     <ClInclude Include="..\src\Res.h" />
