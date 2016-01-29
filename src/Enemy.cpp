@@ -71,11 +71,10 @@ int Enemy::getHealth()
 }
 
 void Enemy::onAttackTimer(Timer& t) {
-	//TODO: make timer callback work better
     ScreenState& screen = dynamic_cast<ScreenState&>(*_level.state);
 	if (_level.player->health > 0) {
 		screen.getScreen().addText(this->attack());
-		_attackTimer->start(((rand() % 3) + 2) * 1.5, 1, [this](Timer &t) {return this->onAttackTimer(t); });
+		t.start(((rand() % 3) + 2) * 1.5, 1, [this](Timer &t) {return this->onAttackTimer(t); });
 		oxygine::log::messageln("Timer callback called");
 	}
 }
