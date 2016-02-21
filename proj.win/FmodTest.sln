@@ -1,9 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FmodTest", "FmodTest.vcxproj", "{2B4D7491-A4F8-4606-B0E3-2A1FCE3C46C4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Oxygine", "../../oxygine-framework-with-sdl/oxygine-framework/\oxygine\SDL\win32\oxygine.vcxproj", "{52411305-CFE1-4FA8-9885-5729BFC816CF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oxygine", "..\..\oxygine-framework-with-sdl\oxygine-framework\oxygine\SDL\win32\oxygine.vcxproj", "{52411305-CFE1-4FA8-9885-5729BFC816CF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlitchDSP", "..\GlitchDSP\GlitchDSP.vcxproj", "{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,28 +23,20 @@ Global
 		{2B4D7491-A4F8-4606-B0E3-2A1FCE3C46C4}.Release|Win32.ActiveCfg = Release|Win32
 		{2B4D7491-A4F8-4606-B0E3-2A1FCE3C46C4}.Release|Win32.Build.0 = Release|Win32
 		{2B4D7491-A4F8-4606-B0E3-2A1FCE3C46C4}.Release|x64.ActiveCfg = Release|Win32
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|Win32.ActiveCfg = Debug|Win32
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|Win32.Build.0 = Debug|Win32
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.ActiveCfg = Debug|x64
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Debug|x64.Build.0 = Debug|x64
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|Win32.ActiveCfg = Release|Win32
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|Win32.Build.0 = Release|Win32
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.ActiveCfg = Release|x64
-		{81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68}.Release|x64.Build.0 = Release|x64
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Debug|Win32.Build.0 = Debug|Win32
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Debug|x64.ActiveCfg = Debug|x64
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Debug|x64.Build.0 = Debug|x64
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Release|Win32.ActiveCfg = Release|Win32
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Release|Win32.Build.0 = Release|Win32
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Release|x64.ActiveCfg = Release|x64
-		{DA956FD3-E142-46F2-9DD5-C78BEBB56B7A}.Release|x64.Build.0 = Release|x64
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Debug|Win32.ActiveCfg = Debug|Win32
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Debug|Win32.Build.0 = Debug|Win32
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Debug|x64.ActiveCfg = Debug|Win32
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Release|Win32.ActiveCfg = Release|Win32
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Release|Win32.Build.0 = Release|Win32
 		{52411305-CFE1-4FA8-9885-5729BFC816CF}.Release|x64.ActiveCfg = Release|Win32
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Debug|Win32.Build.0 = Debug|Win32
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Debug|x64.ActiveCfg = Debug|x64
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Debug|x64.Build.0 = Debug|x64
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Release|Win32.ActiveCfg = Release|Win32
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Release|Win32.Build.0 = Release|Win32
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Release|x64.ActiveCfg = Release|x64
+		{3CD1EABC-A5F8-43AB-84F4-CD898561ACA0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
