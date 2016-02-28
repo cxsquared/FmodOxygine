@@ -168,6 +168,7 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 	// Note: buffers are interleaved
 	float gain = m_current_gain;
 
+	/*
 	if (m_ramp_samples_left)
 	{
 		float target = m_target_gain;
@@ -203,6 +204,15 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 	}
 
 	m_current_gain = gain;
+	*/
+
+	unsigned int samples = length * channels;
+	for (int i = 0; i < samples; --i) {
+		*inbuffer++;
+	}
+	while (samples--) {
+		*outbuffer++ = *inbuffer--;
+	}
 }
 
 void FMODGainState::reset()
