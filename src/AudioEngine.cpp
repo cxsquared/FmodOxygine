@@ -1,5 +1,9 @@
 #include "AudioEngine.h"
 
+
+/*****************
+* Implementation *
+******************/
 Implementation::Implementation() {
 	mpStudioSystem = NULL;
 	CAudioEngine::ErrorCheck(FMOD::Studio::System::create(&mpStudioSystem));
@@ -7,8 +11,6 @@ Implementation::Implementation() {
 
 	mpSystem = NULL;
 	CAudioEngine::ErrorCheck(mpStudioSystem->getLowLevelSystem(&mpSystem));
-
-	
 }
 
 Implementation::~Implementation() {
@@ -16,13 +18,12 @@ Implementation::~Implementation() {
 	CAudioEngine::ErrorCheck(mpStudioSystem->release());
 }
 
-void Implementation::Update() {
+void Implementation::Update(float fTimeDeltaSeconds) {
 	vector<ChannelMap::iterator> pStoppedChannels;
 	for (auto it = mChannels.begin(), itEnd = mChannels.end(); it != itEnd; ++it)
 	{
-		bool bIsPlaying = false;
-		it->second->isPlaying(&bIsPlaying);
-		if (!bIsPlaying)
+		it->second->Update(fTimeDeltaSeconds);
+		if (it->second->meState == Channel::State::STOPPED)
 		{
 			pStoppedChannels.push_back(it);
 		}
@@ -34,80 +35,267 @@ void Implementation::Update() {
 	CAudioEngine::ErrorCheck(mpStudioSystem->update());
 }
 
+void Implementation::LoadSound(int nSoundId) {
+	if (SoundIsLoaded(nSoundId)) {
+		return;
+	}
+
+	auto tFoundIt = mSounds.find(nSoundId);
+	if (tFoundIt != mSounds.end())
+		return;
+
+	FMOD_MODE eMode = FMOD_NONBLOCKING;
+	eMode |= tFoundIt->second->mSoundDefinition.bIs3d ? (FMOD_3D | FMOD_3D_INVERSETAPEREDROLLOFF) : FMOD_2D;
+	eMode |= tFoundIt->second->mSoundDefinition.bIsLooping ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+	eMode |= tFoundIt->second->mSoundDefinition.bIsStreaming ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
+
+	CAudioEngine::ErrorCheck(mpSystem->createSound(tFoundIt->second->mSoundDefinition.mSoundName.c_str(), eMode, nullptr, &tFoundIt->second->mpSound));
+	if (tFoundIt->second->mpSound) {
+		tFoundIt->second->mpSound->set3DMinMaxDistance(tFoundIt->second->mSoundDefinition.fMinDistance, tFoundIt->second->mSoundDefinition.fMaxDistance);
+	}
+}
+
+bool Implementation::SoundIsLoaded(int nSoundId) {
+	auto tFoundIt = mSounds.find(nSoundId);
+	if (tFoundIt == mSounds.end())
+		return false;
+
+	// Checking the state of the FMOD sound to see if it's loaded
+	FMOD_OPENSTATE state;
+	CAudioEngine::ErrorCheck(tFoundIt->second->mpSound->getOpenState(&state, 0, 0, 0));
+	if (state == FMOD_OPENSTATE_READY)
+		return true;
+
+	return false;
+}
+
 Implementation* sgpImplementation = nullptr;
 
+/****************
+* Channel State *
+*****************/
+
+Implementation::Channel::Channel(Implementation& tImplemenation, int nSoundId, const CAudioEngine::SoundDefinition& tSoundDefinition, const FmodVector3& vPosition, float vVolumedB) {
+	mImplemenation = tImplemenation;
+	mSoundId = nSoundId;
+	
+	// Getting info from Sound Definition
+	mfVolumedB = vVolumedB;
+	mfSoundVolume = CAudioEngine::dbToVolume(vVolumedB);
+
+	mvPosition = vPosition;
+}
+
+void Implementation::Channel::Update(float fTimeDeltaSeconds) {
+	switch (meState)
+	{
+	case Implementation::Channel::State::INITIALIZE:
+	case Implementation::Channel::State::DEVIRTUALIZE:
+	case Implementation::Channel::State::TOPLAY: {
+		if (mbStopRequested) {
+			meState = State::STOPPING;
+			return;
+		}
+
+		if (ShouldBeVirtual(true)) {
+			if (IsOneShot()) {
+				meState = State::STOPPING;
+			}
+			else {
+				meState = State::VIRTUAL;
+			}
+			return;
+		}
+
+		if (!mImplemenation.SoundIsLoaded(mSoundId)) {
+			mImplemenation.LoadSound(mSoundId);
+			meState = State::LOADING;
+			return;
+		}
+
+		mpChannel = nullptr;
+
+		auto tSoundIt = mImplemenation.mSounds.find(mSoundId);
+		if (tSoundIt != mImplemenation.mSounds.end()) {
+			mImplemenation.mpSystem->playSound(tSoundIt->second->mpSound, nullptr, true, &mpChannel);
+		}
+
+		if (mpChannel) {
+			if (meState == State::DEVIRTUALIZE) {
+				mVirtualizedFader.StartFade(CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
+			}
+
+			meState = State::PLAYING;
+
+			FMOD_VECTOR position = CAudioEngine::VectorToFmod(mvPosition);
+			mpChannel->set3DAttributes(&position, nullptr);
+			mpChannel->setVolume(CAudioEngine::dbToVolume(GetVolumedB()));
+			mpChannel->getPaused(false);
+		}
+		else {
+			meState = State::STOPPING;
+		}
+	}
+		break;
+	case Implementation::Channel::State::LOADING:
+		if (mImplemenation.SoundIsLoaded(mSoundId)) {
+			meState = State::TOPLAY;
+		}
+		break;
+	case Implementation::Channel::State::PLAYING:
+		mVirtualizedFader.Update(fTimeDeltaSeconds);
+		UpdateChannelParameters();
+
+		if (!IsPlaying() || mbStopRequested) {
+			meState = State::STOPPING;
+			return;
+		}
+
+		if (ShouldBeVirtual(false)) {
+			mVirtualizedFader.StartFade(CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
+			meState = State::VIRTUALIZING;
+		}
+		break;
+	case Implementation::Channel::State::STOPPING:
+		mStopFader.Update(fTimeDeltaSeconds);
+		UpdateChannelParameters();
+		if (mStopFader.IsFinished()) {
+			mpChannel->stop();
+		}
+		if (!IsPlaying()) {
+			meState = State::STOPPED;
+			return;
+		}
+		break;
+	case Implementation::Channel::State::STOPPED:
+		break;
+	case Implementation::Channel::State::VIRTUALIZING:
+		mVirtualizedFader.Update(fTimeDeltaSeconds);
+		UpdateChannelParameters();
+		if (!ShouldBeVirtual(false)) {
+			mVirtualizedFader.StartFade(0.0f, CAudioFader::VIRTUALIZE_FADE_TIME);
+			meState = State::PLAYING;
+			break;
+		}
+		if (mVirtualizedFader.IsFinished()) {
+			mpChannel->stop();
+			meState = State::VIRTUAL;
+		}
+		break;
+	case Implementation::Channel::State::VIRTUAL:
+		if (mbStopRequested) {
+			meState = State::STOPPING;
+		}
+		else if (!ShouldBeVirtual(false)) {
+			meState = State::DEVIRTUALIZE;
+		}
+		break;
+	}
+}
+
+void Implementation::Channel::UpdateChannelParameters() {
+	// Only update if the channel is active
+	if (mpChannel) {
+		FMOD_VECTOR vVel;
+		vVel.x = 0;
+		vVel.y = 0;
+		vVel.z = 0;
+		mpChannel->set3DAttributes(&CAudioEngine::VectorToFmod(mvPosition), &vVel);
+		mpChannel->setVolume(CAudioEngine::dbToVolume(mfVolumedB));
+	}
+}
+
+bool Implementation::Channel::ShouldBeVirtual(bool bAllowOneShotVirtuals) const {
+	// TODO: Write code to check if things should be virtualized
+	return true;
+}
+
+bool Implementation::Channel::IsPlaying() const {
+	if (meState == State::PLAYING)
+		return true;
+
+	return false;
+}
+
+bool Implementation::Channel::IsOneShot() const {
+	auto tSoundIt = mImplemenation.mSounds.find(mSoundId);
+	if (tSoundIt == mImplemenation.mSounds.end())
+		return NULL; // TODO: Return actual error
+
+	return !tSoundIt->second->mSoundDefinition.bIsLooping;
+}
+
+float Implementation::Channel::GetVolumedB() const {
+	return mfVolumedB;
+}
+
+/**************
+* Audio Fader *
+***************/
+void CAudioFader::StartFade(float fVolumedB, float fSeconds) {
+	mfSecondsLeft = fSeconds;
+}
+
+bool CAudioFader::IsFinished() {
+	return !mbRunning;
+}
+
+void CAudioFader::Update(float fTimeDeltaSeconds) {
+
+}
+
+/***************
+* Audio Engine *
+****************/
 void CAudioEngine::Init() {
 	sgpImplementation = new Implementation;
 }
 
-void CAudioEngine::Update() {
-	sgpImplementation->Update();
+void CAudioEngine::Update(float fTimeDeltaSeconds) {
+	sgpImplementation->Update(fTimeDeltaSeconds);
 }
 
-void CAudioEngine::LoadSound(const std::string& strSoundName, bool b3d, bool bLooping, bool bStream)
+void CAudioEngine::LoadSound(int nSoundId)
 {
-    //cout << "Loading sound " << strSoundName << endl;
-	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
-	if (tFoundIt != sgpImplementation->mSounds.end())
-		return;
-	FMOD_MODE eMode = FMOD_DEFAULT;
-	eMode |= b3d ? FMOD_3D : FMOD_2D;
-	eMode |= bLooping ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
-	eMode |= bStream ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
-	FMOD::Sound* pSound = nullptr;
-	CAudioEngine::ErrorCheck(sgpImplementation->mpSystem->createSound(strSoundName.c_str(), eMode, nullptr, &pSound));
-	if (pSound){
-		sgpImplementation->mSounds[strSoundName] = pSound;
-	}
-    //cout << "Sound loaded " << strSoundName << endl;
+	sgpImplementation->LoadSound(nSoundId);
 }
 
-void CAudioEngine::UnLoadSound(const std::string& strSoundName)
+void CAudioEngine::UnLoadSound(int nSoundId)
 {
-	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
+	auto tFoundIt = sgpImplementation->mSounds.find(nSoundId);
 	if (tFoundIt == sgpImplementation->mSounds.end())
 		return;
-	CAudioEngine::ErrorCheck(tFoundIt->second->release());
+	CAudioEngine::ErrorCheck(tFoundIt->second->mpSound->release());
 	sgpImplementation->mSounds.erase(tFoundIt);
 }
 
-int CAudioEngine::PlaySounds(const string& strSoundName, const FmodVector3& vPosition, float fVolumedB)
+int CAudioEngine::PlaySound(int nSoundId, const FmodVector3& vPos, float fVolumedB)
 {
     //cout << "Playing sound " << strSoundName << endl;
 	int nChannelId = sgpImplementation->mnNextChannelId++;
-	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
+	auto tFoundIt = sgpImplementation->mSounds.find(nSoundId);
 	if (tFoundIt == sgpImplementation->mSounds.end())
 	{
-		LoadSound(strSoundName);
-		tFoundIt = sgpImplementation->mSounds.find(strSoundName);
-		if (tFoundIt == sgpImplementation->mSounds.end())
-		{
-			return nChannelId;
-		}
+		return nChannelId;
 	}
-	FMOD::Channel* pChannel = nullptr;
-	CAudioEngine::ErrorCheck(sgpImplementation->mpSystem->playSound(tFoundIt->second, nullptr, true, &pChannel));
-	if (pChannel)
-	{
-		FMOD_MODE currMode;
-		tFoundIt->second->getMode(&currMode);
-		if (currMode & FMOD_3D){
-			FMOD_VECTOR position = VectorToFmod(vPosition);
-			CAudioEngine::ErrorCheck(pChannel->set3DAttributes(&position, nullptr));
-		}
-		CAudioEngine::ErrorCheck(pChannel->setVolume(dbToVolume(fVolumedB)));
-		CAudioEngine::ErrorCheck(pChannel->setPaused(false));
-		sgpImplementation->mChannels[nChannelId] = pChannel;
-	}
+	
+	sgpImplementation->mChannels[nChannelId] = make_unique<Implementation::Channel>(*sgpImplementation, nSoundId, tFoundIt->second->mSoundDefinition, vPos, fVolumedB);
+
 	return nChannelId;
 }
 
-void CAudioEngine::StopChannel(int nChannelId) {
+void CAudioEngine::StopChannel(int nChannelId, float fFadeTimeSeconds) {
     auto tFoundIt = sgpImplementation->mChannels.find(nChannelId);
     if (tFoundIt == sgpImplementation->mChannels.end())
         return;
     
-    CAudioEngine::ErrorCheck(tFoundIt->second->stop());
+	if (fFadeTimeSeconds <= 0.0f) {
+		CAudioEngine::ErrorCheck(tFoundIt->second->mpChannel->stop());
+	}
+	else {
+		tFoundIt->second->mbStopRequested = true;
+		tFoundIt->second->mStopFader.StartFade(CAudioFader::SILENCE_dB, fFadeTimeSeconds);
+	}
 }
 
 void CAudioEngine::SetChannel3dPosition(int nChannelId, const FmodVector3& vPosition)
@@ -116,8 +304,7 @@ void CAudioEngine::SetChannel3dPosition(int nChannelId, const FmodVector3& vPosi
 	if (tFoundIt == sgpImplementation->mChannels.end())
 		return;
 
-	FMOD_VECTOR position = VectorToFmod(vPosition);
-	CAudioEngine::ErrorCheck(tFoundIt->second->set3DAttributes(&position, NULL));
+	tFoundIt->second->mvPosition = vPosition;
 }
 
 void CAudioEngine::SetChannelVolume(int nChannelId, float fVolumedB)
@@ -126,7 +313,7 @@ void CAudioEngine::SetChannelVolume(int nChannelId, float fVolumedB)
 	if (tFoundIt == sgpImplementation->mChannels.end())
 		return;
 
-	CAudioEngine::ErrorCheck(tFoundIt->second->setVolume(dbToVolume(fVolumedB)));
+	tFoundIt->second->mfVolumedB = fVolumedB;
 }
 
 void CAudioEngine::LoadBank(const std::string& strBankName, FMOD_STUDIO_LOAD_BANK_FLAGS flags) {
