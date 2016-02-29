@@ -75,8 +75,7 @@ Implementation* sgpImplementation = nullptr;
 * Channel State *
 *****************/
 
-Implementation::Channel::Channel(Implementation& tImplemenation, int nSoundId, const CAudioEngine::SoundDefinition& tSoundDefinition, const FmodVector3& vPosition, float vVolumedB) {
-	mImplemenation = tImplemenation;
+Implementation::Channel::Channel(Implementation& tImplemenation, int nSoundId, const CAudioEngine::SoundDefinition& tSoundDefinition, const FmodVector3& vPosition, float vVolumedB): mImplemenation(tImplemenation) {
 	mSoundId = nSoundId;
 	
 	// Getting info from Sound Definition
@@ -122,7 +121,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 
 		if (mpChannel) {
 			if (meState == State::DEVIRTUALIZE) {
-				mVirtualizedFader.StartFade(CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
+				mVirtualizedFader.StartFade(mfVolumedB, CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
 			}
 
 			meState = State::PLAYING;
@@ -152,7 +151,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		}
 
 		if (ShouldBeVirtual(false)) {
-			mVirtualizedFader.StartFade(CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
+			mVirtualizedFader.StartFade(mfVolumedB, CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
 			meState = State::VIRTUALIZING;
 		}
 		break;
@@ -173,7 +172,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		mVirtualizedFader.Update(fTimeDeltaSeconds);
 		UpdateChannelParameters();
 		if (!ShouldBeVirtual(false)) {
-			mVirtualizedFader.StartFade(0.0f, CAudioFader::VIRTUALIZE_FADE_TIME);
+			mVirtualizedFader.StartFade(mfVolumedB, CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
 			meState = State::PLAYING;
 			break;
 		}
@@ -232,8 +231,13 @@ float Implementation::Channel::GetVolumedB() const {
 /**************
 * Audio Fader *
 ***************/
-void CAudioFader::StartFade(float fVolumedB, float fSeconds) {
+void CAudioFader::StartFade(float fStartVolumedB, float fEndVolumedB, float fSeconds) {
 	mfSecondsLeft = fSeconds;
+	mfStartTime = fSeconds;
+	mfStartVolumedB = fStartVolumedB;
+	mfTargetVolumedB = fEndVolumedB;
+
+	mbRunning = true;
 }
 
 bool CAudioFader::IsFinished() {
@@ -241,7 +245,21 @@ bool CAudioFader::IsFinished() {
 }
 
 void CAudioFader::Update(float fTimeDeltaSeconds) {
+	if (mbRunning) {
+		mfSecondsLeft -= fTimeDeltaSeconds;
 
+		if (mfSecondsLeft < 0) {
+			mbRunning = false;
+		}
+	}
+}
+
+float CAudioFader::GetCurrentVolume() {
+	return lerp(mfSecondsLeft / mfStartTime, mfStartVolumedB, mfTargetVolumedB);
+}
+
+float CAudioFader::lerp(float fTime, float fStart, float fEnd) {
+	return (1 - fTime)*fStart + fTime*fEnd;
 }
 
 /***************
@@ -294,7 +312,7 @@ void CAudioEngine::StopChannel(int nChannelId, float fFadeTimeSeconds) {
 	}
 	else {
 		tFoundIt->second->mbStopRequested = true;
-		tFoundIt->second->mStopFader.StartFade(CAudioFader::SILENCE_dB, fFadeTimeSeconds);
+		tFoundIt->second->mStopFader.StartFade(tFoundIt->second->mfVolumedB, CAudioFader::SILENCE_dB, fFadeTimeSeconds);
 	}
 }
 

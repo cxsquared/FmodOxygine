@@ -71,7 +71,7 @@ struct Implementation {
 	int mnNextChannelId;
 
 	typedef map<int, Implementation::Sound*> SoundMap;
-	typedef map<int, Implementation::Channel*> ChannelMap;
+	typedef map<int, unique_ptr<Implementation::Channel>> ChannelMap;
 	typedef map<string, FMOD::Studio::EventInstance*> EventMap;
 	typedef map<string, FMOD::Studio::Bank*> BankMap;
 	BankMap mBanks;
@@ -85,16 +85,17 @@ public:
 	static constexpr float SILENCE_dB = -40.0f;
 	static constexpr float VIRTUALIZE_FADE_TIME = 0.125f;
 
-	void StartFade(float fVolumedB, float fSeconds);
+	void StartFade(float fStartVolumedB, float fEndVolumedB, float fSeconds);
 	bool IsFinished();
 	void Update(float fTimeDeltaSeconds);
 
-	float GetCurrentVolume() const;
+	float GetCurrentVolume();
 private:
 	float mfSecondsLeft;
+	float mfStartTime;
 	float mfStartVolumedB;
-	bool mbRunning;
 	float mfTargetVolumedB;
+	bool mbRunning;
 	float lerp(float fTime, float fStart, float fEnd);
 };
 
