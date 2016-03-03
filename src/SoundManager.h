@@ -8,9 +8,10 @@ namespace SoundManager {
     
     void init();
     void destroy();
-    void update();
-    void loadSound(const string &fileLocation);
-    int playSound(const string &fileLocation);
+    void update(float fTimeDeltaSeconds);
+    int registerSound(const SoundDefinition &tSoundDefinition, int nSoundId, bool bLoad = true);
+    void unRegisterSound(int nSoundId);
+    int playSound(int nSoundId);
     void setChannelVolume(int nChannelId,float fVolumedB);
     void stopChannel(int nChannelId);
     void loadBank(const string &bankFileLocaiton);

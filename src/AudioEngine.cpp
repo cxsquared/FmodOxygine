@@ -40,19 +40,32 @@ void Implementation::LoadSound(int nSoundId) {
 		return;
 	}
 
-	auto tFoundIt = mSounds.find(nSoundId);
-	if (tFoundIt != mSounds.end())
+	auto tFoundIt = mSoundDefinitions.find(nSoundId);
+	if (tFoundIt != mSoundDefinitions.end())
 		return;
 
 	FMOD_MODE eMode = FMOD_NONBLOCKING;
-	eMode |= tFoundIt->second->mSoundDefinition.bIs3d ? (FMOD_3D | FMOD_3D_INVERSETAPEREDROLLOFF) : FMOD_2D;
-	eMode |= tFoundIt->second->mSoundDefinition.bIsLooping ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
-	eMode |= tFoundIt->second->mSoundDefinition.bIsStreaming ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
+	eMode |= tFoundIt->second.bIs3d ? (FMOD_3D | FMOD_3D_INVERSETAPEREDROLLOFF) : FMOD_2D;
+	eMode |= tFoundIt->second.bIsLooping ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+	eMode |= tFoundIt->second.bIsStreaming ? FMOD_CREATESTREAM : FMOD_CREATECOMPRESSEDSAMPLE;
 
-	CAudioEngine::ErrorCheck(mpSystem->createSound(tFoundIt->second->mSoundDefinition.mSoundName.c_str(), eMode, nullptr, &tFoundIt->second->mpSound));
-	if (tFoundIt->second->mpSound) {
-		tFoundIt->second->mpSound->set3DMinMaxDistance(tFoundIt->second->mSoundDefinition.fMinDistance, tFoundIt->second->mSoundDefinition.fMaxDistance);
+	CAudioEngine::ErrorCheck(mpSystem->createSound(tFoundIt->second.mSoundName.c_str(), eMode, nullptr, &mSounds[nSoundId]));
+	if (mSounds[nSoundId]) {
+		mSounds[nSoundId]->set3DMinMaxDistance(tFoundIt->second.fMinDistance, tFoundIt->second.fMaxDistance);
 	}
+}
+
+void Implementation::UnLoadSound(int nSoundId) {
+    auto tSoundIt = mSounds.find(nSoundId);
+    if (tSoundIt == mSounds.end())
+        return;
+    CAudioEngine::ErrorCheck(tSoundIt->second->release());
+    mSounds.erase(tSoundIt);
+    
+    auto tFoundIt = mSoundDefinitions.find(nSoundId);
+    if (tFoundIt == mSoundDefinitions.end())
+        return;
+    mSoundDefinitions.erase(tFoundIt);
 }
 
 bool Implementation::SoundIsLoaded(int nSoundId) {
@@ -62,7 +75,7 @@ bool Implementation::SoundIsLoaded(int nSoundId) {
 
 	// Checking the state of the FMOD sound to see if it's loaded
 	FMOD_OPENSTATE state;
-	CAudioEngine::ErrorCheck(tFoundIt->second->mpSound->getOpenState(&state, 0, 0, 0));
+	CAudioEngine::ErrorCheck(tFoundIt->second->getOpenState(&state, 0, 0, 0));
 	if (state == FMOD_OPENSTATE_READY)
 		return true;
 
@@ -75,7 +88,7 @@ Implementation* sgpImplementation = nullptr;
 * Channel State *
 *****************/
 
-Implementation::Channel::Channel(Implementation& tImplemenation, int nSoundId, const CAudioEngine::SoundDefinition& tSoundDefinition, const FmodVector3& vPosition, float vVolumedB): mImplemenation(tImplemenation) {
+Implementation::Channel::Channel(Implementation& tImplemenation, int nSoundId, const SoundDefinition& tSoundDefinition, const FmodVector3& vPosition, float vVolumedB): mImplemenation(tImplemenation) {
 	mSoundId = nSoundId;
 	
 	// Getting info from Sound Definition
@@ -116,7 +129,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 
 		auto tSoundIt = mImplemenation.mSounds.find(mSoundId);
 		if (tSoundIt != mImplemenation.mSounds.end()) {
-			mImplemenation.mpSystem->playSound(tSoundIt->second->mpSound, nullptr, true, &mpChannel);
+			mImplemenation.mpSystem->playSound(tSoundIt->second, nullptr, true, &mpChannel);
 		}
 
 		if (mpChannel) {
@@ -129,7 +142,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 			FMOD_VECTOR position = CAudioEngine::VectorToFmod(mvPosition);
 			mpChannel->set3DAttributes(&position, nullptr);
 			mpChannel->setVolume(CAudioEngine::dbToVolume(GetVolumedB()));
-			mpChannel->getPaused(false);
+			mpChannel->setPaused(false);
 		}
 		else {
 			meState = State::STOPPING;
@@ -199,7 +212,8 @@ void Implementation::Channel::UpdateChannelParameters() {
 		vVel.x = 0;
 		vVel.y = 0;
 		vVel.z = 0;
-		mpChannel->set3DAttributes(&CAudioEngine::VectorToFmod(mvPosition), &vVel);
+        FMOD_VECTOR vPos = CAudioEngine::VectorToFmod(mvPosition);
+		mpChannel->set3DAttributes(&vPos, &vVel);
 		mpChannel->setVolume(CAudioEngine::dbToVolume(mfVolumedB));
 	}
 }
@@ -217,11 +231,11 @@ bool Implementation::Channel::IsPlaying() const {
 }
 
 bool Implementation::Channel::IsOneShot() const {
-	auto tSoundIt = mImplemenation.mSounds.find(mSoundId);
-	if (tSoundIt == mImplemenation.mSounds.end())
+	auto tSoundIt = mImplemenation.mSoundDefinitions.find(mSoundId);
+	if (tSoundIt == mImplemenation.mSoundDefinitions.end())
 		return NULL; // TODO: Return actual error
 
-	return !tSoundIt->second->mSoundDefinition.bIsLooping;
+	return !tSoundIt->second.bIsLooping;
 }
 
 float Implementation::Channel::GetVolumedB() const {
@@ -273,31 +287,34 @@ void CAudioEngine::Update(float fTimeDeltaSeconds) {
 	sgpImplementation->Update(fTimeDeltaSeconds);
 }
 
-void CAudioEngine::LoadSound(int nSoundId)
-{
-	sgpImplementation->LoadSound(nSoundId);
-}
-
-void CAudioEngine::UnLoadSound(int nSoundId)
-{
-	auto tFoundIt = sgpImplementation->mSounds.find(nSoundId);
-	if (tFoundIt == sgpImplementation->mSounds.end())
-		return;
-	CAudioEngine::ErrorCheck(tFoundIt->second->mpSound->release());
-	sgpImplementation->mSounds.erase(tFoundIt);
+int CAudioEngine::RegisterSound(const SoundDefinition &tSoundDefinition, int nSoundId, bool bLoad) {
+    // Check if sound id is already used
+    auto tSoundIt = sgpImplementation->mSoundDefinitions.find(nSoundId);
+    if (tSoundIt != sgpImplementation->mSoundDefinitions.end())
+        return -1;
+    
+    // Set Sound definition
+    sgpImplementation->mSoundDefinitions[nSoundId] = tSoundDefinition;
+    
+    if (bLoad){
+        // Load sound
+        sgpImplementation->LoadSound(nSoundId);
+    }
+    
+    return nSoundId;
 }
 
 int CAudioEngine::PlaySound(int nSoundId, const FmodVector3& vPos, float fVolumedB)
 {
     //cout << "Playing sound " << strSoundName << endl;
 	int nChannelId = sgpImplementation->mnNextChannelId++;
-	auto tFoundIt = sgpImplementation->mSounds.find(nSoundId);
-	if (tFoundIt == sgpImplementation->mSounds.end())
+	auto tFoundIt = sgpImplementation->mSoundDefinitions.find(nSoundId);
+	if (tFoundIt == sgpImplementation->mSoundDefinitions.end())
 	{
 		return nChannelId;
 	}
 	
-	sgpImplementation->mChannels[nChannelId] = make_unique<Implementation::Channel>(*sgpImplementation, nSoundId, tFoundIt->second->mSoundDefinition, vPos, fVolumedB);
+    sgpImplementation->mChannels[nChannelId] = std::unique_ptr<Implementation::Channel>(new Implementation::Channel(*sgpImplementation, nSoundId, tFoundIt->second, vPos, fVolumedB));
 
 	return nChannelId;
 }

@@ -16,7 +16,16 @@ void example_init() {
     SoundManager::loadEvent("event:/Music/MusicTrack");
     SoundManager::loadEvent("event:/Sfx/Buzz");
     
-    SoundManager::loadSound("sounds/rain.wav");
+    SoundDefinition rain;
+    rain.mSoundName = "sounds/rain.wav";
+    rain.fDefaultVolumedB = 0.0f;
+    rain.fMinDistance = 0.0f;
+    rain.fMaxDistance = 0.0f;
+    rain.bIs3d = false;
+    rain.bIsLooping = false;
+    rain.bIsStreaming = false;
+    
+    SoundManager::registerSound(rain, 0);
     
     spGame game = new Game;
     game->init();
@@ -24,7 +33,7 @@ void example_init() {
 }
 
 void example_update() {
-    SoundManager::update();
+    //SoundManager::update();
 }
 
 void example_destroy(){

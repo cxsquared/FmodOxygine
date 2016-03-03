@@ -21,7 +21,7 @@ string Music::parseNoun(vector<string> options, ScreenState * state)
 				return "Playing music";
 			}
 			else if (options[1] == "rain") {
-				rainChannel = SoundManager::playSound("sounds/rain.wav");
+				rainChannel = SoundManager::playSound(0);
 				cout << "Rain channel " << rainChannel << endl;
 				return "Playing rain";
 			}

@@ -8,16 +8,16 @@ namespace SoundManager{
         aEngine.Init();
     }
     
-    void update() {
-        aEngine.Update();
+    void update(float fTimeDeltaSeconds) {
+        aEngine.Update(fTimeDeltaSeconds);
     }
     
     void destroy() {
         aEngine.Shutdown();
     }
     
-    int playSound(const string &fileName) {
-        return aEngine.PlaySounds(fileName);
+    int playSound(int nSoundId) {
+        return aEngine.PlaySound(nSoundId);
     }
     
     void setChannelVolume(int nChannelId,float fDb) {
@@ -28,8 +28,8 @@ namespace SoundManager{
         aEngine.StopChannel(nChannelId);
     }
     
-    void loadSound(const string &fileName) {
-        aEngine.LoadSound(fileName);
+    int registerSound(const SoundDefinition &tSoundDefinition, int nSoundId, bool bLoad){
+        return aEngine.RegisterSound(tSoundDefinition, nSoundId, bLoad);
     }
     
     void loadBank(const string &bankFileLocaiton){
