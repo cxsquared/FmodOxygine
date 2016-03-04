@@ -9,6 +9,7 @@ namespace SoundManager{
     }
     
     void update(float fTimeDeltaSeconds) {
+        //cout << "Sound Manager updating ..." << endl;
         aEngine.Update(fTimeDeltaSeconds);
     }
     
@@ -24,8 +25,8 @@ namespace SoundManager{
         aEngine.SetChannelVolume(nChannelId, fDb);
     }
     
-    void stopChannel(int nChannelId) {
-        aEngine.StopChannel(nChannelId);
+    void stopChannel(int nChannelId, float fFadeTimeSeconds)  {
+        aEngine.StopChannel(nChannelId, fFadeTimeSeconds);
     }
     
     int registerSound(const SoundDefinition &tSoundDefinition, int nSoundId, bool bLoad){

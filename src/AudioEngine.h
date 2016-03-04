@@ -98,7 +98,7 @@ struct Implementation {
 		FMOD::Sound* mpSound;
 	};
 
-	int mnNextChannelId;
+	unsigned int mnNextChannelId = 0;
 
 	typedef map<int, SoundDefinition> SoundDefinitionMap;
     typedef map<int, FMOD::Sound*> SoundMap;

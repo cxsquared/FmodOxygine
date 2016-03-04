@@ -41,7 +41,7 @@ void Implementation::LoadSound(int nSoundId) {
 	}
 
 	auto tFoundIt = mSoundDefinitions.find(nSoundId);
-	if (tFoundIt != mSoundDefinitions.end())
+	if (tFoundIt == mSoundDefinitions.end())
 		return;
 
 	FMOD_MODE eMode = FMOD_NONBLOCKING;
@@ -70,12 +70,15 @@ void Implementation::UnLoadSound(int nSoundId) {
 
 bool Implementation::SoundIsLoaded(int nSoundId) {
 	auto tFoundIt = mSounds.find(nSoundId);
-	if (tFoundIt == mSounds.end())
+    if (tFoundIt == mSounds.end()) {
+        cout << "Loading sound not found " << mSoundDefinitions[nSoundId].mSoundName << endl;
 		return false;
+    }
 
 	// Checking the state of the FMOD sound to see if it's loaded
 	FMOD_OPENSTATE state;
 	CAudioEngine::ErrorCheck(tFoundIt->second->getOpenState(&state, 0, 0, 0));
+    cout << "Fmod loading state = " << state << endl;
 	if (state == FMOD_OPENSTATE_READY)
 		return true;
 
@@ -104,6 +107,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 	case Implementation::Channel::State::INITIALIZE:
 	case Implementation::Channel::State::DEVIRTUALIZE:
 	case Implementation::Channel::State::TOPLAY: {
+        cout << "Starting to play..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		if (mbStopRequested) {
 			meState = State::STOPPING;
 			return;
@@ -133,6 +137,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		}
 
 		if (mpChannel) {
+            cout << "Playing state success " << mSoundId << endl;
 			if (meState == State::DEVIRTUALIZE) {
 				mVirtualizedFader.StartFade(mfVolumedB, CAudioFader::SILENCE_dB, CAudioFader::VIRTUALIZE_FADE_TIME);
 			}
@@ -145,16 +150,19 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 			mpChannel->setPaused(false);
 		}
 		else {
+            cout << "Tried to play sound " << mSoundId << " but playSound didn't work." << endl;
 			meState = State::STOPPING;
 		}
 	}
 		break;
 	case Implementation::Channel::State::LOADING:
+        cout << "Loading sound..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		if (mImplemenation.SoundIsLoaded(mSoundId)) {
 			meState = State::TOPLAY;
 		}
 		break;
 	case Implementation::Channel::State::PLAYING:
+        cout << "Playing..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		mVirtualizedFader.Update(fTimeDeltaSeconds);
 		UpdateChannelParameters();
 
@@ -169,6 +177,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		}
 		break;
 	case Implementation::Channel::State::STOPPING:
+        cout << "Stopping..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		mStopFader.Update(fTimeDeltaSeconds);
 		UpdateChannelParameters();
 		if (mStopFader.IsFinished()) {
@@ -180,8 +189,10 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		}
 		break;
 	case Implementation::Channel::State::STOPPED:
+        cout << "Stopped..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		break;
 	case Implementation::Channel::State::VIRTUALIZING:
+        cout << "Virtualizing..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		mVirtualizedFader.Update(fTimeDeltaSeconds);
 		UpdateChannelParameters();
 		if (!ShouldBeVirtual(false)) {
@@ -195,6 +206,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		}
 		break;
 	case Implementation::Channel::State::VIRTUAL:
+        cout << "Sound is virtual..." << mImplemenation.mSoundDefinitions[mSoundId].mSoundName << endl;
 		if (mbStopRequested) {
 			meState = State::STOPPING;
 		}
@@ -220,7 +232,7 @@ void Implementation::Channel::UpdateChannelParameters() {
 
 bool Implementation::Channel::ShouldBeVirtual(bool bAllowOneShotVirtuals) const {
 	// TODO: Write code to check if things should be virtualized
-	return true;
+	return false;
 }
 
 bool Implementation::Channel::IsPlaying() const {
@@ -306,13 +318,14 @@ int CAudioEngine::RegisterSound(const SoundDefinition &tSoundDefinition, int nSo
 
 int CAudioEngine::PlaySound(int nSoundId, const FmodVector3& vPos, float fVolumedB)
 {
-    //cout << "Playing sound " << strSoundName << endl;
 	int nChannelId = sgpImplementation->mnNextChannelId++;
 	auto tFoundIt = sgpImplementation->mSoundDefinitions.find(nSoundId);
 	if (tFoundIt == sgpImplementation->mSoundDefinitions.end())
 	{
 		return nChannelId;
 	}
+    
+        cout << "Playing sound " << tFoundIt->second.mSoundName << endl;
 	
     sgpImplementation->mChannels[nChannelId] = std::unique_ptr<Implementation::Channel>(new Implementation::Channel(*sgpImplementation, nSoundId, tFoundIt->second, vPos, fVolumedB));
 

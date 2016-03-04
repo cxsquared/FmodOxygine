@@ -20,9 +20,9 @@ void example_init() {
     rain.mSoundName = "sounds/rain.wav";
     rain.fDefaultVolumedB = 0.0f;
     rain.fMinDistance = 0.0f;
-    rain.fMaxDistance = 0.0f;
+    rain.fMaxDistance = 100.0f;
     rain.bIs3d = false;
-    rain.bIsLooping = false;
+    rain.bIsLooping = true;
     rain.bIsStreaming = false;
     
     SoundManager::registerSound(rain, 0);

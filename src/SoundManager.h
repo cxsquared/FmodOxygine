@@ -13,7 +13,7 @@ namespace SoundManager {
     void unRegisterSound(int nSoundId);
     int playSound(int nSoundId);
     void setChannelVolume(int nChannelId,float fVolumedB);
-    void stopChannel(int nChannelId);
+    void stopChannel(int nChannelId, float fFadeTimeSeconds = 0.0f);
     void loadBank(const string &bankFileLocaiton);
     void loadEvent(const string &eventName);
     void playEvent(const string &eventName);

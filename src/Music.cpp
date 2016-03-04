@@ -32,7 +32,11 @@ string Music::parseNoun(vector<string> options, ScreenState * state)
 				return "Stopping music";
 			}
 			else if (options[1] == "rain" && rainChannel != -1) {
-				SoundManager::stopChannel(rainChannel);
+                if (options.size() > 2){
+                    SoundManager::stopChannel(rainChannel, stoi(options[2]));
+                } else{
+                    SoundManager::stopChannel(rainChannel);
+                }
 				rainChannel = -1;
 				return "Stopping rain";
 			}
