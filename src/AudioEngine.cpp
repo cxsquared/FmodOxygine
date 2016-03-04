@@ -181,6 +181,7 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 		mStopFader.Update(fTimeDeltaSeconds);
 		UpdateChannelParameters();
 		if (mStopFader.IsFinished()) {
+            
 			mpChannel->stop();
 		}
 		if (!IsPlaying()) {
@@ -220,6 +221,13 @@ void Implementation::Channel::Update(float fTimeDeltaSeconds) {
 void Implementation::Channel::UpdateChannelParameters() {
 	// Only update if the channel is active
 	if (mpChannel) {
+        //Faders
+        if (mVirtualizedFader.IsRunning()) {
+            mfVolumedB = mVirtualizedFader.GetCurrentVolume();
+        }
+        if (mStopFader.IsRunning()) {
+            mfVolumedB = mStopFader.GetCurrentVolume();
+        }
 		FMOD_VECTOR vVel;
 		vVel.x = 0;
 		vVel.y = 0;
@@ -236,10 +244,10 @@ bool Implementation::Channel::ShouldBeVirtual(bool bAllowOneShotVirtuals) const 
 }
 
 bool Implementation::Channel::IsPlaying() const {
-	if (meState == State::PLAYING)
-		return true;
+    bool bIsPlaying;
+    mpChannel->isPlaying(&bIsPlaying);
 
-	return false;
+	return bIsPlaying;
 }
 
 bool Implementation::Channel::IsOneShot() const {
@@ -264,15 +272,24 @@ void CAudioFader::StartFade(float fStartVolumedB, float fEndVolumedB, float fSec
 	mfTargetVolumedB = fEndVolumedB;
 
 	mbRunning = true;
+    mbStarted = true;
+    
+    cout << "Starting fade " << fSeconds << " start volume " << fStartVolumedB << " end volume " << fEndVolumedB << endl;
 }
 
 bool CAudioFader::IsFinished() {
-	return !mbRunning;
+    if (mbStarted && !mbRunning) {
+        mbStarted = false;
+        return true;
+    }
+    
+	return false;
 }
 
 void CAudioFader::Update(float fTimeDeltaSeconds) {
 	if (mbRunning) {
 		mfSecondsLeft -= fTimeDeltaSeconds;
+        cout << "Fade seconds left " << mfSecondsLeft << " delta time " << fTimeDeltaSeconds << " current volume " << GetCurrentVolume() << endl;
 
 		if (mfSecondsLeft < 0) {
 			mbRunning = false;
@@ -284,8 +301,12 @@ float CAudioFader::GetCurrentVolume() {
 	return lerp(mfSecondsLeft / mfStartTime, mfStartVolumedB, mfTargetVolumedB);
 }
 
-float CAudioFader::lerp(float fTime, float fStart, float fEnd) {
+float CAudioFader::lerp(float fTime, float fEnd, float fStart) {
 	return (1 - fTime)*fStart + fTime*fEnd;
+}
+
+bool CAudioFader::IsRunning() {
+    return mbRunning;
 }
 
 /***************
@@ -338,9 +359,11 @@ void CAudioEngine::StopChannel(int nChannelId, float fFadeTimeSeconds) {
         return;
     
 	if (fFadeTimeSeconds <= 0.0f) {
+        cout << "Hard stopping sound " << endl;
 		CAudioEngine::ErrorCheck(tFoundIt->second->mpChannel->stop());
 	}
 	else {
+        cout << "Starting fade out " << endl;
 		tFoundIt->second->mbStopRequested = true;
 		tFoundIt->second->mStopFader.StartFade(tFoundIt->second->mfVolumedB, CAudioFader::SILENCE_dB, fFadeTimeSeconds);
 	}

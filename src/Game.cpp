@@ -50,5 +50,5 @@ void Game::handleInput(Event * ev)
 }
 
 void Game::doUpdate(const UpdateState& us) {
-    SoundManager::update(us.dt);
+    SoundManager::update(us.dt / 1000.0f);
 }

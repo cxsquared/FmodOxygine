@@ -38,12 +38,14 @@ public:
     void Update(float fTimeDeltaSeconds);
     
     float GetCurrentVolume();
+    bool IsRunning();
 private:
     float mfSecondsLeft;
     float mfStartTime;
     float mfStartVolumedB;
     float mfTargetVolumedB;
-    bool mbRunning;
+    bool mbRunning = false;
+    bool mbStarted = false;
     float lerp(float fTime, float fStart, float fEnd);
 };
 
