@@ -1,3 +1,6 @@
+// Based on the GDC talks from Guy Somberg
+// Check them out on the GDC vault if you get the chance
+
 #ifndef _AUDIO_ENGINE_H_
 #define _AUDIO_ENGINE_H_
 
