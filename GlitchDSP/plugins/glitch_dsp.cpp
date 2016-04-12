@@ -152,23 +152,45 @@ private:
 	float m_current_glitch;
 	int   m_ramp_samples_left;
 	bool  m_invert;
+    float m_delay_buffer[2 * 441000];
+    float m_max_delay_sec = 2;
+    int currentDelayIndex = 441000;
 };
 
 FMODGainState::FMODGainState()
 {
 	srand(time(0));
+    
 	m_target_gain = DECIBELS_TO_LINEAR(FMOD_GAIN_PARAM_GAIN_DEFAULT);
 	m_current_glitch = FMOD_GLITCH_PARAM_MOD_DEFAULT;
 	m_invert = 0;
+    currentDelayIndex = 0;
 	reset();
 }
 
 void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length, int channels)
 {
+    int delayTime = 441000;
+    
+    // Check delay index
+    if (currentDelayIndex > (2 * 441000) - 1) {
+        currentDelayIndex = 0;
+    }
+    
+    unsigned int samples = length * channels;
+    while (samples--) {
+        if (currentDelayIndex > (2 * 441000) / 2){
+            m_delay_buffer[currentDelayIndex - delayTime] += *inbuffer * .75f;
+        } else {
+            m_delay_buffer[currentDelayIndex + delayTime] += *inbuffer * .75f;
+        }
+        
+        *outbuffer++ = *inbuffer++ + m_delay_buffer[currentDelayIndex++];
+    }
+    /*
 	// Note: buffers are interleaved
 	float gain = m_current_gain;
 
-	/*
 	if (m_ramp_samples_left)
 	{
 		float target = m_target_gain;
@@ -204,15 +226,7 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 	}
 
 	m_current_gain = gain;
-	*/
-
-	unsigned int samples = length * channels;
-	for (int i = 0; i < samples; --i) {
-		*inbuffer++;
-	}
-	while (samples--) {
-		*outbuffer++ = *inbuffer--;
-	}
+     */
 }
 
 void FMODGainState::reset()
