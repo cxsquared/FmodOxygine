@@ -158,19 +158,26 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 {
     unsigned int samples = length * channels;
     while (samples--) {
+        //Saturation ?
+        float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        //float r = 0.5;
+        float inSamp = *inbuffer;
+        if (inSamp > r) {
+            inSamp = r + (inSamp-r)/ (1+((inSamp-r)/(1-r)) * (1+((inSamp-r)/(1-r))));
+        } else if (inSamp > 1) {
+            inSamp = (r+1)/2;
+        }
+        
 		// Check delay index
 		if (m_currentDelayIndex > m_delay_buffer_size - 1) {
 			m_currentDelayIndex = 0;
 		}
-
-		float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-
+        
+        // Delay
         if ((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) > m_delay_buffer_size){
-            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size)] += *inbuffer * .25f;
-			//m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - ((m_max_delay_sec * FMODGainState::sampleRate) - m_currentDelayIndex))] *= r + 0.05f;
+            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size)] = inSamp * .25f;
         } else {
-            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] += *inbuffer * .25f;
-			//m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] *= r + 0.05f;
+            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] = inSamp * .25f;
         }
         
         *outbuffer++ = *inbuffer++ + m_delay_buffer[m_currentDelayIndex++];
