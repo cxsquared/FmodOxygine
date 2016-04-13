@@ -1,10 +1,3 @@
-/*==============================================================================
-Gain DSP Plugin Example
-Copyright (c), Firelight Technologies Pty, Ltd 2004-2015.
-
-This example shows how to create a simple gain DSP effect.
-==============================================================================*/
-
 #ifdef WIN32
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -25,19 +18,13 @@ extern "C" {
 	F_DECLSPEC F_DLLEXPORT FMOD_DSP_DESCRIPTION* F_STDCALL FMODGetDSPDescription();
 }
 
-const float FMOD_GAIN_PARAM_GAIN_MIN = -80.0f;
-const float FMOD_GAIN_PARAM_GAIN_MAX = 10.0f;
-const float FMOD_GAIN_PARAM_GAIN_DEFAULT = 0.0f;
-const float FMOD_GLITCH_PARAM_MOD_MIN = 0.0f;
-const float FMOD_GLITCH_PARAM_MOD_MAX = 1.0f;
-const float FMOD_GLITCH_PARAM_MOD_DEFAULT = 0.5f;
-#define FMOD_GAIN_RAMPCOUNT 256
+const float CX2_DELAY_PARAM_TIME_MIN = 0.0f;
+const float CX2_DELAY_PARAM_TIME_MAX = 2.0f;
+const float CX2_DELAY_PARAM_TIME_DEFAULT = 0.5f;
 
 enum
 {
-	FMOD_GAIN_PARAM_GAIN = 0,
-	FMOD_GAIN_PARAM_GLITCH = 1,
-	FMOD_GAIN_PARAM_INVERT,
+	FMOD_GAIN_PARAM_TIME = 0,
 	FMOD_GAIN_NUM_PARAMETERS
 };
 
@@ -65,22 +52,18 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_sys_register(FMOD_DSP_STATE *dsp_state);
 FMOD_RESULT F_CALLBACK FMOD_Gain_sys_deregister(FMOD_DSP_STATE *dsp_state);
 FMOD_RESULT F_CALLBACK FMOD_Gain_sys_mix(FMOD_DSP_STATE *dsp_state, int stage);
 
-static bool                    FMOD_Gain_Running = false;
-static FMOD_DSP_PARAMETER_DESC p_gain;
-static FMOD_DSP_PARAMETER_DESC p_glitch;
-static FMOD_DSP_PARAMETER_DESC p_invert;
+static bool FMOD_Gain_Running = false;
+static FMOD_DSP_PARAMETER_DESC p_time;
 
 FMOD_DSP_PARAMETER_DESC *FMOD_Gain_dspparam[FMOD_GAIN_NUM_PARAMETERS] =
 {
-	&p_gain,
-	&p_glitch,
-	&p_invert
+	&p_time,
 };
 
 FMOD_DSP_DESCRIPTION FMOD_Gain_Desc =
 {
 	FMOD_PLUGIN_SDK_VERSION,
-	"CX2 Glitch",    // name
+	"CX2 Glitch Soundtrack",    // name
 	0x00000001,     // plug-in version
 	1,              // number of input buffers to process
 	1,              // number of output buffers to process
@@ -102,11 +85,11 @@ FMOD_DSP_DESCRIPTION FMOD_Gain_Desc =
 	FMOD_Gain_dspparam,
 	FMOD_Gain_dspsetparamfloat,
 	0, // FMOD_Gain_dspsetparamint,
-	FMOD_Gain_dspsetparambool,
+	0, //FMOD_Gain_dspsetparambool,
 	0, // FMOD_Gain_dspsetparamdata,
 	FMOD_Gain_dspgetparamfloat,
 	0, // FMOD_Gain_dspgetparamint,
-	FMOD_Gain_dspgetparambool,
+	0, // FMOD_Gain_dspgetparambool,
 	0, // FMOD_Gain_dspgetparamdata,
 	FMOD_Gain_shouldiprocess,
 	0,                                      // userdata
@@ -120,12 +103,7 @@ extern "C"
 
 	F_DECLSPEC F_DLLEXPORT FMOD_DSP_DESCRIPTION* F_STDCALL FMODGetDSPDescription()
 	{
-		static float gain_mapping_values[] = { -80, -50, -30, -10, 10 };
-		static float gain_mapping_scale[] = { 0, 2, 4, 7, 11 };
-
-		FMOD_DSP_INIT_PARAMDESC_FLOAT_WITH_MAPPING(p_gain, "Gain", "dB", "Gain in dB. -80 to 10. Default = 0", FMOD_GAIN_PARAM_GAIN_DEFAULT, gain_mapping_values, gain_mapping_scale);
-		FMOD_DSP_INIT_PARAMDESC_FLOAT(p_glitch, "Glitch", "%", "Glitch percentage chance.", FMOD_GAIN_PARAM_GAIN_MIN, FMOD_GAIN_PARAM_GAIN_MAX, FMOD_GAIN_PARAM_GAIN_DEFAULT);
-		FMOD_DSP_INIT_PARAMDESC_BOOL(p_invert, "Invert", "", "Invert signal. Default = off", false, 0);
+		FMOD_DSP_INIT_PARAMDESC_FLOAT(p_time, "Time", "ms", "Time in milliseconds.", CX2_DELAY_PARAM_TIME_MIN, CX2_DELAY_PARAM_TIME_MAX, CX2_DELAY_PARAM_TIME_DEFAULT);
 
 		return &FMOD_Gain_Desc;
 	}
@@ -137,122 +115,65 @@ class FMODGainState
 public:
 	FMODGainState();
 
+	void init();
 	void read(float *inbuffer, float *outbuffer, unsigned int length, int channels);
 	void reset();
-	void setGain(float);
-	void setGlitch(float);
-	void setInvert(bool);
-	float gain() const { return LINEAR_TO_DECIBELS(m_invert ? -m_target_gain : m_target_gain); }
-	float glitch() const { return m_current_glitch; }
-	FMOD_BOOL invert() const { return m_invert; }
+	void setDelayTime(float);
+	float delayTime() const { return m_delay_time; }
+	static int sampleRate;
 
 private:
-	float m_target_gain;
-	float m_current_gain;
-	float m_current_glitch;
-	int   m_ramp_samples_left;
-	bool  m_invert;
-    float m_delay_buffer[2 * 441000];
-    float m_max_delay_sec = 2;
-    int currentDelayIndex = 441000;
+	float m_delay_time;
+    float* m_delay_buffer;
+    float m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
+    int m_currentDelayIndex = 0;
 };
+
+int FMODGainState::sampleRate = 44100;
 
 FMODGainState::FMODGainState()
 {
+	init();
+}
+
+void FMODGainState::init() {
 	srand(time(0));
-    
-	m_target_gain = DECIBELS_TO_LINEAR(FMOD_GAIN_PARAM_GAIN_DEFAULT);
-	m_current_glitch = FMOD_GLITCH_PARAM_MOD_DEFAULT;
-	m_invert = 0;
-    currentDelayIndex = 0;
+
+	m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
+	m_currentDelayIndex = 0;
+	if (m_delay_buffer == nullptr) {
+		m_delay_buffer = new float[m_max_delay_sec * FMODGainState::sampleRate]();
+	}
 	reset();
 }
 
 void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length, int channels)
 {
-    int delayTime = 441000;
-    
-    // Check delay index
-    if (currentDelayIndex > (2 * 441000) - 1) {
-        currentDelayIndex = 0;
-    }
-    
     unsigned int samples = length * channels;
     while (samples--) {
-        if (currentDelayIndex > (2 * 441000) / 2){
-            m_delay_buffer[currentDelayIndex - delayTime] += *inbuffer * .75f;
+		// Check delay index
+		if (m_currentDelayIndex > (m_max_delay_sec * FMODGainState::sampleRate) - 1) {
+			m_currentDelayIndex = 0;
+		}
+
+        if ((m_currentDelayIndex + m_delay_time) > (m_max_delay_sec * FMODGainState::sampleRate)){
+            m_delay_buffer[(int)((m_currentDelayIndex + m_delay_time) - ((m_max_delay_sec * FMODGainState::sampleRate) - m_currentDelayIndex))] += *inbuffer * .75f;
         } else {
-            m_delay_buffer[currentDelayIndex + delayTime] += *inbuffer * .75f;
+            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] += *inbuffer * .75f;
         }
         
-        *outbuffer++ = *inbuffer++ + m_delay_buffer[currentDelayIndex++];
+        *outbuffer++ = *inbuffer++ + m_delay_buffer[m_currentDelayIndex++];
     }
-    /*
-	// Note: buffers are interleaved
-	float gain = m_current_gain;
-
-	if (m_ramp_samples_left)
-	{
-		float target = m_target_gain;
-		float delta = (target - gain) / m_ramp_samples_left;
-		while (length)
-		{
-			if (--m_ramp_samples_left)
-			{
-				gain += delta;
-				for (int i = 0; i < channels; ++i)
-				{
-					*outbuffer++ = *inbuffer++ * gain;
-				}
-			}
-			else
-			{
-				gain = target;
-				break;
-			}
-			--length;
-		}
-	}
-
-	unsigned int samples = length * channels;
-	while (samples--)
-	{
-		if (m_current_glitch > ((float)rand() / (float)RAND_MAX)) {
-			*outbuffer++ = *inbuffer++ * gain *  ((float)rand() / (float)RAND_MAX);
-		}
-		else {
-			*outbuffer++ = *inbuffer++ * gain;
-		}
-	}
-
-	m_current_gain = gain;
-     */
 }
 
 void FMODGainState::reset()
 {
-	m_current_gain = m_target_gain;
-	m_ramp_samples_left = 0;
+	m_currentDelayIndex = 0;
 }
 
-void FMODGainState::setGain(float gain)
+void FMODGainState::setDelayTime(float delay)
 {
-	m_target_gain = m_invert ? -DECIBELS_TO_LINEAR(gain) : DECIBELS_TO_LINEAR(gain);
-	m_ramp_samples_left = FMOD_GAIN_RAMPCOUNT;
-}
-
-void FMODGainState::setGlitch(float glitch) {
-	m_current_gain = glitch;
-}
-
-void FMODGainState::setInvert(bool invert)
-{
-	if (invert != m_invert)
-	{
-		m_target_gain = -m_target_gain;
-		m_ramp_samples_left = FMOD_GAIN_RAMPCOUNT;
-	}
-	m_invert = invert;
+	m_delay_time = delay;
 }
 
 FMOD_RESULT F_CALLBACK FMOD_Gain_dspcreate(FMOD_DSP_STATE *dsp_state)
@@ -262,6 +183,12 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_dspcreate(FMOD_DSP_STATE *dsp_state)
 	{
 		return FMOD_ERR_MEMORY;
 	}
+	int sr;
+	dsp_state->callbacks->getsamplerate(dsp_state, &sr);
+	FMODGainState::sampleRate = sr;
+
+	FMODGainState *state = (FMODGainState *)dsp_state->plugindata;
+	state->init();
 	return FMOD_OK;
 }
 
@@ -319,11 +246,8 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_dspsetparamfloat(FMOD_DSP_STATE *dsp_state, int
 
 	switch (index)
 	{
-	case FMOD_GAIN_PARAM_GAIN:
-		state->setGain(value);
-		return FMOD_OK;
-	case FMOD_GAIN_PARAM_GLITCH:
-		state->setGlitch(value);
+	case FMOD_GAIN_PARAM_TIME:
+		state->setDelayTime(value);
 		return FMOD_OK;
 	}
 
@@ -336,42 +260,9 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_dspgetparamfloat(FMOD_DSP_STATE *dsp_state, int
 
 	switch (index)
 	{
-	case FMOD_GAIN_PARAM_GAIN:
-		*value = state->gain();
-		if (valuestr) sprintf(valuestr, "%.1f dB", state->gain());
-		return FMOD_OK;
-	case FMOD_GAIN_PARAM_GLITCH:
-		*value = state->glitch();
-		if (valuestr) sprintf(valuestr, "%.1f", state->glitch());
-		return FMOD_OK;
-	}
-
-	return FMOD_ERR_INVALID_PARAM;
-}
-
-FMOD_RESULT F_CALLBACK FMOD_Gain_dspsetparambool(FMOD_DSP_STATE *dsp_state, int index, FMOD_BOOL value)
-{
-	FMODGainState *state = (FMODGainState *)dsp_state->plugindata;
-
-	switch (index)
-	{
-	case FMOD_GAIN_PARAM_INVERT:
-		state->setInvert(value ? true : false);
-		return FMOD_OK;
-	}
-
-	return FMOD_ERR_INVALID_PARAM;
-}
-
-FMOD_RESULT F_CALLBACK FMOD_Gain_dspgetparambool(FMOD_DSP_STATE *dsp_state, int index, FMOD_BOOL *value, char *valuestr)
-{
-	FMODGainState *state = (FMODGainState *)dsp_state->plugindata;
-
-	switch (index)
-	{
-	case FMOD_GAIN_PARAM_INVERT:
-		*value = state->invert();
-		if (valuestr) sprintf(valuestr, state->invert() ? "Inverted" : "Off");
+	case FMOD_GAIN_PARAM_TIME:
+		*value = state->delayTime();
+		if (valuestr) sprintf(valuestr, "%.1f ms", state->delayTime());
 		return FMOD_OK;
 	}
 
