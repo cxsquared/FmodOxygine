@@ -20,7 +20,7 @@ extern "C" {
 
 const float CX2_DELAY_PARAM_TIME_MIN = 0.0f;
 const float CX2_DELAY_PARAM_TIME_MAX = 2.0f;
-const float CX2_DELAY_PARAM_TIME_DEFAULT = 0.5f;
+const float CX2_DELAY_PARAM_TIME_DEFAULT = 1.0f;
 
 enum
 {
@@ -114,6 +114,7 @@ class FMODGainState
 {
 public:
 	FMODGainState();
+	~FMODGainState();
 
 	void init();
 	void read(float *inbuffer, float *outbuffer, unsigned int length, int channels);
@@ -136,6 +137,10 @@ FMODGainState::FMODGainState()
 	init();
 }
 
+FMODGainState::~FMODGainState() {
+	delete m_delay_buffer;
+}
+
 void FMODGainState::init() {
 	srand(time(0));
 
@@ -156,10 +161,14 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 			m_currentDelayIndex = 0;
 		}
 
-        if ((m_currentDelayIndex + m_delay_time) > (m_max_delay_sec * FMODGainState::sampleRate)){
-            m_delay_buffer[(int)((m_currentDelayIndex + m_delay_time) - ((m_max_delay_sec * FMODGainState::sampleRate) - m_currentDelayIndex))] += *inbuffer * .75f;
+		float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+        if ((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) > (m_max_delay_sec * FMODGainState::sampleRate)){
+            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - ((m_max_delay_sec * FMODGainState::sampleRate) - m_currentDelayIndex))] += *inbuffer * .25f;
+			//m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - ((m_max_delay_sec * FMODGainState::sampleRate) - m_currentDelayIndex))] *= r + 0.05f;
         } else {
-            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] += *inbuffer * .75f;
+            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] += *inbuffer * .25f;
+			//m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] *= r + 0.05f;
         }
         
         *outbuffer++ = *inbuffer++ + m_delay_buffer[m_currentDelayIndex++];
