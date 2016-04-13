@@ -180,9 +180,9 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
     unsigned int samples = length * channels;
     while (samples--) {
         if (currentDelayIndex > (2 * 441000) / 2){
-            m_delay_buffer[currentDelayIndex - delayTime] += *inbuffer * .75f;
+            m_delay_buffer[currentDelayIndex - delayTime] += *inbuffer;
         } else {
-            m_delay_buffer[currentDelayIndex + delayTime] += *inbuffer * .75f;
+            m_delay_buffer[currentDelayIndex + delayTime] += *inbuffer;
         }
         
         *outbuffer++ = *inbuffer++ + m_delay_buffer[currentDelayIndex++];
