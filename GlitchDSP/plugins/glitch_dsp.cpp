@@ -129,6 +129,8 @@ private:
     int m_delay_buffer_size;
     float m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
     int m_currentDelayIndex = 0;
+	int m_readDelayIndex = 0;
+	int m_pitch_delay;
 };
 
 int FMODGainState::sampleRate = 44100;
@@ -147,6 +149,7 @@ void FMODGainState::init() {
 
 	m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
 	m_currentDelayIndex = 0;
+	m_readDelayIndex = 0;
     m_delay_buffer_size = (int)(m_max_delay_sec * FMODGainState::sampleRate);
 	if (m_delay_buffer == nullptr) {
 		m_delay_buffer = new float[m_delay_buffer_size]();
@@ -172,15 +175,29 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 		if (m_currentDelayIndex > m_delay_buffer_size - 1) {
 			m_currentDelayIndex = 0;
 		}
+
+		if (m_readDelayIndex < 0) {
+			m_readDelayIndex = m_delay_buffer_size - 1;
+		}
         
         // Delay
         if ((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) > m_delay_buffer_size){
-            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size)] = inSamp * .25f;
+            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size)] = inSamp;
         } else {
-            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] = inSamp * .25f;
+            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] = inSamp;
         }
-        
-        *outbuffer++ = *inbuffer++ + m_delay_buffer[m_currentDelayIndex++];
+
+		m_currentDelayIndex++;
+		if (m_pitch_delay % 2 == 0) {
+			*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex--];
+		}
+		else {
+			*outbuffer++ = *inbuffer++;
+		}
+
+		//*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex];
+		//m_readDelayIndex += 2;
+		m_pitch_delay++;
     }
 }
 
