@@ -18,7 +18,7 @@ extern "C" {
 	F_DECLSPEC F_DLLEXPORT FMOD_DSP_DESCRIPTION* F_STDCALL FMODGetDSPDescription();
 }
 
-const float CX2_DELAY_PARAM_TIME_MIN = 0.0f;
+const float CX2_DELAY_PARAM_TIME_MIN = 0.01f;
 const float CX2_DELAY_PARAM_TIME_MAX = 2.0f;
 const float CX2_DELAY_PARAM_TIME_DEFAULT = 1.0f;
 
@@ -64,7 +64,7 @@ FMOD_DSP_DESCRIPTION FMOD_Gain_Desc =
 {
 	FMOD_PLUGIN_SDK_VERSION,
 	"CX2 Glitch Soundtrack",    // name
-	0x00000001,     // plug-in version
+	0x00000002,     // plug-in version
 	1,              // number of input buffers to process
 	1,              // number of output buffers to process
 	FMOD_Gain_dspcreate,
@@ -126,6 +126,7 @@ public:
 private:
 	float m_delay_time;
     float* m_delay_buffer = nullptr;
+    float* m_reson_buffer = nullptr;
     int m_delay_buffer_size;
     float m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
     int m_currentDelayIndex = 0;
@@ -151,15 +152,24 @@ void FMODGainState::init() {
 	if (m_delay_buffer == nullptr) {
 		m_delay_buffer = new float[m_delay_buffer_size]();
 	}
+    if (m_reson_buffer == nullptr){
+        m_reson_buffer = new float[m_delay_buffer_size]();
+    }
 	reset();
 }
 
 void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length, int channels)
 {
+    float f = .75;
+    float q = 0;
+
+    float fb = q + q/(1.0 - f);
+    
+    float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    
     unsigned int samples = length * channels;
     while (samples--) {
         //Saturation ?
-        float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         //float r = 0.5;
         float inSamp = *inbuffer;
         if (inSamp > r) {
@@ -173,14 +183,21 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 			m_currentDelayIndex = 0;
 		}
         
+        int delayIndex = 0;
         // Delay
         if ((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) > m_delay_buffer_size){
-            m_delay_buffer[(int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size)] = inSamp * .25f;
+            delayIndex = (int)((m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate)) - m_delay_buffer_size);
         } else {
-            m_delay_buffer[(int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate))] = inSamp * .25f;
+            delayIndex = (int)(m_currentDelayIndex + (m_delay_time * FMODGainState::sampleRate));
         }
         
-        *outbuffer++ = *inbuffer++ + m_delay_buffer[m_currentDelayIndex++];
+        //Resonace ?
+        m_reson_buffer[delayIndex] = m_reson_buffer[delayIndex] + f * (inSamp - m_reson_buffer[delayIndex] + fb * (m_reson_buffer[delayIndex] - m_delay_buffer[delayIndex]));
+        m_delay_buffer[delayIndex] = m_delay_buffer[delayIndex] + f * (m_reson_buffer[delayIndex] - m_delay_buffer[delayIndex]);
+        
+        //m_delay_buffer[delayIndex] *= .5f;
+        
+        *outbuffer++ = (*inbuffer++ + m_delay_buffer[m_currentDelayIndex++] + m_reson_buffer[delayIndex])/3;
     }
 }
 
