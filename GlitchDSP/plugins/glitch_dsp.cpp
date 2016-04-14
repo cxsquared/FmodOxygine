@@ -18,14 +18,24 @@ extern "C" {
 	F_DECLSPEC F_DLLEXPORT FMOD_DSP_DESCRIPTION* F_STDCALL FMODGetDSPDescription();
 }
 
-const float CX2_DELAY_PARAM_TIME_MIN = 0.01f;
-const float CX2_DELAY_PARAM_TIME_MAX = 2.0f;
-const float CX2_DELAY_PARAM_TIME_DEFAULT = 1.0f;
+const float CX2_SOUNDTRACK_PARAM_TIME_MIN = 0.01f;
+const float CX2_SOUNDTRACK_PARAM_TIME_MAX = 2.0f;
+const float CX2_SOUNDTRACK_PARAM_TIME_DEFAULT = 1.0f;
+
+const float CX2_SOUNDTRACK_PARAM_FEEDBACK_MIN = 0;
+const float CX2_SOUNDTRACK_PARAM_FEEDBACK_MAX = 100;
+const float CX2_SOUNDTRACK_PARAM_FEEDBACK_DEFAULT = 50;
+
+const float CX2_SOUNDTRACK_PARAM_RESONANCE_MIN = 0;
+const float CX2_SOUNDTRACK_PARAM_RESONANCE_MAX = 100;
+const float CX2_SOUNDTRACK_PARAM_RESONANCE_DEFAULT = 50;
 
 enum
 {
-	FMOD_GAIN_PARAM_TIME = 0,
-	FMOD_GAIN_NUM_PARAMETERS
+	CX2_SOUNDTRACK_PARAM_TIME = 0,
+    CX2_SOUNDTRACK_PARAM_FEEDBACK = 1,
+    CX2_SOUNDTRACK_PARAM_RESONANCE = 2,
+	CX2_SOUNDTRACK_NUM_PARAMETERS
 };
 
 #define DECIBELS_TO_LINEAR(__dbval__)  ((__dbval__ <= FMOD_GAIN_PARAM_GAIN_MIN) ? 0.0f : powf(10.0f, __dbval__ / 20.0f))
@@ -54,17 +64,21 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_sys_mix(FMOD_DSP_STATE *dsp_state, int stage);
 
 static bool FMOD_Gain_Running = false;
 static FMOD_DSP_PARAMETER_DESC p_time;
+static FMOD_DSP_PARAMETER_DESC p_feedback;
+static FMOD_DSP_PARAMETER_DESC p_resonance;
 
-FMOD_DSP_PARAMETER_DESC *FMOD_Gain_dspparam[FMOD_GAIN_NUM_PARAMETERS] =
+FMOD_DSP_PARAMETER_DESC *FMOD_Gain_dspparam[CX2_SOUNDTRACK_NUM_PARAMETERS] =
 {
 	&p_time,
+    &p_feedback,
+    &p_resonance
 };
 
 FMOD_DSP_DESCRIPTION FMOD_Gain_Desc =
 {
 	FMOD_PLUGIN_SDK_VERSION,
 	"CX2 Glitch Soundtrack",    // name
-	0x00000002,     // plug-in version
+	0x00000003,     // plug-in version
 	1,              // number of input buffers to process
 	1,              // number of output buffers to process
 	FMOD_Gain_dspcreate,
@@ -81,7 +95,7 @@ FMOD_DSP_DESCRIPTION FMOD_Gain_Desc =
 	0,
 #endif
 	0,
-	FMOD_GAIN_NUM_PARAMETERS,
+	CX2_SOUNDTRACK_NUM_PARAMETERS,
 	FMOD_Gain_dspparam,
 	FMOD_Gain_dspsetparamfloat,
 	0, // FMOD_Gain_dspsetparamint,
@@ -103,7 +117,9 @@ extern "C"
 
 	F_DECLSPEC F_DLLEXPORT FMOD_DSP_DESCRIPTION* F_STDCALL FMODGetDSPDescription()
 	{
-		FMOD_DSP_INIT_PARAMDESC_FLOAT(p_time, "Time", "ms", "Time in milliseconds.", CX2_DELAY_PARAM_TIME_MIN, CX2_DELAY_PARAM_TIME_MAX, CX2_DELAY_PARAM_TIME_DEFAULT);
+		FMOD_DSP_INIT_PARAMDESC_FLOAT(p_time, "Time", "ms", "Time in milliseconds.", CX2_SOUNDTRACK_PARAM_TIME_MIN, CX2_SOUNDTRACK_PARAM_TIME_MAX, CX2_SOUNDTRACK_PARAM_TIME_DEFAULT);
+        FMOD_DSP_INIT_PARAMDESC_FLOAT(p_feedback, "Feedback", "%", "Feedback percent.", CX2_SOUNDTRACK_PARAM_FEEDBACK_MIN, CX2_SOUNDTRACK_PARAM_FEEDBACK_MAX, CX2_SOUNDTRACK_PARAM_FEEDBACK_DEFAULT);
+        FMOD_DSP_INIT_PARAMDESC_FLOAT(p_resonance, "Resonance", "%", "Resonance percent", CX2_SOUNDTRACK_PARAM_RESONANCE_MIN, CX2_SOUNDTRACK_PARAM_RESONANCE_MAX, CX2_SOUNDTRACK_PARAM_RESONANCE_DEFAULT);
 
 		return &FMOD_Gain_Desc;
 	}
@@ -120,7 +136,11 @@ public:
 	void read(float *inbuffer, float *outbuffer, unsigned int length, int channels);
 	void reset();
 	void setDelayTime(float);
+    void setFeedback (float);
+    void setResonance (float);
 	float delayTime() const { return m_delay_time; }
+    float feedback() const { return m_feedback; }
+    float resonance() const { return m_resonance; }
 	static int sampleRate;
 
 private:
@@ -128,10 +148,13 @@ private:
     float* m_delay_buffer = nullptr;
     float* m_reson_buffer = nullptr;
     int m_delay_buffer_size;
-    float m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
-    int m_currentDelayIndex = 0;
-	int m_readDelayIndex = 0;
+    float m_max_delay_sec;
+    int m_currentDelayIndex;
+	int m_readDelayIndex;
 	int m_pitch_delay;
+    
+    float m_feedback;
+    float m_resonance;
 };
 
 int FMODGainState::sampleRate = 44100;
@@ -148,7 +171,7 @@ FMODGainState::~FMODGainState() {
 void FMODGainState::init() {
 	srand(time(0));
 
-	m_max_delay_sec = CX2_DELAY_PARAM_TIME_MAX;
+	m_max_delay_sec = CX2_SOUNDTRACK_PARAM_TIME_MAX;
 	m_currentDelayIndex = 0;
 	m_readDelayIndex = 0;
     m_delay_buffer_size = (int)(m_max_delay_sec * FMODGainState::sampleRate);
@@ -163,8 +186,8 @@ void FMODGainState::init() {
 
 void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length, int channels)
 {
-    float f = .75;
-    float q = 0;
+    float f = m_feedback;
+    float q = m_resonance;
 
     float fb = q + q/(1.0 - f);
     
@@ -200,15 +223,17 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
         
         //Resonace ?
         m_reson_buffer[delayIndex] = m_reson_buffer[delayIndex] + f * (inSamp - m_reson_buffer[delayIndex] + fb * (m_reson_buffer[delayIndex] - m_delay_buffer[delayIndex]));
-        m_delay_buffer[delayIndex] = m_delay_buffer[delayIndex] + f * (m_reson_buffer[delayIndex] - m_delay_buffer[delayIndex]);
+        m_delay_buffer[delayIndex] += m_delay_buffer[delayIndex] + f * (m_reson_buffer[delayIndex] - m_delay_buffer[delayIndex]);
         
         //m_delay_buffer[delayIndex] *= .5f;
+        
+        m_delay_buffer[delayIndex] *= fb;
 		
 		if (m_pitch_delay % 2 == 0) {
 			*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex--] + m_reson_buffer[m_currentDelayIndex++];
 		}
 		else {
-			*outbuffer++ = *inbuffer++;
+			*outbuffer++ = m_reson_buffer[m_currentDelayIndex++];
 		}
 
 		//*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex];
@@ -220,11 +245,34 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
 void FMODGainState::reset()
 {
 	m_currentDelayIndex = 0;
+    m_readDelayIndex = 0;
 }
 
 void FMODGainState::setDelayTime(float delay)
 {
 	m_delay_time = delay;
+}
+
+void FMODGainState::setFeedback(float fb)
+{
+    m_feedback = fb/100.0f;
+    
+    if (m_feedback < 0){
+        m_feedback = 0;
+    } else if (m_feedback > 1) {
+        m_feedback = 1;
+    }
+}
+
+void FMODGainState::setResonance(float r)
+{
+    m_resonance = r/100.0f;
+    
+    if (m_resonance < 0){
+        m_resonance = 0;
+    } else if (m_resonance > 1) {
+        m_resonance = 1;
+    }
 }
 
 FMOD_RESULT F_CALLBACK FMOD_Gain_dspcreate(FMOD_DSP_STATE *dsp_state)
@@ -297,9 +345,15 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_dspsetparamfloat(FMOD_DSP_STATE *dsp_state, int
 
 	switch (index)
 	{
-	case FMOD_GAIN_PARAM_TIME:
-		state->setDelayTime(value);
-		return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_TIME:
+            state->setDelayTime(value);
+            return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_FEEDBACK:
+            state->setFeedback(value);
+            return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_RESONANCE:
+            state->setResonance(value);
+            return FMOD_OK;
 	}
 
 	return FMOD_ERR_INVALID_PARAM;
@@ -311,10 +365,18 @@ FMOD_RESULT F_CALLBACK FMOD_Gain_dspgetparamfloat(FMOD_DSP_STATE *dsp_state, int
 
 	switch (index)
 	{
-	case FMOD_GAIN_PARAM_TIME:
-		*value = state->delayTime();
-		if (valuestr) sprintf(valuestr, "%.1f ms", state->delayTime());
-		return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_TIME:
+            *value = state->delayTime();
+            if (valuestr) sprintf(valuestr, "%.1f", state->delayTime());
+            return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_FEEDBACK:
+            *value = state->feedback();
+            if (valuestr) sprintf(valuestr, "%.1f", state->feedback());
+            return FMOD_OK;
+        case CX2_SOUNDTRACK_PARAM_RESONANCE:
+            *value = state->resonance();
+            if (valuestr) sprintf(valuestr, "%.1f", state->resonance());
+            return FMOD_OK;
 	}
 
 	return FMOD_ERR_INVALID_PARAM;
