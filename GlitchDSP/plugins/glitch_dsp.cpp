@@ -187,15 +187,21 @@ void FMODGainState::init() {
 
 void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length, int channels)
 {
-    float f = m_feedback;
-    float q = m_resonance;
-
-    float fb = q + q/(1.0 - f);
-    
-    float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    
     unsigned int samples = length * channels;
     while (samples--) {
+        
+        float f = m_feedback;
+        float q = m_resonance;
+        
+        if (m_currentDelayIndex < (.01 * FMODGainState::sampleRate)){
+            q = .75;
+            f = 0;
+        }
+        
+        float fb = q + q/(1.0 - f);
+        
+        float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        
         //Saturation ?
         //float r = 0.5;
         float inSamp = *inbuffer;
@@ -229,13 +235,15 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
         //m_delay_buffer[delayIndex] *= .5f;
         
         m_delay_buffer[delayIndex] *= fb;
+        m_reson_buffer[delayIndex] *= fb;
 		
 		if (m_pitch_delay % 2 == 0) {
 			*outbuffer++ = (*inbuffer++ + m_delay_buffer[m_readDelayIndex--] + m_reson_buffer[m_currentDelayIndex++]) / 3;
 		}
 		else {
 			*inbuffer++;
-			*outbuffer++ = m_reson_buffer[m_currentDelayIndex++];
+			*outbuffer++ = m_reson_buffer[m_readDelayIndex--];
+            m_currentDelayIndex++;
 		}
 
 		//*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex];
