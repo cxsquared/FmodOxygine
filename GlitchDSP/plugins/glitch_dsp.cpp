@@ -166,6 +166,7 @@ FMODGainState::FMODGainState()
 
 FMODGainState::~FMODGainState() {
 	delete m_delay_buffer;
+    delete m_reson_buffer;
 }
 
 void FMODGainState::init() {
