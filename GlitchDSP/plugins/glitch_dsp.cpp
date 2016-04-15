@@ -231,9 +231,10 @@ void FMODGainState::read(float *inbuffer, float *outbuffer, unsigned int length,
         m_delay_buffer[delayIndex] *= fb;
 		
 		if (m_pitch_delay % 2 == 0) {
-			*outbuffer++ = *inbuffer++ + m_delay_buffer[m_readDelayIndex--] + m_reson_buffer[m_currentDelayIndex++];
+			*outbuffer++ = (*inbuffer++ + m_delay_buffer[m_readDelayIndex--] + m_reson_buffer[m_currentDelayIndex++]) / 3;
 		}
 		else {
+			*inbuffer++;
 			*outbuffer++ = m_reson_buffer[m_currentDelayIndex++];
 		}
 
