@@ -4,6 +4,7 @@
 #include "ScreenState.h"
 #include "GameState.h"
 #include "ScreenActor.h"
+#include "SoundManager.h"
 
 using namespace std;
 
@@ -51,6 +52,7 @@ void Enemy::update(const UpdateState &us)
 
 string Enemy::hit(int damage)
 {
+    SoundManager::playEvent("event:/Sfx/Attack");
 	if (isAlive) {
 		// TODO: Add cover and armor values
 		_health -= damage;

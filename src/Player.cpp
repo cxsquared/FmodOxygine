@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "Enemy.h"
 #include "core/log.h"
+#include "SoundManager.h"
 
 Player::Player(Room& startingRoom)
 {
@@ -46,6 +47,7 @@ string Player::attack(Enemy & enemy)
 
 string Player::hit(int damage)
 {
+    SoundManager::playEvent("event:/Sfx/Attack");
 	health -= damage;
     
     oxygine::log::messageln("Player attacked");

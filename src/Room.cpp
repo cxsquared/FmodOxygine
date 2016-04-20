@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Enemy.h"
 #include "Item.h"
+#include "SoundManager.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ Room::~Room()
 
 string Room::enteringRoom()
 {
+    SoundManager::playEvent("event:/Sfx/Footsteps");
 	if (enemies.size() > 0) {
 		for (auto enemy : enemies) {
 			enemy->onEnter();

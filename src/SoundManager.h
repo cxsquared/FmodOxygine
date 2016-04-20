@@ -20,4 +20,5 @@ namespace SoundManager {
     void stopEvent(const string &eventName);
     void setEventParam(const string &eventName, const string &paramName, float value);
     bool isEventPlaying(const string &eventName);
+    void loadPlugin(const char* file, const char* path, unsigned int *handle);
 }

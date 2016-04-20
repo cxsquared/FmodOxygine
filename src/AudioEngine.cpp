@@ -14,6 +14,9 @@ Implementation::Implementation() {
 
 	mpSystem = NULL;
 	CAudioEngine::ErrorCheck(mpStudioSystem->getLowLevelSystem(&mpSystem));
+    
+    // Ignore this stuff unless you have this dsp
+    //mpSystem->loadPlugin(<#const char *filename#>, <#unsigned int *handle#>)
 }
 
 Implementation::~Implementation() {
@@ -497,4 +500,9 @@ float  CAudioEngine::VolumeTodB(float volume)
 
 void CAudioEngine::Shutdown() {
 	delete sgpImplementation;
+}
+
+void CAudioEngine::loadPlugin(const char* file, const char* path, unsigned int *handle) {
+    CAudioEngine::ErrorCheck(sgpImplementation->mpSystem->setPluginPath(path));
+    CAudioEngine::ErrorCheck(sgpImplementation->mpSystem->loadPlugin(file, handle));
 }

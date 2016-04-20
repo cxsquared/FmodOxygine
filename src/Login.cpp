@@ -1,5 +1,6 @@
 #include "Login.h"
 #include "ScreenState.h"
+#include "SoundManager.h"
 
 string Login::parseNoun(vector<string> options, ScreenState * state)
 {
@@ -15,6 +16,7 @@ string Login::parseNoun(vector<string> options, ScreenState * state)
 					_username = "";
                     state->switchStates(ScreenState::mainMenu);
                     currentUser = tempUser;
+                    SoundManager::playEvent("event:/Sfx/Buzz");
 					return "Welcome " + tempUser;
 				}
 				else {

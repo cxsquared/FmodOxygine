@@ -15,7 +15,8 @@ Game::Game(){
 }
 
 void Game::init() {
-    SoundManager::playEvent("event:/Music/MusicTrack");
+    //SoundManager::playEvent("event:/Music/MusicTrack");
+    SoundManager::playEvent("event:/Ambience/Outside");
     
     setSize(getStage()->getSize());
 

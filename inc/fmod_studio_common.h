@@ -1,6 +1,6 @@
 /*
     fmod_studio_common.h
-    Copyright (c), Firelight Technologies Pty, Ltd. 2015.
+    Copyright (c), Firelight Technologies Pty, Ltd. 2016.
 
     This header defines common enumerations, structs and callbacks that are shared between the C and C++ interfaces.
 */
@@ -46,6 +46,7 @@ typedef struct FMOD_STUDIO_COMMANDREPLAY FMOD_STUDIO_COMMANDREPLAY;
 #define FMOD_STUDIO_INIT_LIVEUPDATE                 0x00000001  /* Enable live update. */
 #define FMOD_STUDIO_INIT_ALLOW_MISSING_PLUGINS      0x00000002  /* Load banks even if they reference plugins that have not been loaded. */
 #define FMOD_STUDIO_INIT_SYNCHRONOUS_UPDATE         0x00000004  /* Disable asynchronous processing and perform all processing on the calling thread instead. */
+#define FMOD_STUDIO_INIT_DEFERRED_CALLBACKS         0x00000008  /* Defer timeline callbacks until the main update. See Studio::EventInstance::setCallback for more information. */
 /* [DEFINE_END] */
 
 typedef unsigned int FMOD_STUDIO_INITFLAGS;
@@ -224,8 +225,8 @@ typedef enum FMOD_STUDIO_USER_PROPERTY_TYPE
     (i.e. 0 is the highest priority while 256 is the lowest).
 
     [SEE_ALSO]
-    EventInstance::getProperty
-    EventInstance::setProperty
+    Studio::EventInstance::getProperty
+    Studio::EventInstance::setProperty
 ]
 */
 typedef enum FMOD_STUDIO_EVENT_PROPERTY
@@ -233,6 +234,8 @@ typedef enum FMOD_STUDIO_EVENT_PROPERTY
     FMOD_STUDIO_EVENT_PROPERTY_CHANNELPRIORITY,     /* Priority to set on low-level channels created by this event instance (-1 to 256). */
     FMOD_STUDIO_EVENT_PROPERTY_SCHEDULE_DELAY,      /* Schedule delay to synchronized playback for multiple tracks in DSP clocks, or -1 for default. */
     FMOD_STUDIO_EVENT_PROPERTY_SCHEDULE_LOOKAHEAD,  /* Schedule look-ahead on the timeline in DSP clocks, or -1 for default. */
+    FMOD_STUDIO_EVENT_PROPERTY_MINIMUM_DISTANCE,    /* Override the event's 3D minimum distance, or -1 for default. */
+    FMOD_STUDIO_EVENT_PROPERTY_MAXIMUM_DISTANCE,    /* Override the event's 3D maximum distance, or -1 for default. */
     FMOD_STUDIO_EVENT_PROPERTY_MAX,                 /* Maximum number of event properties supported. */
 
     FMOD_STUDIO_EVENT_PROPERTY_FORCEINT = 65536 /* Makes sure this enum is signed 32bit. */
@@ -342,6 +345,8 @@ typedef unsigned int FMOD_STUDIO_SYSTEM_CALLBACK_TYPE;
 #define FMOD_STUDIO_EVENT_CALLBACK_CREATED                  0x00000080  /* Called when an instance is fully created. Parameters = unused. */
 #define FMOD_STUDIO_EVENT_CALLBACK_DESTROYED                0x00000100  /* Called when an instance is just about to be destroyed. Parameters = unused. */
 #define FMOD_STUDIO_EVENT_CALLBACK_START_FAILED             0x00000200  /* Called when an instance did not start, e.g. due to polyphony. Parameters = unused. */
+#define FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_MARKER          0x00000400  /* Called when the timeline passes a named marker.  Parameters = FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES. */
+#define FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_BEAT            0x00000800  /* Called when the timeline hits a beat in a tempo section.  Parameters = FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES. */
 #define FMOD_STUDIO_EVENT_CALLBACK_ALL                      0xFFFFFFFF  /* Pass this mask to Studio::EventDescription::setCallback or Studio::EventInstance::setCallback to receive all callback types. */
 /* [DEFINE_END] */
 
@@ -397,6 +402,51 @@ typedef struct FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES
     FMOD_DSP *dsp;                              /* The DSP plugin instance. This can be cast to FMOD::DSP* type. */
 } FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES;
 
+/*
+[STRUCTURE]
+[
+    [DESCRIPTION]
+    This structure holds information about a marker on the timeline.
+
+    [REMARKS]
+    This data is passed to the event callback function when type is FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_MARKER.
+
+    [SEE_ALSO]
+    FMOD_STUDIO_EVENT_CALLBACK
+    Studio::EventDescription::setCallback
+    Studio::EventInstance::setCallback
+]
+*/
+typedef struct FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES
+{
+    const char* name;                           /* The marker name */
+    int position;                               /* The position of the marker on the timeline in milliseconds. */
+} FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES;
+
+/*
+[STRUCTURE]
+[
+    [DESCRIPTION]
+    This structure holds information about a beat on the timeline.
+
+    [REMARKS]
+    This data is passed to the event callback function when type is FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_BEAT.
+
+    [SEE_ALSO]
+    FMOD_STUDIO_EVENT_CALLBACK
+    Studio::EventDescription::setCallback
+    Studio::EventInstance::setCallback
+]
+*/
+typedef struct FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES
+{
+    int bar;                                    /* The bar number (starting from 1). */
+    int beat;                                   /* The beat number within the bar (starting from 1). */
+    int position;                               /* The position of the beat on the timeline in milliseconds. */
+    float tempo;                                /* The current tempo in beats per minute. */
+    int timeSignatureUpper;                     /* The current time signature upper number (beats per bar). */
+    int timeSignatureLower;                     /* The current time signature lower number (beat unit). */
+} FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES;
 
 /*
 [ENUM]
@@ -465,8 +515,9 @@ typedef enum FMOD_STUDIO_STOP_MODE
     Studio::System::loadBankCustom
 ]
 */
-#define FMOD_STUDIO_LOAD_BANK_NORMAL         0x00000000         /* Standard behaviour. */
-#define FMOD_STUDIO_LOAD_BANK_NONBLOCKING    0x00000001         /* Bank loading occurs asynchronously rather than occurring immediately. */
+#define FMOD_STUDIO_LOAD_BANK_NORMAL                0x00000000         /* Standard behaviour. */
+#define FMOD_STUDIO_LOAD_BANK_NONBLOCKING           0x00000001         /* Bank loading occurs asynchronously rather than occurring immediately. */
+#define FMOD_STUDIO_LOAD_BANK_DECOMPRESS_SAMPLES    0x00000002         /* Force samples to decompress into memory when they are loaded, rather than staying compressed. */
 /* [DEFINE_END] */
 
 typedef unsigned int FMOD_STUDIO_LOAD_BANK_FLAGS;

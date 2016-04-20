@@ -1,5 +1,6 @@
 #include "ScreenActor.h"
 #include "ScreenState.h"
+#include "SoundManager.h"
 
 ScreenActor::ScreenActor(ScreenState* startingState)
 {
@@ -41,6 +42,7 @@ void ScreenActor::onTextTweenDone(Event * event)
 {
 	// TODO: Add skipping tween animation
 	isTextTweening = false;
+    SoundManager::stopEvent("event:/Sfx/Typing");
 }
 
 void ScreenActor::createScreen()
@@ -74,6 +76,9 @@ void ScreenActor::createScreen()
 
 void ScreenActor::addText(const string& line)
 {
+    if (!SoundManager::isEventPlaying("event:/Sfx/Typing")) {
+        SoundManager::playEvent("event:/Sfx/Typing");
+    }
 	//TODO: Prevent text from scrolling when there isn't enough
     //TODO: Clear the oldest text lines when we get so far
 

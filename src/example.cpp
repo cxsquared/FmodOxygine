@@ -10,11 +10,20 @@ void example_preinit(){
 void example_init() {
     Res::load();
     SoundManager::init();
+    
+#ifdef __APPLE__
+    SoundManager::loadPlugin("libSoundtrackPlugin.dylib", "sounds/", nullptr);
+#endif
+    
     SoundManager::loadBank("sounds/Master Bank.bank");
     SoundManager::loadBank("sounds/Master Bank.strings.bank");
     
     SoundManager::loadEvent("event:/Music/MusicTrack");
+    SoundManager::loadEvent("event:/Sfx/Attack");
+    SoundManager::loadEvent("event:/Sfx/Footsteps");
     SoundManager::loadEvent("event:/Sfx/Buzz");
+    SoundManager::loadEvent("event:/Sfx/Typing");
+    SoundManager::loadEvent("event:/Ambience/Outside");
     
     SoundDefinition rain;
     rain.mSoundName = "sounds/rain.wav";

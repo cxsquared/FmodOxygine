@@ -58,4 +58,8 @@ namespace SoundManager{
         cout << eventName << " is playing= " << isPlaying << endl;
         return isPlaying;
     }
+    
+    void loadPlugin(const char* file, const char* path, unsigned int *handle) {
+        aEngine.loadPlugin(file, path, handle);
+    }
 }

@@ -134,6 +134,7 @@ public:
 	void SetChannel3dPosition(int nChannelId, const FmodVector3& vPosition);
 	void SetChannelVolume(int nChannelId, float fVolumedB);
 	bool IsPlaying(int nChannelId) const;
+    void loadPlugin(const char* file, const char* path, unsigned int* handle);
 
 	// Studio Event Sounds
 	void LoadBank(const std::string& strBankName, FMOD_STUDIO_LOAD_BANK_FLAGS flags);
